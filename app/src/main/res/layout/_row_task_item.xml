@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="right"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:background="@color/fb_background_color"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_border"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:textColor="@color/colorTextGry"
+                    android:text="نام و نام خانوادگی متقاضی"
+                    android:layout_marginTop="5dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:id="@+id/textViewDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorTextGry"
+                    android:text="(نوع درخواست - نوع خدمت)"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:textColor="@color/colorTextGry"
+                    android:text="تاریخ و ساعت"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold" />
+
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorTextGry"
+                    android:text="وضعیت منطقه"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </LinearLayout>
+
+            <include
+                layout="@layout/_part_horizontal_line"></include>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp">
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="@string/send"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

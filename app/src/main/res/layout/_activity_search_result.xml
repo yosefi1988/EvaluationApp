@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:id="@+id/content"
+    android:background="@color/fb_background_color"
+    android:layout_height="match_parent"  >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"  />
+
+    <ImageView
+        android:id="@+id/ivVisableBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutRegister"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result"
+            android:id="@+id/xxxxxxf"
+            android:layout_marginTop="10dp"
+            android:textSize="35dp" />
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"  />
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:text="@string/searchText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_search"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="0.7"
+                android:paddingTop="5dp"
+                android:visibility="invisible"
+                android:text="@string/searchRequest" />
+
+            <Button
+                android:id="@+id/button_register_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="0.3"
+                android:paddingTop="5dp"
+                android:text="@string/cancel" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>

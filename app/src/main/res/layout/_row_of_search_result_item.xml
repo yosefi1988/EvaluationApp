@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="right"
+    android:layout_margin="5dp"
+    android:background="@drawable/bg_search"
+
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:textColor="#4267b2"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="@string/name"
+            android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textViewStatment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="تاریخ پیدا شدن"
+            android:paddingBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textViewStatment2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textDirection="rtl"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:visibility="visible"
+            android:text="تاریخ پیدا شدن"
+            android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

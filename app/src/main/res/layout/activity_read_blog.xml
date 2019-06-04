@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="0.9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:background="#43ffebeb"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent">
+
+
+
+            <ImageView
+                android:id="@+id/iv_menuCover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_alignParentTop="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvPersian0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="right|center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:clickable="true"
+                android:textColor="@color/colorPrimary"
+                android:paddingTop="10dp"
+                android:elevation="1dp"
+                android:foregroundGravity="right"
+                android:gravity="right"
+                android:text="منتظر باشید"
+                android:textSize="17dp"
+                tools:layout_width="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvPersian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+
+                android:layout_columnWeight="1"
+                android:layout_gravity="right|center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:clickable="true"
+                android:elevation="1dp"
+                android:paddingTop="10dp"
+                android:foregroundGravity="right"
+                android:gravity="right"
+                android:text="منتظر باشید"
+                android:textSize="17dp"
+                tools:layout_width="wrap_content" />
+
+            <GridLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:columnCount="2"
+                android:foregroundGravity="right"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl">
+
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="0.5"
+                    android:layout_gravity="right|center"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="0.5"
+                    android:layout_gravity="left|center"
+                    android:text="Button" />
+            </GridLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

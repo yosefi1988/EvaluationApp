@@ -1,3 +1,160 @@
 <resources>
-    <string name="app_name">EvaluationApplication</string>
+    <string name="app_name">ارزیابی</string>
+    <string name="app_version">نسخه 1.0.0</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+
+    <string name="national_code">کد ملی</string>
+    <string name="search_by_name">جستجو با نام و نام خانوادگی</string>
+    <string name="searchRequest">جستجو</string>
+    <string name="serach_by_name">جستجو با نام</string>
+    <string name="name">نام</string>
+    <string name="family">نام خانوادگی</string>
+    <string name="father_name">نام پدر</string>
+    <string name="search_by_national_code">جستجو با کد ملی</string>
+    <string name="not_found">پیدا نشد</string>
+    <string name="countinue">ادامه</string>
+    <string name="cancel">انصراف</string>
+    <string name="login">ورود</string>
+    <string name="mobile_number">شماره موبایل</string>
+    <string name="password">رمز عبور</string>
+    <string name="forget_password">فراموشی رمز عبور</string>
+    <string name="text">متن</string>
+    <string name="send">ارسال</string>
+    <string name="contact_us">تماس با ما</string>
+    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+    <string name="about_us">درباره ما</string>
+    <string name="help">راهنمایی</string>
+    <string name="reg">ثبت</string>
+    <string name="search_result">نتیجه جستجو</string>
+    <string name="searchText">نتیجه جستجو</string>
+    <string name="title">عنوان</string>
+    <string name="app_pardakht_text">app_pardakht_text</string>
+    <string name="app_price">app_price</string>
+    <string name="app_web_address">app_web_address</string>
+    <string name="son_of">فرزند</string>
+    <string name="find_date">تاریخ پیدا شدن</string>
+    <string name="code_melli">کد ملی</string>
+    <string name="identity_number">کد شناسایی</string>
+    <string name="inputError">inputError</string>
+    <string name="server_not_response">سرور پاسخ نداد</string>
+    <string name="error_message_1001">کد ملی صحبح نیست</string>
+    <string name="error_message_1002">نام صحیح نیست</string>
+    <string name="error_message_1003">نام خانوادگی صحیح نیست</string>
+    <string name="error_message_1004">نام پدر صحیح نیست</string>
+    <string name="ok">باشه</string>
+    <string name="cancel_2">بیخیال</string>
+    <string name="see_result">مشاهده نتایج</string>
+    <string name="about_us_text">اپلیکیشن پیش روی شما یکی از نرم افزار های مجموعه تبوبلس مب یاشد .این نرم افزار به همت
+        متخصصین و توانمند های داخل کشور تهیه شده است.در صورت تمایل به همکاری با ما یا ارائه پیشنهادات و انتقادات از روش
+        های ارتباطی زیر استفاده کنید.
+    </string>
+    <string name="register">ثبت نام</string>
+    <string name="account">حساب کاریری</string>
+    <string name="pleaseWait">pleaseWait</string>
+    <string name="profile">پروفایل</string>
+    <string name="register_and_login">ورود / ثبت نام</string>
+    <string name="Communicate">پل های ارتباطی</string>
+    <string name="tubeless_app_list">لیست اپلیکیشن ها</string>
+    <string name="simcart">سیم کارت</string>
+    <string name="welcome">خوش آمدید</string>
 </resources>

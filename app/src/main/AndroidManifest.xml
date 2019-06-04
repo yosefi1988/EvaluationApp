@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ir.sajjadyosefi.evaluation">
+<manifest
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        package="ir.sajjadyosefi.evaluation">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:name=".classes.Global"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <meta-data android:name="AA_DB_NAME" android:value="EvaluationDatabase" />
+        <meta-data android:name="AA_DB_VERSION" android:value="2" />
+
+        <activity
+                android:name=".activity.SplashScreenActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize"
+
+                android:theme="@style/AppTheme.NoActionBar"
+                android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.business.SearchByNationalCodeActivity" ></activity>
+        <activity android:name=".activity.business.SearchByNameActivity" ></activity>
+        <activity android:name=".activity.business.SearchResultActivity" ></activity>
+        <activity android:name=".activity.account.LoginActivity" >
+        </activity>
+        <activity android:name=".activity.ReadBlogActivity" ></activity>
+        <activity android:name=".activity.account.ProfileActivity" ></activity>
+        <activity
+                android:theme="@style/AppTheme.NoActionBar"
+                android:name=".activity.MainActivity" ></activity>
+
+        <service android:name=".TopWindowService"/>
+        <service android:name=".classes.service.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                       android:resource="@xml/authenticator" />
+        </service>
     </application>
 
 </manifest>
