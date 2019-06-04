@@ -2,6 +2,9 @@
 <resources>
     <color name="colorPrimary">#FFC107</color>
     <color name="colorTextGry">#5A5A5A</color>
+    <color name="buttonsColor">#0075A5</color>
+    <color name="buttonsTextColor">#C0ECF3</color>
+
     <color name="colorPrimaryDark">#4267b2</color>
     <color name="colorAccent">#D81B60</color>
 

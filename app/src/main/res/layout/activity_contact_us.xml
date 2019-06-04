@@ -17,7 +17,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="22dp"
         android:gravity="center_horizontal"
-        android:text="@string/contact_us"
+        android:text="توضیحات"
         android:textColor="#4267b2"
         android:textSize="26sp"
         android:textStyle="bold" />
@@ -26,20 +26,27 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="130dp">
+        android:paddingTop="50dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_search"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        android:drawablePadding="15dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:layout_marginTop="20dp"
+            android:textDirection="ltr"
+            android:orientation="horizontal" >
 
-        android:textDirection="locale"
-        android:gravity="start"
-        android:textAlignment="viewStart"
-        android:hint="@string/mobile_number"
-        android:padding="16dp" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="تبدیل گفتار"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
     <EditText
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
@@ -55,7 +62,84 @@
         android:hint="@string/text"
         android:padding="16dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:layout_marginTop="20dp"
+            android:textDirection="ltr"
+            android:orientation="horizontal" >
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="دوربین"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="گالری"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text=" فایل ها"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:textDirection="ltr"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:textDirection="ltr"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_search"
+                        android:text="فایل 1"
+                        android:textAllCaps="false"
+                        android:textColor="#fff" />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_search"
+                        android:text="فایل 2"
+                        android:textAllCaps="false"
+                        android:textColor="#fff" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

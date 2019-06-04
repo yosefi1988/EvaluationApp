@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fb_background_color"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:padding="5dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp" >
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:id="@+id/login_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="22dp"
+                android:gravity="center_horizontal"
+                android:text="شبکه و انشعاب"
+                android:textColor="#4267b2"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="مشخصات شبکه آب"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="قطر شبکه انشعاب"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست قطر شبکه آب"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="جنس شبکه انشعاب"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست جنس شبکه آب"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="مشخصات انشعاب آب"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="وضعیت انشعاب آب"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست وضعیت انشعاب آب"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="قطر انشعاب آب"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست قطر انشعاب آب"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="طول مسیر"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextNationalCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textDirection="rtl"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:text="50"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:background="@drawable/bg_search" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="خط قبلی جمع شود."
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="مشخصات کنتور"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="قطر کنتور"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست قطر کنتور آب"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="ریز کاربری"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="ریز کاربری"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="تعداد"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextNationalCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textDirection="rtl"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:text="20"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:background="@drawable/bg_search" />
+            </LinearLayout>
+
+
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="وضعیت نصب"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="وضعیت عملیاتی نصب"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست وضعیت عملیاتی"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="اشتراک فعلی"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="لیست اشتراک های قدیکی"
+                    android:textAllCaps="false"
+                    android:textColor="#fff" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="تعداد"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextNationalCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textDirection="rtl"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:text="6565"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:background="@drawable/bg_search" />
+            </LinearLayout>
+
+            <include layout="@layout/_part_horizontal_line"></include>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:textDirection="ltr"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="افزودن"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

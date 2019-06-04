@@ -84,34 +84,52 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
             </LinearLayout>
 
-            <include
-                layout="@layout/_part_horizontal_line"></include>
+            <include layout="@layout/_part_horizontal_line"></include>
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linearLayoutBottom"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content">
 
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="@string/menu"
+                android:textAllCaps="false"
+                android:src="@drawable/ic_menu_manage"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:textColor="@color/buttonsTextColor"
+                android:layout_alignParentRight="true"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="@string/details"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonsTextColor"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/btn_search"
-                android:text="@string/send"
-                android:textAllCaps="false"
-                android:textColor="#fff"
+                android:text="@string/send_to_server"
+                android:layout_toRightOf="@+id/send"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/buttonsTextColor"
                 android:textSize="18sp" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

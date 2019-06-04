@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fb_background_color"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:padding="20dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:text="فاضلاب"
+        android:textColor="#4267b2"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layoutDirection="rtl"
+        android:paddingTop="50dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/colorTextGry"
+                android:text="وضعیت سیفون"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="دارد/ندارد"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonsTextColor"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorTextGry"
+                    android:text="تعداد"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="تداد"
+                    android:textAllCaps="false"
+                    android:textColor="@color/buttonsTextColor"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorTextGry"
+                    android:layout_gravity="center"
+                    android:text="قطر سیفون"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="قطر سیفون"
+                    android:textAllCaps="false"
+                    android:textColor="@color/buttonsTextColor"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorTextGry"
+                    android:layout_gravity="center"
+                    android:text="کد اشتراک"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_search"
+                    android:text="کد اشتراک های قدیمی"
+                    android:textAllCaps="false"
+                    android:textColor="@color/buttonsTextColor"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/colorTextGry"
+                android:text="طول مسیر فاضلاب"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_search"
+                android:drawablePadding="15dp"
+                android:hint="4"
+                android:textDirection="locale"
+                android:gravity="start"
+                android:textAlignment="viewStart"
+                android:padding="16dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+
+        <Button
+                android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_search"
+            android:text="@string/reg"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,7 +3,11 @@ package ir.sajjadyosefi.evaluation.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.activeandroid.Model;
 import com.activeandroid.query.Delete;
@@ -56,7 +60,7 @@ public class SplashScreenActivity extends TubelessActivity {
 //                Build.DISPLAY);
 //        DeviceRegister(loginRequest);
 
-        dialog.show();
+       // dialog.show();
 
 //        Category restaurants = new Category();
 //        restaurants.name = "Restaurants";
@@ -99,6 +103,40 @@ public class SplashScreenActivity extends TubelessActivity {
 //                .set("Enabled = 0")
 //                .where("Account = ?", 5)
 //                .execute();
+
+
+        TextView textView = findViewById(R.id.textViewVersion);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(getContext(),findViewById(R.id.textViewVersion));
+                //inflating menu from xml resource
+                popup.inflate(R.menu.main_fab);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu_image:
+                                //handle menu1 click
+                                break;
+                            case R.id.menu_place:
+                                //handle menu2 click
+                                break;
+                            case R.id.menu_emoticon:
+                                //handle menu3 click
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
+            }
+        });
+
+
     }
 
     private void initDb(Context context) {

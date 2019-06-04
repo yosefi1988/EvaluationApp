@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="right"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:background="@color/fb_background_color"
+    android:padding="4dp">
+
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_search"
+        android:text="افزودن اشتراک"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonsTextColor"
+        android:layout_alignParentLeft="true"
+        android:textSize="18sp" />
+</LinearLayout>

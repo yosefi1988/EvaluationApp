@@ -157,4 +157,15 @@
     <string name="tubeless_app_list">لیست اپلیکیشن ها</string>
     <string name="simcart">سیم کارت</string>
     <string name="welcome">خوش آمدید</string>
+    <string name="menu">منو</string>
+    <string name="details">جزئیات</string>
+    <string name="send_to_server">ارسال به مرکز</string>
+    <string name="call">تماس با متقاضی</string>
+    <string name="send_sms">ارسال پیامک</string>
+    <string name="see_koroki">مشاهده کروکی</string>
+    <string name="goBack">بازگشت</string>
+    <string name="start_evaluation">شروع ارزیابی</string>
+    <string name="next_step">ادامه</string>
+    <string name="delete">حدف</string>
+    <string name="add_subscrib">افزودن اشتراک</string>
 </resources>

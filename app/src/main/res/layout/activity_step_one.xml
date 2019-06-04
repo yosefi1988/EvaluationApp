@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fb_background_color"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:padding="20dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/login_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="22dp"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textColor="#4267b2"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal" >
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold" />
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:text="امکان واگذاری وجود دارد" />
+    </LinearLayout>
+        <include layout="@layout/_part_horizontal_line"></include>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal" >
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold" />
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:text="سه شنبه 15/8/1395"  />
+    </LinearLayout>
+    <include layout="@layout/_part_horizontal_line"></include>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal" >
+
+            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:textDirection="ltr"
+                android:layout_marginBottom="10dp"
+
+                android:orientation="vertical" >
+
+                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:layout_width="match_parent"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="امکان واگذاری به شرط مهیا سازی ذیل وجود دارد" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:textDirection="ltr"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_search"
+                        android:text="موارد مهیا سازی"
+                        android:textAllCaps="false"
+                        android:textColor="#fff" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <include layout="@layout/_part_horizontal_line"></include>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal" >
+
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold" />
+        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:text="نیازمند توسعه شبکه می باشد"  />
+    </LinearLayout>
+    <include layout="@layout/_part_horizontal_line"></include>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:textDirection="ltr"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="@string/goBack"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="@string/next_step"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

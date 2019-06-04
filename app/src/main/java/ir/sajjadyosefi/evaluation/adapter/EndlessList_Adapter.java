@@ -218,11 +218,11 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
 
             imageViewUserAvatar           = (ImageView) itemView.findViewById(R.id.imageViewUserAvatar);
-            imageviewPicture           = (ImageView) itemView.findViewById(R.id.imageviewPicture);
+            imageviewPicture           = (ImageView) itemView.findViewById(R.id.textViewDate);
             textViewUserName              = (TextView) itemView.findViewById(R.id.textViewUserName);
 
-            textViewTitle                 = (TextView) itemView.findViewById(R.id.textViewTitle);
-            textViewLocation              = (TextView) itemView.findViewById(R.id.textViewLocation);
+            textViewTitle                 = (TextView) itemView.findViewById(R.id.textViewDate);
+            textViewLocation              = (TextView) itemView.findViewById(R.id.textViewDate);
             textViewDate                  = (TextView) itemView.findViewById(R.id.textViewDate);
             textViewCount                 = (TextView) itemView.findViewById(R.id.textViewCount);
         }

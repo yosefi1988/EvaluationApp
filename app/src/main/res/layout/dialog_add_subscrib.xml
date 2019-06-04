@@ -18,9 +18,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="2dp"
         android:gravity="center_horizontal"
-        android:text="@string/account"
+        android:text="@string/add_subscrib"
         android:textColor="#4267b2"
         android:textSize="26sp"
         android:textStyle="bold" />
@@ -29,32 +29,30 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="130dp">
+        android:paddingTop="50dp">
 
         <EditText
-                android:id="@+id/editTextPhone"
+            android:id="@+id/editTextPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search"
-            android:drawableLeft="@android:drawable/stat_sys_vp_phone_call"
             android:drawablePadding="15dp"
-            android:hint="@string/mobile_number"
+            android:hint="کد اشتراک"
             android:textDirection="locale"
             android:gravity="start"
             android:textAlignment="viewStart"
             android:padding="16dp" />
         <EditText
-                android:id="@+id/editTextPass"
-                android:layout_marginTop="5dp"
+            android:id="@+id/editTextPass"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textDirection="locale"
             android:gravity="start"
             android:textAlignment="viewStart"
             android:background="@drawable/bg_search"
-            android:drawableLeft="@android:drawable/ic_secure"
             android:drawablePadding="15dp"
-            android:hint="@string/password"
+            android:hint="رقم مصرف"
             android:padding="16dp" />
 
 
@@ -74,7 +72,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_search"
-            android:text="@string/login"
+            android:text="@string/reg"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18sp" />
