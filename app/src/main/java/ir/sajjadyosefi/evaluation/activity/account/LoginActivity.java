@@ -81,8 +81,6 @@ public class LoginActivity extends TubelessActivity {
 
 
         submitButton = findViewById(R.id.submit);
-        submitBySimCard = findViewById(R.id.submitBySimCard);
-        submitByGoogle = findViewById(R.id.submitByGoogle);
         editTextPass = findViewById(R.id.editTextPass);
         editTextPhone = findViewById(R.id.editTextPhone);
 
@@ -114,18 +112,6 @@ public class LoginActivity extends TubelessActivity {
         });
 
 
-        ((TextView) findViewById(R.id.textViewForgetpass)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getContext(), LoginActivity.class);
-//                getActivity().startActivity(intent);
-//                getActivity().finish();
-
-                ((TubelessActivity) getContext()).dialog.show();
-
-
-            }
-        });
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

@@ -211,7 +211,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
             linearLayoutTop               = (LinearLayout) itemView.findViewById(R.id.linearLayoutTop);
             linearLayoutCenter            = (LinearLayout) itemView.findViewById(R.id.linearLayoutCenter);
-            linearLayoutBottom            = (LinearLayout) itemView.findViewById(R.id.linearLayoutBottom);
+            linearLayoutBottom            = (LinearLayout) itemView.findViewById(R.id.linearLayoutCenter);
 
             imageViewShare               = (ImageView) itemView.findViewById(R.id.imageViewShare);
             textViewShare                = (TextView) itemView.findViewById(R.id.textViewShare);

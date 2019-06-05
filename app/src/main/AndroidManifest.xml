@@ -15,6 +15,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"  />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -27,12 +33,15 @@
 
         <meta-data android:name="AA_DB_NAME" android:value="EvaluationDatabase" />
         <meta-data android:name="AA_DB_VERSION" android:value="2" />
+        <activity android:name=".activity.SplashScreenActivity" ></activity>
+        <activity android:name=".activity.evaluation.CommentActivity" ></activity>
+        <activity android:name=".activity.evaluation.MapActivity" ></activity>
+        <activity android:name=".activity.evaluation.PaintActivity" ></activity>
 
         <activity
-                android:name=".activity.SplashScreenActivity"
+                android:name=".activity.evaluation.SignatureActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize"
-
                 android:theme="@style/AppTheme.NoActionBar"
                 android:label="@string/app_name">
             <intent-filter>
@@ -59,6 +68,8 @@
             <meta-data android:name="android.accounts.AccountAuthenticator"
                        android:resource="@xml/authenticator" />
         </service>
+
+
     </application>
 
 </manifest>

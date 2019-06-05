@@ -44,4 +44,9 @@ dependencies {
     implementation 'com.github.andremion:counterfab:1.2.0'
     implementation 'com.hlab.fabrevealmenu:fab-reveal-menu:1.0.3'
     implementation files('libs/activeandroid-3.1-beta.jar')
+
+
+    implementation 'org.osmdroid:osmdroid-android:6.1.0'
+
+
 }
