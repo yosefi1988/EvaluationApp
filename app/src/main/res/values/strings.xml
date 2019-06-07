@@ -168,4 +168,7 @@
     <string name="next_step">ادامه</string>
     <string name="delete">حدف</string>
     <string name="add_subscrib">افزودن اشتراک</string>
+    <string name="title_location_permission">مجوزدسترسی</string>
+    <string name="text_location_permission">برای ادامه به تایید شما احتیاج داریم</string>
+    <string name="add">افزودن</string>
 </resources>

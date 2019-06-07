@@ -37,9 +37,12 @@
         <activity android:name=".activity.evaluation.CommentActivity" ></activity>
         <activity android:name=".activity.evaluation.MapActivity" ></activity>
         <activity android:name=".activity.evaluation.PaintActivity" ></activity>
+        <activity
+            android:name=".activity.evaluation.SignatureActivity"
+            android:screenOrientation="portrait"></activity>
 
         <activity
-                android:name=".activity.evaluation.SignatureActivity"
+                android:name=".activity.evaluation.WasterWaterActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/AppTheme.NoActionBar"

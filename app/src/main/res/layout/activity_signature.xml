@@ -9,15 +9,23 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="reset" android:id="@+id/redButton"/>
-
-    <ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView
-        android:layout_marginTop="150dp"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/ChoosenImageView">
-    </ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Save Picture" android:id="@+id/SavePictureButton"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="get last location"
+        android:id="@+id/getLastlocation"/>
+    <ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/signback"
+        android:scaleType="centerCrop"
+        android:id="@+id/ChoosenImageView">
+    </ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView>
+
+
 </LinearLayout>

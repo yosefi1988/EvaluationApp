@@ -10,9 +10,6 @@
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
 
-
-
-
     <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
         android:id="@+id/login_title"
         android:layout_width="fill_parent"
