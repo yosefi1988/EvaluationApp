@@ -1,11 +1,17 @@
 package ir.sajjadyosefi.evaluation.activity.evaluation;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+import com.tuyenmonkey.mkloader.model.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +22,12 @@ import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.LAST_ITEM;
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WASTER_WATER;
 
-public class WasterWaterActivity extends TubelessActivity {
+public class WasterWaterListActivity extends TubelessActivity {
 
 
-    private static final String TAG = WasterWaterActivity.class.getSimpleName();
+    private static final String TAG = WasterWaterListActivity.class.getSimpleName();
 
 
     LinearLayoutManager             mLayoutManager;
@@ -32,7 +37,27 @@ public class WasterWaterActivity extends TubelessActivity {
     List<TubelessObject> WasterWaterList = new ArrayList<TubelessObject>();
     EndlessList_Adapter adapter_Posts;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("result");
+
+                if (result != null){
+
+
+                    Gson gson = new Gson();
+                    WasterWater wasterWaterItem = gson.fromJson(result,WasterWater.class);
+                    WasterWaterList.add(wasterWaterItem);
+                    adapter_Posts.notifyItemInserted(WasterWaterList.size());
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

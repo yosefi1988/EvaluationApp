@@ -1,6 +1,8 @@
 package ir.sajjadyosefi.evaluation.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TimelineItem;
 import ir.sajjadyosefi.evaluation.classes.Global;
@@ -103,6 +106,14 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
         }
     }
+    public class AddViewHolder extends ParentViewHolder {
+        public Button buttonSubmit;
+
+        public AddViewHolder(View itemView) {
+            super(itemView);
+            buttonSubmit            = (Button) itemView.findViewById(R.id.submit);
+        }
+    }
     //////////////////// End ViewHolder   /////////////////////////
 
     @Override
@@ -111,7 +122,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         if (listType == WASTER_WATER) {
             if (viewType == LAST_ITEM) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_waster_water, parent, false);
-                return new ProgressViewHolder(view);
+                return new AddViewHolder(view);
             }
             if (viewType == WASTER_WATER) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_waster_water, parent, false);
@@ -135,7 +146,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 ((WasterWater)mTimelineItemList.get(position)).prepareYafteItem(mContext, (WasterWaterViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
                 //LAST ITEM
-
+                ((AddViewHolder)holder).buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(mContext, WasterWaterAddActivity.class);
+                        ((Activity)mContext).startActivityForResult(i, 1);
+                    }
+                });
 
             }
         }
