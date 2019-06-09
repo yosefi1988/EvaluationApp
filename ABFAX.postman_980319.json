@@ -1,0 +1,226 @@
+{
+	"id": "c440d9c7-802d-fce0-728e-e7a27422d86a",
+	"name": "ABFAX",
+	"description": "",
+	"order": [
+		"c78873f2-48d6-e022-9cc3-820070d1e300",
+		"9f00292c-e338-cee6-e378-091e78d6ba1b",
+		"37845473-a6fa-fad5-9ee7-c7cd6ce9c9d6"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "4407754",
+	"public": false,
+	"requests": [
+		{
+			"id": "37845473-a6fa-fad5-9ee7-c7cd6ce9c9d6",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://shop.atiafkar.ir/api/GetAllUsageTypeInfo?UserName=ApiService&Password=BandarAndroid&AndroidId=123",
+			"queryParams": [
+				{
+					"key": "UserName",
+					"value": "ApiService",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Password",
+					"value": "BandarAndroid",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "AndroidId",
+					"value": "123",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": "",
+					"value": "کنترل محاسبه-لیست.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "kl;",
+					"value": "",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1560087604127,
+			"name": "http://shop.atiafkar.ir/api/GetAllUsageTypeInfo",
+			"description": "",
+			"collectionId": "c440d9c7-802d-fce0-728e-e7a27422d86a",
+			"responses": []
+		},
+		{
+			"id": "9f00292c-e338-cee6-e378-091e78d6ba1b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://shop.atiafkar.ir/api/GetAllSelect?UserName=ApiService&Password=BandarAndroid&AndroidId=123",
+			"queryParams": [
+				{
+					"key": "UserName",
+					"value": "ApiService",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Password",
+					"value": "BandarAndroid",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "AndroidId",
+					"value": "123",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": "",
+					"value": "کنترل محاسبه-لیست.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "kl;",
+					"value": "",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1560087568851,
+			"name": "http://shop.atiafkar.ir/api/GetAllSelect",
+			"description": "",
+			"collectionId": "c440d9c7-802d-fce0-728e-e7a27422d86a",
+			"responses": []
+		},
+		{
+			"id": "c78873f2-48d6-e022-9cc3-820070d1e300",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://shop.atiafkar.ir/api/CheckLoginUser?UserName=ApiService&Password=BandarAndroid&LoginUser=09123333333&LoginPass=Ar_123456&AndroidId=123",
+			"queryParams": [
+				{
+					"key": "UserName",
+					"value": "ApiService",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Password",
+					"value": "BandarAndroid",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "LoginUser",
+					"value": "09123333333",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "LoginPass",
+					"value": "Ar_123456",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "AndroidId",
+					"value": "123",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": "",
+					"value": "کنترل محاسبه-لیست.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "kl;",
+					"value": "",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1560087507290,
+			"name": "http://shop.atiafkar.ir/api/CheckLoginUser",
+			"description": "",
+			"collectionId": "c440d9c7-802d-fce0-728e-e7a27422d86a",
+			"responses": []
+		}
+	]
+}
