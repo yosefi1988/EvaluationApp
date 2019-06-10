@@ -62,152 +62,151 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="8"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="8"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="8"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:orientation="vertical">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_weight="8"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:orientation="horizontal">-->
 
-                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="5"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/colorTextGry"
-                    android:text="تعداد"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold" />
+                <!--<ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="5"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:paddingTop="5dp"-->
+                    <!--android:textColor="@color/colorTextGry"-->
+                    <!--android:text="تعداد"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textStyle="bold" />-->
 
-                <Button
-                    android:id="@+id/send"
-                    android:layout_width="0dp"
-                    android:layout_weight="8"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_search"
-                    android:text="تداد"
-                    android:textAllCaps="false"
-                    android:textColor="@color/buttonsTextColor"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="8"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                <!--<Button-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="8"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@drawable/btn_search"-->
+                    <!--android:text="تداد"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/buttonsTextColor"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:textSize="18sp" />-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_weight="8"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:orientation="horizontal">-->
 
-                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="5"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/colorTextGry"
-                    android:layout_gravity="center"
-                    android:text="قطر سیفون"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold" />
+                <!--<ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="5"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:paddingTop="5dp"-->
+                    <!--android:textColor="@color/colorTextGry"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:text="قطر سیفون"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textStyle="bold" />-->
 
-                <Button
-                    android:id="@+id/send"
-                    android:layout_width="0dp"
-                    android:layout_weight="8"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_search"
-                    android:text="قطر سیفون"
-                    android:textAllCaps="false"
-                    android:textColor="@color/buttonsTextColor"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                <!--<Button-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="8"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@drawable/btn_search"-->
+                    <!--android:text="قطر سیفون"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/buttonsTextColor"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:textSize="18sp" />-->
+            <!--</LinearLayout>-->
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="8"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="8"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="8"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:orientation="vertical">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_weight="8"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:orientation="horizontal">-->
 
-                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="5"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/colorTextGry"
-                    android:layout_gravity="center"
-                    android:text="کد اشتراک"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold" />
+                <!--<ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="5"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:paddingTop="5dp"-->
+                    <!--android:textColor="@color/colorTextGry"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:text="کد اشتراک"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textStyle="bold" />-->
 
-                <Button
-                    android:id="@+id/send"
-                    android:layout_width="0dp"
-                    android:layout_weight="8"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_search"
-                    android:text="کد اشتراک های قدیمی"
-                    android:textAllCaps="false"
-                    android:textColor="@color/buttonsTextColor"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                <!--<Button-->
+                    <!--android:id="@+id/sendx"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="8"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@drawable/btn_search"-->
+                    <!--android:text="old"-->
+                    <!--android:clickable="true"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/buttonsTextColor"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:textSize="18sp" />-->
+            <!--</LinearLayout>-->
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="8"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="8"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:orientation="horizontal">-->
 
-            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingRight="10dp"
-                android:paddingTop="5dp"
-                android:textColor="@color/colorTextGry"
-                android:text="طول مسیر فاضلاب"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:textStyle="bold" />
+            <!--<ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="3"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:paddingTop="5dp"-->
+                <!--android:textColor="@color/colorTextGry"-->
+                <!--android:text="طول مسیر فاضلاب"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:textStyle="bold" />-->
 
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_search"
-                android:drawablePadding="15dp"
-                android:hint="4"
-                android:textDirection="locale"
-                android:gravity="start"
-                android:textAlignment="viewStart"
-                android:padding="16dp" />
+            <!--<EditText-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="5"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_search"-->
+                <!--android:drawablePadding="15dp"-->
+                <!--android:hint="4"-->
+                <!--android:textDirection="locale"-->
+                <!--android:gravity="start"-->
+                <!--android:textAlignment="viewStart"-->
+                <!--android:padding="16dp" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
 
     </LinearLayout>

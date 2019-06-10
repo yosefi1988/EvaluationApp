@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -28,11 +30,11 @@ public class WasterWaterAddActivity extends TubelessActivity {
 
     private static final String TAG = WasterWaterAddActivity.class.getSimpleName();
 
-    private Button submit;
-
-    LinearLayoutManager             mLayoutManager;
-    private RecyclerView            mRecyclerViewTimeline;
-    private View                    emptyView;
+//    public Button submit;
+//
+//    LinearLayoutManager             mLayoutManager;
+//    private RecyclerView            mRecyclerViewTimeline;
+//    private View                    emptyView;
 
 
 
@@ -40,46 +42,46 @@ public class WasterWaterAddActivity extends TubelessActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wastewater);
-        setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
-        submit = findViewById(R.id.submit);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
+//        submit = (Button) findViewById(R.id.submit);
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                WasterWater aaaaaa = new WasterWater();
+////                ((WasterWater) aaaaaa).setCount(5);
+////                ((WasterWater) aaaaaa).setLength(10);
+////                ((WasterWater) aaaaaa).setSiphon(true);
+////                ((WasterWater) aaaaaa).setDiameter(10);
+////                ((WasterWater) aaaaaa).setType(WASTER_WATER);
+////
+////                WasterWater aaaaaa2 = new WasterWater();
+////                ((WasterWater) aaaaaa2).setLength(100);
+////                ((WasterWater) aaaaaa2).setSiphon(false);
+////                ((WasterWater) aaaaaa2).setSubscribeCode("54514");
+////                ((WasterWater) aaaaaa2).setType(WASTER_WATER);
+////
+////
+////                Gson gson = new Gson();
+////                Intent returnIntent = new Intent();
+////                returnIntent.putExtra("result",gson.toJson(aaaaaa));
+////                setResult(Activity.RESULT_OK,returnIntent);
+////                finish();
+//            }
+//        });
 
 
-                WasterWater aaaaaa = new WasterWater();
-                ((WasterWater) aaaaaa).setCount(5);
-                ((WasterWater) aaaaaa).setLength(10);
-                ((WasterWater) aaaaaa).setSiphon(true);
-                ((WasterWater) aaaaaa).setDiameter(10);
-                ((WasterWater) aaaaaa).setType(WASTER_WATER);
-
-//                WasterWater aaaaaa2 = new WasterWater();
-//                ((WasterWater) aaaaaa2).setLength(100);
-//                ((WasterWater) aaaaaa2).setSiphon(false);
-//                ((WasterWater) aaaaaa2).setSubscribeCode("54514");
-//                ((WasterWater) aaaaaa2).setType(WASTER_WATER);
-//
-//
-//                Gson gson = new Gson();
-//                Intent returnIntent = new Intent();
-//                returnIntent.putExtra("result",gson.toJson(aaaaaa));
-//                setResult(Activity.RESULT_OK,returnIntent);
-//                finish();
-            }
-        });
 
 
     }
 
 
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_CANCELED, returnIntent);
-        finish();
-    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//
+//        Intent returnIntent = new Intent();
+//        setResult(Activity.RESULT_CANCELED, returnIntent);
+//        finish();
+//    }
 }
