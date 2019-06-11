@@ -1,5 +1,6 @@
 package ir.sajjadyosefi.evaluation.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.google.gson.JsonElement;
 import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.account.LoginActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.SAccounts;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
@@ -24,6 +27,7 @@ import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
 import ir.sajjadyosefi.evaluation.classes.utility.DateConverterSjd;
+import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.db.Config;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
@@ -40,9 +44,18 @@ public class SplashScreenActivity extends TubelessActivity {
         setContentView(R.layout.activity_splash_screen);
         setRootActivity(((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
-        init(getContext());
+//        SAccounts sAccounts = new SAccounts(getContext());
+//        if (sAccounts.hasUserAccount()) {
+//            Global.IDUser = sAccounts.getUserAccountID();
+//            initDb(getContext());
+//        }else {
+//            //redirect ro login
+//            //start activity for result
+            Intent i = new Intent(getContext(), LoginActivity.class);
+            i.putExtra("From" , "SplashScreen");
+            getActivity().startActivityForResult(i, 1);
+//        }
 
-        initDb(getContext());
 
 
 
@@ -125,6 +138,26 @@ public class SplashScreenActivity extends TubelessActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("result");
+
+                if (result != null){
+
+
+
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
+
+
     private void initDb(Context context) {
 
         //Persian Date // shamsi date
@@ -184,10 +217,6 @@ public class SplashScreenActivity extends TubelessActivity {
 
     }
 
-    private void init(Context context) {
-        SAccounts sAccounts = new SAccounts(context);
-        Global.IDUser = sAccounts.getUserAccountID();
-    }
 
 
 

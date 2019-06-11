@@ -1,6 +1,7 @@
 package ir.sajjadyosefi.evaluation.activity.account;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -50,8 +51,7 @@ public class LoginActivity extends TubelessActivity {
     //var
 
     //widget
-    Button submitButton, submitBySimCard;
-    SignInButton submitByGoogle;
+    Button submitButton;
 
     EditText editTextPass, editTextPhone;
 
@@ -84,21 +84,8 @@ public class LoginActivity extends TubelessActivity {
         editTextPass = findViewById(R.id.editTextPass);
         editTextPhone = findViewById(R.id.editTextPhone);
 
+        String result = getIntent().getExtras().getString("From");
 
-        submitBySimCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (!checkPermission(wantPermission)) {
-                    requestPermission(wantPermission);
-                } else {
-                    LoginRequest loginRequest = new LoginRequest(getPhone());
-                    loginRequest.setAndroidID(DeviceUtil.GetAndroidId(getContext()));
-                    UserName = getPhone();
-                    LoginOrRegister(loginRequest);
-                }
-            }
-        });
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -124,14 +111,7 @@ public class LoginActivity extends TubelessActivity {
 //        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 //        updateUI(account);
 
-        submitByGoogle.setSize(SignInButton.SIZE_STANDARD);
-        submitByGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
+
 //        PackageManager p = getPackageManager();
 //        p.setComponentEnabledSetting(getComponentName(), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
@@ -157,13 +137,20 @@ public class LoginActivity extends TubelessActivity {
 
                 Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
 
-                Intent autoActivityIntent =  new Intent(getContext(), MainActivity.class);
-//                Bundle bundleAuto = new Bundle();
-//                bundleAuto.putString("type","NEW_Auto");
-//                bundleAuto.putString("BankNumber" , phoneNumber );
-//                bundleAuto.putString("Message" , message );
-//                autoActivityIntent.putExtras(bundleAuto);
-                getContext().startActivity(autoActivityIntent);
+//                Intent autoActivityIntent =  new Intent(getContext(), MainActivity.class);
+////                Bundle bundleAuto = new Bundle();
+////                bundleAuto.putString("type","NEW_Auto");
+////                bundleAuto.putString("BankNumber" , phoneNumber );
+////                bundleAuto.putString("Message" , message );
+////                autoActivityIntent.putExtras(bundleAuto);
+//                getContext().startActivity(autoActivityIntent);
+//                finish();
+
+
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result","ok");
+                setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
 
@@ -263,5 +250,12 @@ public class LoginActivity extends TubelessActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
+    }
 
 }
