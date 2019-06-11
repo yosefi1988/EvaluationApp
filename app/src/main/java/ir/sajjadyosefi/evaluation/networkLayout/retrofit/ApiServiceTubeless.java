@@ -34,8 +34,10 @@ public interface ApiServiceTubeless {
 //            @Field("token") String token);
 
 
-    @POST("Api/Device/deviceRegister")
-    Call<Object> deviceRegister(@Body DeviceRequest request);
+    @GET("api/GetAllSelect")
+    Call<Object> selectValues(@Query("UserName") String UserName ,
+                              @Query("Password") String Password,
+                              @Query("AndroidId") String AndroidId);
 
     @POST("Api/User/Login")
     Call<Object> login(@Body LoginRequest request);

@@ -18,7 +18,7 @@ public class RetrofitHelperPost {
     private RetrofitHelperPost() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://postyafteh.post.ir/r/Handlers/")
+                .baseUrl("http://shop.atiafkar.ir/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

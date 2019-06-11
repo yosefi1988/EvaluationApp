@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.activeandroid.Model;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.google.gson.Gson;
@@ -22,11 +21,10 @@ import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.SAccounts;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
 import ir.sajjadyosefi.evaluation.classes.utility.DateConverterSjd;
-import ir.sajjadyosefi.evaluation.model.db.Category;
 import ir.sajjadyosefi.evaluation.model.db.Config;
-import ir.sajjadyosefi.evaluation.model.db.Task;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,18 +45,6 @@ public class SplashScreenActivity extends TubelessActivity {
         initDb(getContext());
 
 
-//        DeviceRequest loginRequest = new DeviceRequest(
-//                DeviceUtil.GetAndroidId(getContext()),
-//                Build.SERIAL,
-//                Build.MODEL,
-//                Build.ID,
-//                Build.VERSION.RELEASE,
-//                Build.VERSION.SDK_INT,
-//                Build.MANUFACTURER,
-//                Build.BRAND,
-//                Build.BOARD,
-//                Build.DISPLAY);
-//        DeviceRegister(loginRequest);
 
        // dialog.show();
 
@@ -146,8 +132,6 @@ public class SplashScreenActivity extends TubelessActivity {
         DateConverterSjd.SolarCalendar todayDate = new DateConverterSjd.SolarCalendar();
         String sssssssssss = dateConverterSjd.getCurrentShamsidate();
 
-
-
         List<Config> configList = new Select()
                 .from(Config.class)
                 .where("Day = ?", todayDate.getDay()
@@ -155,26 +139,46 @@ public class SplashScreenActivity extends TubelessActivity {
                 .execute();
 
         if (configList.size() == 0){
+//        if (true){
             //clear db config
             new Delete().from(Config.class).execute();
 
+
             //get from server
-            Config configNew = new Config();
-            configNew.ServerConfig = "server json string";
-            configNew.Day = todayDate.getDay();
+            Global.apiManagerTubeless.getSelects(new TubelessRetrofitCallback<java.lang.Object>(getContext(), getRootActivity(), true, null, new Callback<java.lang.Object>() {
+                @Override
+                public void onResponse(Call<java.lang.Object> call, Response<Object> response) {
+                    Gson gson = new Gson();
+                    JsonElement jsonElement = gson.toJsonTree(response.body());
+                    AbfaxSelects responseX = gson.fromJson(jsonElement, AbfaxSelects.class);
 
 
-            //save to db
-            configNew.save();
+                    Config configNew = new Config();
+                    configNew.ServerConfig = jsonElement.toString();
+                    configNew.Day = todayDate.getDay();
 
-            //init model in GLobal
-            Gson gson = new Gson();
-            //XMODEL model = gson.toJson(configNew.ServerConfig ,XMODEL.class);
-            startMainActivity();
+
+                    //save to db
+                    configNew.save();
+
+                    //init model in GLobal
+                    AbfaxSelects model = gson.fromJson(configList.get(0).ServerConfig ,AbfaxSelects.class);
+                    //startMainActivity();
+                }
+
+                @Override
+                public void onFailure(Call<java.lang.Object> call, Throwable t) {
+
+                    int a = 5 ;
+                    a++;
+                }
+            }));
+
+
         }else {
             //init model in GLobal
             Gson gson = new Gson();
-            //XMODEL model = gson.toJson(configList.get(0).ServerConfig ,XMODEL.class);
+            AbfaxSelects model = gson.fromJson(configList.get(0).ServerConfig ,AbfaxSelects.class);
             startMainActivity();
         }
 
@@ -183,27 +187,9 @@ public class SplashScreenActivity extends TubelessActivity {
     private void init(Context context) {
         SAccounts sAccounts = new SAccounts(context);
         Global.IDUser = sAccounts.getUserAccountID();
-
     }
 
 
-    private void DeviceRegister(DeviceRequest deviceRequest) {
-        Global.apiManagerTubeless.deviceRregister(deviceRequest,new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-                Gson gson = new Gson();
-                JsonElement jsonElement = gson.toJsonTree(response.body());
-                ServerResponseBase responseX = gson.fromJson(jsonElement.getAsString(), ServerResponseBase.class);
-
-                startMainActivity();
-            }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-
-            }
-        }));
-    }
 
     private void startMainActivity() {
         Intent autoActivityIntent =  new Intent(getContext(), MainActivity.class);
@@ -212,8 +198,8 @@ public class SplashScreenActivity extends TubelessActivity {
 //                bundleAuto.putString("BankNumber" , phoneNumber );
 //                bundleAuto.putString("Message" , message );
 //                autoActivityIntent.putExtras(bundleAuto);
-//        getContext().startActivity(autoActivityIntent);
-//        finish();
+        getContext().startActivity(autoActivityIntent);
+        finish();
     }
 
     @Override

@@ -21,7 +21,7 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
     private final View buttonSubmit;
     private final boolean showResult;
     private View rootView;
-    private final Callback<java.lang.Object> mCallback;
+    private Callback<java.lang.Object> mCallback;
 
     public TubelessRetrofitCallback(Context context, View rootView, boolean showResult, View buttonSubmit, Callback<java.lang.Object> callback) {
         this.mContext = context;
@@ -75,12 +75,12 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
             if (response.body() == null)
                 throw new Exception();
 
-            responseX = gson.fromJson(jsonElement.getAsString(), ServerResponseBase.class);
+            responseX = gson.fromJson(jsonElement, ServerResponseBase.class);
             if (response.body() != null ) {
                 if (responseX.getTubelessException().getCode() != 0) {
-                    if (responseX.getTubelessException().getCode() > 0) {
+                    if (responseX.getTubelessException().getCode() == 800) {
                         if (call != null && response != null)
-                            mCallback.onResponse(call, response);
+                            mCallback.onResponse(call,response);
                     } else {
                         throw responseX.getTubelessException();
                     }

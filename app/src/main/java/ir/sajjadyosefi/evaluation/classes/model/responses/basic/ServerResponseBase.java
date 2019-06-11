@@ -6,13 +6,13 @@ import ir.sajjadyosefi.evaluation.model.exception.TubelessException;
  * Created by sajjad on 10/31/2016.
  */
 public class ServerResponseBase {
-    private TubelessException tubelessException;
+    private TubelessException exception;
 
     public TubelessException getTubelessException() {
-        return tubelessException;
+        return exception;
     }
 
     public void setTubelessException(TubelessException tubelessException) {
-        this.tubelessException = tubelessException;
+        this.exception = tubelessException;
     }
 }

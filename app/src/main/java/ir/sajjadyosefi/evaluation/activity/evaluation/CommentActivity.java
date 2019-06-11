@@ -1,18 +1,13 @@
 package ir.sajjadyosefi.evaluation.activity.evaluation;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
-import java.util.Locale;
-
 
 
 public class CommentActivity extends TubelessActivity {
@@ -186,30 +179,30 @@ public class CommentActivity extends TubelessActivity {
 
     }
 
-    private void DeviceRegister(DeviceRequest deviceRequest) {
-        Global.apiManagerTubeless.deviceRregister(deviceRequest,new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-                Gson gson = new Gson();
-                JsonElement jsonElement = gson.toJsonTree(response.body());
-                ServerResponseBase responseX = gson.fromJson(jsonElement.getAsString(), ServerResponseBase.class);
-
-                Intent autoActivityIntent =  new Intent(getContext(), CommentActivity.class);
-//                Bundle bundleAuto = new Bundle();
-//                bundleAuto.putString("type","NEW_Auto");
-//                bundleAuto.putString("BankNumber" , phoneNumber );
-//                bundleAuto.putString("Message" , message );
-//                autoActivityIntent.putExtras(bundleAuto);
-                getContext().startActivity(autoActivityIntent);
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-
-            }
-        }));
-    }
+//    private void DeviceRegister(DeviceRequest deviceRequest) {
+//        Global.apiManagerTubeless.getSelects(deviceRequest,new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
+//            @Override
+//            public void onResponse(Call<Object> call, Response<Object> response) {
+//                Gson gson = new Gson();
+//                JsonElement jsonElement = gson.toJsonTree(response.body());
+//                ServerResponseBase responseX = gson.fromJson(jsonElement.getAsString(), ServerResponseBase.class);
+//
+//                Intent autoActivityIntent =  new Intent(getContext(), CommentActivity.class);
+////                Bundle bundleAuto = new Bundle();
+////                bundleAuto.putString("type","NEW_Auto");
+////                bundleAuto.putString("BankNumber" , phoneNumber );
+////                bundleAuto.putString("Message" , message );
+////                autoActivityIntent.putExtras(bundleAuto);
+//                getContext().startActivity(autoActivityIntent);
+//                finish();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Object> call, Throwable t) {
+//
+//            }
+//        }));
+//    }
 
     @Override
     protected void onStop() {

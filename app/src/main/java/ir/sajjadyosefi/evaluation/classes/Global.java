@@ -33,7 +33,7 @@ public class Global extends Application {
 
         mContext = this;
         apiManagerPost = RetrofitHelperPost.getInstance();
-        apiManagerTubeless = RetrofitHelperTubeless.getInstance();
+        apiManagerTubeless = RetrofitHelperTubeless.getInstance(getApplicationContext());
 
     }
 
