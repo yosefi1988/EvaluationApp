@@ -75,8 +75,6 @@
         <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            app:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <service android:name=".TopWindowService"/>
