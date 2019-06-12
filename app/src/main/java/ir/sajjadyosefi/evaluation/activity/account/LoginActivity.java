@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -26,11 +27,18 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.refactor.kmpautotextview.ItemData;
+import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.MainActivity;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.SAccounts;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.PickerBuilder;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.accounting.LoginResponse;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
@@ -114,6 +122,41 @@ public class LoginActivity extends TubelessActivity {
 
 //        PackageManager p = getPackageManager();
 //        p.setComponentEnabledSetting(getComponentName(), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
+
+
+
+
+        activity = this;
+        complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
+        complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+            @Override
+            public void onPopupItemClick(CharSequence charSequence) {
+                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ArrayList<ItemData> list = new ArrayList<>();
+
+
+//        if (data.size() >= 1){
+//            complTextView.setDatas(data);
+//        }else {
+        //branchList = responseX.getResponse();
+
+        for (int i = 0 ; i < 10 ; i ++ ) {
+            data.add(i + " - " +"xm" + i+"xm");
+
+            ItemData sss = new ItemData(i+"text" , i+"image" , i+"");
+            list.add(sss);
+        }
+
+        complTextView.setDatas(list);
+//        }
+
+
+        selectFromCamera();
+
     }
 
 
@@ -258,4 +301,40 @@ public class LoginActivity extends TubelessActivity {
         finish();
     }
 
+
+
+
+    List<String> data = new ArrayList<String>();
+    KMPAutoComplTextView complTextView;
+
+    Activity activity ;
+    String LastFileSelected = null;
+    //ImageView imageViewAvatar,imageViewMedal;
+
+    private void selectFromCamera() {
+        new PickerBuilder(activity, PickerBuilder.SELECT_FROM_CAMERA)
+                .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
+                    @Override
+                    public void onImageReceived(Uri imageUri) {
+                        //Toast.makeText(EditProfileActivity.this,"Got image - " + imageUri,Toast.LENGTH_LONG).show();
+                        LastFileSelected = imageUri + "";
+                        //imageViewAvatar.setImageURI(imageUri);
+                    }
+                })
+                .setImageName("avatar")
+                .start();
+    }
+    private void selectFromGallery() {
+        new PickerBuilder(activity, PickerBuilder.SELECT_FROM_GALLERY)
+                .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
+                    @Override
+                    public void onImageReceived(Uri imageUri) {
+//                        Toast.makeText(EditProfileActivity.this,"Got image - " + imageUri,Toast.LENGTH_LONG).show();
+                        LastFileSelected = imageUri + "";
+                        //imageViewAvatar.setImageURI(imageUri);
+                    }
+                })
+                .setImageName("avatar")
+                .start();
+    }
 }

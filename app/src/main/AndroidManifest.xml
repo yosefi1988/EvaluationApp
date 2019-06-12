@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="ir.sajjadyosefi.evaluation">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    package="ir.sajjadyosefi.evaluation">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
 
@@ -19,6 +19,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"  />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
 
     <application
@@ -67,6 +71,14 @@
                 android:theme="@style/AppTheme.NoActionBar"
                 android:name=".activity.MainActivity" ></activity>
 
+
+        <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            app:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
         <service android:name=".TopWindowService"/>
         <service android:name=".classes.service.AuthenticatorService">
             <intent-filter>
@@ -75,6 +87,8 @@
             <meta-data android:name="android.accounts.AccountAuthenticator"
                        android:resource="@xml/authenticator" />
         </service>
+
+
 
 
     </application>

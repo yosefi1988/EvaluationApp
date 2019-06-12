@@ -7,6 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/fb_background_color"
     android:orientation="vertical"
     android:textDirection="rtl"
@@ -60,6 +61,16 @@
 
     </LinearLayout>
 
+    <cn.refactor.kmpautotextview.KMPAutoComplTextView
+        android:id="@+id/tvAutoCompl"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:completionThreshold="1"
+        app:completionHighlightColor="@color/colorAccent"
+        app:completionTextColor="#80000000"
+        android:layout_marginTop="-10dp"
+        app:completionTextSize="18sp"
+        app:completionIgnoreCase="true"/>
 
     <LinearLayout
         android:layout_width="fill_parent"

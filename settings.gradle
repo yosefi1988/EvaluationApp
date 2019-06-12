@@ -1,1 +1,1 @@
-include ':app', ':ProgressWindow'
+include ':app', ':ProgressWindow', ':libraryKMPAutoComplete', ':ucropx'
