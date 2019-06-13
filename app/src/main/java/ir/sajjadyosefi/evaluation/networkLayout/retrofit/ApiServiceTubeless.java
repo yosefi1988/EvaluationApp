@@ -25,6 +25,14 @@ public interface ApiServiceTubeless {
 //                                       @Query("tagged") String tagged,
 //                                       @Query("site") String site);
 
+//    @POST("api/CheckLoginUser")
+//    Call<Object> login(@Query("UserName") String userName,
+//                       @Query("UserName") String Password,
+//                       @Query("AndroidId") String AndroidId,
+//                       @Query("LoginUser") String LoginUser,
+//                       @Query("LoginPass") String LoginPass,
+//                       @Body LoginRequest request);
+
     @GET("movies.json")
     Call<List<Movie>> getMoviesService();
 
@@ -33,18 +41,24 @@ public interface ApiServiceTubeless {
 //            @Field("userId") String userID,
 //            @Field("token") String token);
 
+    @GET("Api/TimeLine/getTimeline")
+    Call<Object> getTimeline(@Query("index") int index,
+                             @Query("count") int count);
+
 
     @GET("api/GetAllSelect")
     Call<Object> selectValues(@Query("UserName") String UserName ,
                               @Query("Password") String Password,
                               @Query("AndroidId") String AndroidId);
 
-    @POST("Api/User/Login")
-    Call<Object> login(@Body LoginRequest request);
+    @POST("api/CheckLoginUser")
+    Call<Object> login(@Query("UserName") String userName,
+                       @Query("UserName") String Password,
+                       @Query("AndroidId") String AndroidId,
+                       @Query("LoginUser") String LoginUser,
+                       @Query("LoginPass") String LoginPass);
 
-    @GET("Api/TimeLine/getTimeline")
-    Call<Object> getTimeline(@Query("index") int index,
-                             @Query("count") int count);
+
 
 
 }

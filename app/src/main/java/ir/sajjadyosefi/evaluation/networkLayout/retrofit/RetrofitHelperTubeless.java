@@ -44,14 +44,7 @@ public class RetrofitHelperTubeless {
         return apiManager;
     }
 
-    public void getSelects(TubelessRetrofitCallback<Object> callback) {
-        Call<Object> userCall = service.selectValues(userName,password, androidId);
-        userCall.enqueue(callback);
-    }
-    public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<Object> callback) {
-        Call<Object> userCall = service.login(request);
-        userCall.enqueue(callback);
-    }
+
     public void getTimeline(int index, TubelessRetrofitCallback<Object> callback) {
         Call<Object> userCall = service.getTimeline(index,15);
         userCall.enqueue(callback);
@@ -60,4 +53,19 @@ public class RetrofitHelperTubeless {
 //        Call<ServerResponse> userCall = service.search(searchRequest);
 //        userCall.enqueue(callback);
 //    }
+
+    ///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+
+    public void getSelects(TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.selectValues(userName,password, androidId);
+        userCall.enqueue(callback);
+    }
+    public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.login(userName,password, androidId,request.getLoginUser(),request.getLoginPass());
+        userCall.enqueue(callback);
+    }
+
+    ///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+
+
 }

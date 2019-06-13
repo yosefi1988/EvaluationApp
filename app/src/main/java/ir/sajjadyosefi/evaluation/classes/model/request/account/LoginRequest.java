@@ -4,24 +4,18 @@ import ir.sajjadyosefi.evaluation.classes.Global;
 
 public class LoginRequest {
 
-    private int IDApplicationVersion  = Global.IDApplicationVersion;
+
     private String UserName;
     private String Password;
-    private String AndroidID;
-    private String Email;
-    private String MobileNumber;
-    private String UserMoarefID;
-    private String UserImage;
-    private String ProfileImage;
+    private String LoginUser;
+    private String LoginPass;
+    private String AndroidId;
 
-
-    public int getIDApplicationVersion() {
-        return IDApplicationVersion;
+    public LoginRequest(String loginUser, String loginPass) {
+        LoginUser = loginUser;
+        LoginPass = loginPass;
     }
 
-    public void setIDApplicationVersion(int IDApplicationVersion) {
-        this.IDApplicationVersion = IDApplicationVersion;
-    }
 
     public String getUserName() {
         return UserName;
@@ -39,95 +33,28 @@ public class LoginRequest {
         Password = password;
     }
 
-    public String getAndroidID() {
-        return AndroidID;
+    public String getLoginUser() {
+        return LoginUser;
     }
 
-    public void setAndroidID(String androidID) {
-        AndroidID = androidID;
+    public void setLoginUser(String loginUser) {
+        LoginUser = loginUser;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getLoginPass() {
+        return LoginPass;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setLoginPass(String loginPass) {
+        LoginPass = loginPass;
     }
 
-    public String getMobileNumber() {
-        return MobileNumber;
+    public String getAndroidId() {
+        return AndroidId;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        MobileNumber = mobileNumber;
-    }
-
-    public String getUserMoarefID() {
-        return UserMoarefID;
-    }
-
-    public void setUserMoarefID(String userMoarefID) {
-        UserMoarefID = userMoarefID;
-    }
-
-    public String getUserImage() {
-        return UserImage;
-    }
-
-    public void setUserImage(String userImage) {
-        UserImage = userImage;
-    }
-
-    public String getProfileImage() {
-        return ProfileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        ProfileImage = profileImage;
-    }
-
-
-
-    //mamual
-    public LoginRequest(String userName, String password, String androidID) {
-        UserName = userName;
-        Password = password;
-        AndroidID = androidID;
-
-        Email = "";
-        MobileNumber = "";
-        UserMoarefID = "";
-        UserImage = "";
-        ProfileImage = "";
-    }
-
-
-    //google
-    public LoginRequest(String email, String userImage) {
-        Email = email;
-        UserImage = userImage;
-
-        UserName = email;
-        Password = "";
-        AndroidID = "";
-        MobileNumber = "";
-        UserMoarefID = "";
-        ProfileImage = "";
-    }
-
-
-    //sim
-    public LoginRequest(String mobileNumber) {
-        MobileNumber = mobileNumber;
-
-        Email = "";
-        UserImage = "";
-        UserName = mobileNumber;
-        Password = "";
-        AndroidID = "";
-        UserMoarefID = "";
-        ProfileImage = "";
+    public void setAndroidId(String androidId) {
+        AndroidId = androidId;
     }
 
 

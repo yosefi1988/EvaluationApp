@@ -68,10 +68,10 @@ public class LoginActivity extends TubelessActivity {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    LoginRequest loginRequest = new LoginRequest(getPhone());
+//                    LoginRequest loginRequest = new LoginRequest();
                     UserName = getPhone();
-                    loginRequest.setAndroidID(DeviceUtil.GetAndroidId(getContext()));
-                    LoginOrRegister(loginRequest);
+//                    loginRequest.setAndroidId(DeviceUtil.GetAndroidId(getContext()));
+//                    LoginOrRegister(loginRequest);
                 } else {
                     Toast.makeText(getActivity(),"Permission Denied. We can't get phone number.", Toast.LENGTH_LONG).show();
                 }
@@ -100,7 +100,7 @@ public class LoginActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 //                LoginRequest loginRequest = new LoginRequest("09123678522");
-                LoginRequest loginRequest = new LoginRequest(editTextPhone.getText().toString(), editTextPass.getText().toString(), DeviceUtil.GetAndroidId(getContext()));
+                LoginRequest loginRequest = new LoginRequest(editTextPhone.getText().toString(), editTextPass.getText().toString());
                 UserName = editTextPhone.getText().toString();
                 LoginOrRegister(loginRequest);
             }
@@ -108,13 +108,6 @@ public class LoginActivity extends TubelessActivity {
 
 
 
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-
-        final GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 //        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 //        updateUI(account);
@@ -124,26 +117,9 @@ public class LoginActivity extends TubelessActivity {
 //        p.setComponentEnabledSetting(getComponentName(), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
 
-
-
-
+        //part 1
         activity = this;
-        complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
-        complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
-            @Override
-            public void onPopupItemClick(CharSequence charSequence) {
-                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
         ArrayList<ItemData> list = new ArrayList<>();
-
-
-//        if (data.size() >= 1){
-//            complTextView.setDatas(data);
-//        }else {
-        //branchList = responseX.getResponse();
-
         for (int i = 0 ; i < 10 ; i ++ ) {
             data.add(i + " - " +"xm" + i+"xm");
 
@@ -151,11 +127,22 @@ public class LoginActivity extends TubelessActivity {
             list.add(sss);
         }
 
+
+
+        //part 2
+        complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
+        complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+            @Override
+            public void onPopupItemClick(CharSequence charSequence) {
+                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
         complTextView.setDatas(list);
-//        }
 
 
-        selectFromCamera();
+
+
+        //selectFromCamera();
 
     }
 
@@ -250,7 +237,7 @@ public class LoginActivity extends TubelessActivity {
 
 
             LoginRequest loginRequest = new LoginRequest(account.getEmail(),account.getPhotoUrl().toString());
-            loginRequest.setAndroidID(DeviceUtil.GetAndroidId(getContext()));
+//            loginRequest.setAndroidID(DeviceUtil.GetAndroidId(getContext()));
             UserName = account.getEmail();
             LoginOrRegister(loginRequest);
         } catch (ApiException e) {

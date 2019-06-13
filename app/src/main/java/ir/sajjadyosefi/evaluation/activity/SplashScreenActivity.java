@@ -44,17 +44,17 @@ public class SplashScreenActivity extends TubelessActivity {
         setContentView(R.layout.activity_splash_screen);
         setRootActivity(((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
-//        SAccounts sAccounts = new SAccounts(getContext());
-//        if (sAccounts.hasUserAccount()) {
-//            Global.IDUser = sAccounts.getUserAccountID();
-//            initDb(getContext());
-//        }else {
-//            //redirect ro login
-//            //start activity for result
+        SAccounts sAccounts = new SAccounts(getContext());
+        if (sAccounts.hasUserAccount()) {
+            Global.IDUser = sAccounts.getUserAccountID();
+            initDb();
+        }else {
+            //redirect ro login
+            //start activity for result
             Intent i = new Intent(getContext(), LoginActivity.class);
             i.putExtra("From" , "SplashScreen");
             getActivity().startActivityForResult(i, 1);
-//        }
+        }
 
 
 
@@ -145,10 +145,8 @@ public class SplashScreenActivity extends TubelessActivity {
             if(resultCode == Activity.RESULT_OK){
                 String result = data.getStringExtra("result");
 
-                if (result != null){
-
-
-
+                if (result != null && result.equals("ok")){
+                    initDb();
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -158,7 +156,7 @@ public class SplashScreenActivity extends TubelessActivity {
     }//onActivityResult
 
 
-    private void initDb(Context context) {
+    private void initDb() {
 
         //Persian Date // shamsi date
         DateConverterSjd dateConverterSjd = new DateConverterSjd();
@@ -196,7 +194,7 @@ public class SplashScreenActivity extends TubelessActivity {
 
                     //init model in GLobal
                     AbfaxSelects model = gson.fromJson(configList.get(0).ServerConfig ,AbfaxSelects.class);
-                    //startMainActivity();
+                    startMainActivity();
                 }
 
                 @Override
