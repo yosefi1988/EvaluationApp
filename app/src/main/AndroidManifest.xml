@@ -37,46 +37,6 @@
 
         <meta-data android:name="AA_DB_NAME" android:value="EvaluationDatabase" />
         <meta-data android:name="AA_DB_VERSION" android:value="2" />
-        <activity android:name=".activity.SplashScreenActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.evaluation.CommentActivity" ></activity>
-        <activity android:name=".activity.evaluation.MapActivity" ></activity>
-        <activity android:name=".activity.evaluation.PaintActivity" ></activity>
-        <activity
-            android:name=".activity.evaluation.SignatureActivity"
-            android:screenOrientation="portrait"></activity>
-
-
-        <activity
-                android:name=".activity.evaluation.WasterWaterAddActivity"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:label="@string/app_name">
-
-        </activity>
-
-        <activity android:name=".activity.business.SearchByNationalCodeActivity" ></activity>
-        <activity android:name=".activity.business.SearchByNameActivity" ></activity>
-        <activity android:name=".activity.business.SearchResultActivity" ></activity>
-        <activity android:name=".activity.account.LoginActivity" >
-        </activity>
-        <activity android:name=".activity.ReadBlogActivity" ></activity>
-        <activity android:name=".activity.account.ProfileActivity" ></activity>
-        <activity
-                android:theme="@style/AppTheme.NoActionBar"
-                android:name=".activity.MainActivity" ></activity>
-
-
-        <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
 
         <service android:name=".TopWindowService"/>
         <service android:name=".classes.service.AuthenticatorService">
@@ -84,8 +44,59 @@
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
             <meta-data android:name="android.accounts.AccountAuthenticator"
-                       android:resource="@xml/authenticator" />
+                android:resource="@xml/authenticator" />
         </service>
+
+
+        <activity android:name=".activity.SplashScreenActivity" >
+        </activity>
+        <activity android:name=".activity.account.LoginActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+
+
+
+
+
+
+
+
+        <activity android:name=".activity.evaluation.CommentActivity" ></activity>
+        <activity android:name=".activity.evaluation.MapActivity" ></activity>
+        <activity android:name=".activity.evaluation.PaintActivity" ></activity>
+        <activity
+            android:name=".activity.evaluation.SignatureActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+                android:name=".activity.evaluation.WasterWaterAddActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".activity.business.SearchByNationalCodeActivity" ></activity>
+        <activity android:name=".activity.business.SearchByNameActivity" ></activity>
+        <activity android:name=".activity.business.SearchResultActivity" ></activity>
+
+        <activity android:name=".activity.ReadBlogActivity" ></activity>
+        <activity android:name=".activity.account.DetailsActivity" ></activity>
+
+        <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
 
 
 

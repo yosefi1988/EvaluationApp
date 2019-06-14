@@ -46,7 +46,6 @@ public class WasterWaterListActivity extends TubelessActivity {
 
                 if (result != null){
 
-
                     Gson gson = new Gson();
                     WasterWater wasterWaterItem = gson.fromJson(result,WasterWater.class);
                     WasterWaterList.add(wasterWaterItem);

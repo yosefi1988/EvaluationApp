@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ارزیابی</string>
     <string name="app_version">نسخه 1.0.0</string>
     <!-- Strings related to login -->
@@ -10,7 +10,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <string name="permission_rationale" translatable="false" tools:ignore="MissingTranslation">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="large_text">
@@ -171,4 +171,6 @@
     <string name="title_location_permission">مجوزدسترسی</string>
     <string name="text_location_permission">برای ادامه به تایید شما احتیاج داریم</string>
     <string name="add">افزودن</string>
+    <string name="end_of_list">انتهای لیست</string>
+    <string name="edit">ویرایش</string>
 </resources>

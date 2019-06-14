@@ -26,6 +26,18 @@ public class Global extends Application {
 
 
 
+//    __________ global _______
+//    selects
+//    task Item
+//    user
+//
+//    ________ database _________
+//    selects
+//    task Item list
+
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();

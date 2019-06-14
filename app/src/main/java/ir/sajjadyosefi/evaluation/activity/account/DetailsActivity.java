@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.Task;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 
-public class ProfileActivity extends TubelessActivity {
+public class DetailsActivity extends TubelessActivity {
 
 
     private static final String TAG = "sssssssssssssss";

@@ -8,20 +8,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.activeandroid.query.Select;
+import com.activeandroid.query.Update;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
+import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
+import ir.sajjadyosefi.evaluation.model.business.Task;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
-import ir.sajjadyosefi.evaluation.model.main.TimelineItem;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
-import ir.sajjadyosefi.evaluation.classes.model.responses.blog.TimelineListResponse;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +36,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     //val
     public static  final int LAST_ITEM = 99;
     public static final int WASTER_WATER = 1;
+    public static final int TASKS = 2;
 
     public int listType = 0;
 
@@ -50,19 +53,27 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
 
 
+    //Task
     public EndlessList_Adapter(
             final Context context,
             LinearLayoutManager mLayoutManager,
             View rootview,
             List<TubelessObject> timelineItemList,
-            final int idHeader) {
-        this.mContext = context ;
-        this.mLayoutManager = mLayoutManager;
-        this.mRecyclerView = rootview.findViewById(R.id.recyclerView);
-        this.mTimelineItemList =  timelineItemList;
-        this.adapter = this ;
+            int type) {
+        if (type == TASKS) {
+            this.mContext = context;
+            this.mLayoutManager = mLayoutManager;
+            this.mRecyclerView = rootview.findViewById(R.id.recyclerView);
+            this.mTimelineItemList = timelineItemList;
+            this.adapter = this;
 
-        loadTimeline(context,1,false);
+            if (CommonClass.isNetworkConnected(context)) {
+                loadFromServer(context, rootview, 1, false);
+            }else {
+                Gson gson = new Gson();
+                loadTasksFromDatabaseAndShowInRecyclerView(gson);
+            }
+        }
     }
 
 
@@ -93,6 +104,35 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         public ProgressViewHolder(View itemView) {
             super(itemView);
 //            linearLayoutCenter            = (LinearLayout) itemView.findViewById(R.id.linearLayoutCenter);
+        }
+    }
+
+    public class TaskViewHolder extends ParentViewHolder {
+        public View rootView;
+        public TextView textViewName,textViewFamily,textViewRequestType,textViewServicesType,textViewDate,textViewState;
+        public Button buttonMenu,buttonEdit,buttonSend;
+
+        public TaskViewHolder(View itemView) {
+            super(itemView);
+
+            rootView                    = (View) itemView.findViewById(R.id.rootView);
+            textViewName                = (TextView) itemView.findViewById(R.id.textViewName);
+            textViewFamily                = (TextView) itemView.findViewById(R.id.textViewFamily);
+            textViewRequestType                = (TextView) itemView.findViewById(R.id.textViewRequestType);
+            textViewServicesType                = (TextView) itemView.findViewById(R.id.textViewServicesType);
+            textViewDate                = (TextView) itemView.findViewById(R.id.textViewDate);
+            textViewState                = (TextView) itemView.findViewById(R.id.textViewState);
+
+            buttonMenu            = (Button) itemView.findViewById(R.id.buttonMenu);
+            buttonEdit            = (Button) itemView.findViewById(R.id.buttonEdit);
+            buttonSend            = (Button) itemView.findViewById(R.id.buttonSend);
+        }
+    }
+    public class EndOfListHolder extends ParentViewHolder {
+        public TextView textView;
+        public EndOfListHolder (View itemView) {
+            super(itemView);
+            textView                = (TextView) itemView.findViewById(R.id.textView);
         }
     }
 
@@ -135,6 +175,22 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 return holder;
             }
         }
+        if (listType == TASKS) {
+            if (viewType == LAST_ITEM) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_tasks, parent, false);
+                return new EndOfListHolder(view);
+            }
+            if (viewType == TASKS) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_task, parent, false);
+                TaskViewHolder yafteItemViewHolder = new TaskViewHolder(view);
+                return yafteItemViewHolder;
+            }
+            if (viewType == 0) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_progress, parent, false);
+                ProgressViewHolder holder = new ProgressViewHolder(view);
+                return holder;
+            }
+        }
 
         return  null;
     }
@@ -156,29 +212,57 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
             }
         }
+        if (listType == TASKS) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == TASKS) {
+                ((Task)mTimelineItemList.get(position)).prepareYafteItem(mContext, (TaskViewHolder) holder, mTimelineItemList, position,adapter);
+            }else {
+                //LAST ITEM
+                //((EndOfListHolder)holder)
+            }
+        }
 //        setAnimation(holder.itemView, position);
     }
 
 
-    private void loadTimeline(Context context,int current_page,boolean isRefresh) {
-        Global.apiManagerTubeless.getTimeline(current_page - 1,new TubelessRetrofitCallback<Object>(context, null, true, null, new Callback<Object>() {
+    private void loadFromServer(Context context, View rootview, int current_page, boolean isRefresh) {
+        Global.apiManagerTubeless.getTasks(current_page,new TubelessRetrofitCallback<Object>(context, rootview, true, null, new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 Gson gson = new Gson();
                 JsonElement jsonElement = gson.toJsonTree(response.body());
-                TimelineListResponse responseX = gson.fromJson(jsonElement.getAsString(), TimelineListResponse.class);
+                ListTasks serverTaskList = gson.fromJson(jsonElement.getAsString() , ListTasks.class);
+
+                for (Task serverTask : serverTaskList.getObject()) {
+
+                    List<ir.sajjadyosefi.evaluation.model.db.Task> databaseTaskList = new Select()
+                            .from(ir.sajjadyosefi.evaluation.model.db.Task.class)
+                            .where("taskID = ?", serverTask.getId()
+                            )
+                            .execute();
 
 
-                for (TimelineItem item : responseX.getTimelineList()){
-                    item.setType(WASTER_WATER);
-                    mTimelineItemList.add(item);
-                    if (isRefresh) {
-                        adapter.notifyDataSetChanged();
+
+                    if (databaseTaskList.size() == 0){
+                        //insert
+                        ir.sajjadyosefi.evaluation.model.db.Task ttttt = new ir.sajjadyosefi.evaluation.model.db.Task();
+                        ttttt.editedTask = gson.toJson(serverTask) ;
+                        ttttt.taskID = serverTask.getId();
+                        ttttt.orginalTask = gson.toJson(serverTask);
+                        ttttt.save();
+
+
+                    }else if (databaseTaskList.size() == 1){
+                        //update
+                        new Update(ir.sajjadyosefi.evaluation.model.db.Task.class)
+                            .set("orginalTask = ?" , gson.toJson(serverTask))
+                            .where("taskID = ?", serverTask.getId())
+                            .execute();
+
                     }else {
-                        adapter.notifyItemInserted(mTimelineItemList.size());
+
                     }
                 }
-//                adapter.notifyDataSetChanged();
+                loadTasksFromDatabaseAndShowInRecyclerView(gson);
             }
 
             @Override
@@ -188,6 +272,22 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         }));
     }
 
+    private void loadTasksFromDatabaseAndShowInRecyclerView(Gson gson) {
+        //show Items in recyclerView
+        List<ir.sajjadyosefi.evaluation.model.db.Task> databaseTaskList = new Select()
+                .from(ir.sajjadyosefi.evaluation.model.db.Task.class)
+                .where("taskID <> ?", ""
+                )
+                .execute();
+
+        mTimelineItemList.clear();
+
+        for (ir.sajjadyosefi.evaluation.model.db.Task item : databaseTaskList) {
+            Task dbTask = gson.fromJson(item.editedTask, Task.class);
+            mTimelineItemList.add(dbTask);
+        }
+        adapter.notifyDataSetChanged();
+    }
 
 
     ///////////////////////  ok   /////////////////////////
@@ -206,6 +306,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     @Override
     public int getItemViewType(int position) {
         if (listType == WASTER_WATER)
+            return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
+        if (listType == TASKS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
         else return 0;
     }

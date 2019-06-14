@@ -41,8 +41,10 @@ public interface ApiServiceTubeless {
 //            @Field("userId") String userID,
 //            @Field("token") String token);
 
-    @GET("Api/TimeLine/getTimeline")
-    Call<Object> getTimeline(@Query("index") int index,
+
+
+    @GET("Api/TimeLine/getTasks")
+    Call<Object> getAllTasks(@Query("index") int index,
                              @Query("count") int count);
 
 

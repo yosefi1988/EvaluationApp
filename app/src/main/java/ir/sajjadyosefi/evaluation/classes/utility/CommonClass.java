@@ -6,6 +6,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -450,11 +452,11 @@ public class CommonClass {
     }
 
     public static boolean isNetworkConnected(Context context) {
-//        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo info = cm.getActiveNetworkInfo();
-//        if (info != null)
-//            return info.isAvailable();
-//        else
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info != null)
+            return info.isAvailable();
+        else
             return false;
     }
     public static boolean isAppAvailable(Context context, String appName)

@@ -45,7 +45,10 @@ public class SplashScreenActivity extends TubelessActivity {
         setRootActivity(((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
         SAccounts sAccounts = new SAccounts(getContext());
-        if (sAccounts.hasUserAccount()) {
+
+        // TODO: 6/14/2019 unComment this
+//        if (sAccounts.hasUserAccount()) {
+        if (true) {
             Global.IDUser = sAccounts.getUserAccountID();
             initDb();
         }else {
@@ -151,6 +154,7 @@ public class SplashScreenActivity extends TubelessActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
     }//onActivityResult
@@ -170,7 +174,6 @@ public class SplashScreenActivity extends TubelessActivity {
                 .execute();
 
         if (configList.size() == 0){
-//        if (true){
             //clear db config
             new Delete().from(Config.class).execute();
 
