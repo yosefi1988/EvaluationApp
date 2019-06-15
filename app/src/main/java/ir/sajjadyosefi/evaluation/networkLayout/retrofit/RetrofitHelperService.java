@@ -13,17 +13,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by sajjad on 11/7/2018.
  */
 
-public class RetrofitHelperTubeless {
+public class RetrofitHelperService {
 
     private static ApiServiceTubeless service;
-    private static RetrofitHelperTubeless apiManager;
+    private static RetrofitHelperService apiManager;
 
     private static final String userName = "ApiService";
     private static final String password = "BandarAndroid";
     private static String androidId ;
 
 
-    private RetrofitHelperTubeless() {
+    private RetrofitHelperService() {
 
         Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("http://10.0.2.2:3000/")
@@ -34,11 +34,13 @@ public class RetrofitHelperTubeless {
         service = retrofit.create(ApiServiceTubeless.class);
     }
 
-    public static RetrofitHelperTubeless getInstance(Context applicationContext) {
+    public static RetrofitHelperService getInstance(Context applicationContext) {
         if (apiManager == null) {
-            apiManager = new RetrofitHelperTubeless();
+            apiManager = new RetrofitHelperService();
         }
-        androidId = DeviceUtil.GetAndroidId(applicationContext);
+        // TODO: 6/15/2019 uncomment
+        //androidId = DeviceUtil.GetAndroidId(applicationContext);
+        androidId = "123";
         return apiManager;
     }
 
@@ -54,8 +56,8 @@ public class RetrofitHelperTubeless {
         Call<Object> userCall = service.selectValues(userName,password, androidId);
         userCall.enqueue(callback);
     }
-    public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<Object> callback) {
-        Call<Object> userCall = service.login(userName,password, androidId,request.getLoginUser(),request.getLoginPass());
+    public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<java.lang.Object> callback) {
+        Call<java.lang.Object> userCall = service.login(userName,password, androidId,request.getLoginUser(),request.getLoginPass());
         userCall.enqueue(callback);
     }
 

@@ -41,6 +41,7 @@ import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.PickerBuilder;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.accounting.LoginResponse;
+import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import ir.sajjadyosefi.evaluation.classes.utility.DeviceUtil;
 import retrofit2.Call;
@@ -99,9 +100,9 @@ public class LoginActivity extends TubelessActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                LoginRequest loginRequest = new LoginRequest("09123678522");
                 LoginRequest loginRequest = new LoginRequest(editTextPhone.getText().toString(), editTextPass.getText().toString());
                 UserName = editTextPhone.getText().toString();
+
                 LoginOrRegister(loginRequest);
             }
         });
@@ -162,8 +163,8 @@ public class LoginActivity extends TubelessActivity {
 //                        }
 //                        adapter.notifyDataSetChanged();
 
-                Global.user = responseX;
-                accounts(UserName , (int) responseX.getUserId());
+                Global.user = responseX.getObject();
+                accounts(UserName , responseX.getObject());
 
                 Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
 
@@ -192,12 +193,12 @@ public class LoginActivity extends TubelessActivity {
     }
 
 
-    private void accounts(String name , int UserID) {
+    private void accounts(String name , String UserID) {
         SAccounts sAccounts = new SAccounts(getContext());
         if (!sAccounts.hasUserAccount()){
             sAccounts.createAccount(name,UserID);
         }else {
-            int Userid = sAccounts.getUserAccountID();
+            String Userid = sAccounts.getUserAccountID();
 
         }
 

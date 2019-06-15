@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Object> {
     @SuppressWarnings("unused")
     private static final String TAG = "RetrofitCallback";
@@ -21,7 +22,7 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
     private final View buttonSubmit;
     private final boolean showResult;
     private View rootView;
-    private Callback<java.lang.Object> mCallback;
+    private final Callback<java.lang.Object> mCallback;
 
     public TubelessRetrofitCallback(Context context, View rootView, boolean showResult, View buttonSubmit, Callback<java.lang.Object> callback) {
         this.mContext = context;
@@ -65,38 +66,46 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
         afterResponse();
 
 
-//        ServerResponse responseX = (ServerResponse) response.body();
-
-        Gson gson = new Gson();
-        JsonElement jsonElement = gson.toJsonTree(response.body());
-        ServerResponseBase responseX = null;
-
         try {
-            if (response.body() == null)
-                throw new Exception();
-
-            responseX = gson.fromJson(jsonElement, ServerResponseBase.class);
-            if (response.body() != null ) {
-                if (responseX.getTubelessException().getCode() != 0) {
-                    if (responseX.getTubelessException().getCode() == 800) {
-                        if (call != null && response != null)
-                            mCallback.onResponse(call,response);
-                    } else {
-                        throw responseX.getTubelessException();
-                    }
-                }else {
-                    throw responseX.getTubelessException();
-                }
-            }else {
-                throw responseX.getTubelessException();
-            }
-        } catch (TubelessException sException) {
-            sException.printStackTrace();
-            if (showResult)
-                sException.handleServerMessage(mContext,rootView,responseX);
-        }catch (Exception sException) {
-            sException.printStackTrace();
+            mCallback.onResponse(call,response);
+        }catch (Exception ex){
+            int a = 2;
+            a++;
         }
+
+//
+////        ServerResponse responseX = (ServerResponse) response.body();
+//
+//        Gson gson = new Gson();
+//        JsonElement jsonElement = gson.toJsonTree(response.body());
+//        ServerResponseBase responseX = null;
+//
+//        try {
+//            if (response.body() == null)
+//                throw new Exception();
+//
+//            responseX = gson.fromJson(jsonElement, ServerResponseBase.class);
+//            if (response.body() != null ) {
+//                if (responseX.getTubelessException().getCode() != 0) {
+//                    if (responseX.getTubelessException().getCode() == 800) {
+//                        if (call != null && response != null)
+//                            mCallback.onResponse(call,response);
+//                    } else {
+//                        throw responseX.getTubelessException();
+//                    }
+//                }else {
+//                    throw responseX.getTubelessException();
+//                }
+//            }else {
+//                throw responseX.getTubelessException();
+//            }
+//        } catch (TubelessException sException) {
+//            sException.printStackTrace();
+//            if (showResult)
+//                sException.handleServerMessage(mContext,rootView,responseX);
+//        }catch (Exception sException) {
+//            sException.printStackTrace();
+//        }
 
     }
 

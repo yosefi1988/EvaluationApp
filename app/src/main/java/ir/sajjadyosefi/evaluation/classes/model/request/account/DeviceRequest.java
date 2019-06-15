@@ -4,7 +4,7 @@ import ir.sajjadyosefi.evaluation.classes.Global;
 
 public class DeviceRequest {
 
-    private int IDUser = Global.IDUser;
+    private int IDUser = 0;
     private int IDApplicationVersion = Global.IDApplicationVersion;
     private String AndroidID;
     private String SERIAL;

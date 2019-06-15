@@ -7,7 +7,7 @@ import com.activeandroid.ActiveAndroid;
 
 import ir.sajjadyosefi.evaluation.model.main.User;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperPost;
-import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperTubeless;
+import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperService;
 
 
 /**
@@ -16,13 +16,12 @@ import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperTubeless;
 public class Global extends Application {
 
     public static final int IDApplicationVersion = 101;
-    public static int IDUser = 20053 ;
-    public static User user = null;
+    public static String user = null;
 
     private static Context mContext;
     public static String token;
-    public static RetrofitHelperPost apiManagerPost;
-    public static RetrofitHelperTubeless apiManagerTubeless;
+    //public static RetrofitHelperPost apiManagerPost;
+    public static RetrofitHelperService apiManagerTubeless;
 
 
 
@@ -44,8 +43,8 @@ public class Global extends Application {
         ActiveAndroid.initialize(this);
 
         mContext = this;
-        apiManagerPost = RetrofitHelperPost.getInstance();
-        apiManagerTubeless = RetrofitHelperTubeless.getInstance(getApplicationContext());
+        //apiManagerPost = RetrofitHelperPost.getInstance();
+        apiManagerTubeless = RetrofitHelperService.getInstance(getApplicationContext());
 
     }
 

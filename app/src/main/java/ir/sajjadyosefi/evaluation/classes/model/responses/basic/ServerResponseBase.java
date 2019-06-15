@@ -6,6 +6,7 @@ import ir.sajjadyosefi.evaluation.model.exception.TubelessException;
  * Created by sajjad on 10/31/2016.
  */
 public class ServerResponseBase {
+
     private TubelessException exception;
 
     public TubelessException getTubelessException() {

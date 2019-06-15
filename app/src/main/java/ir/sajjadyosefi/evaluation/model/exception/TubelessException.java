@@ -83,8 +83,12 @@ public class TubelessException extends Exception{
             assert view == null;
             assert mContext == null;
 
-            int resID = mContext.getResources().getIdentifier("error_message_" + responseX.getTubelessException().getCode() , "string", mContext.getPackageName());
-            Snackbar.make(view, resID, Snackbar.LENGTH_SHORT).show();
+            int resID = mContext.getResources().getIdentifier("error_message_" + responseX.getTubelessException().getCode(), "string", mContext.getPackageName());
+            if (resID == 0) {
+                Snackbar.make(view, responseX.getTubelessException().message , Snackbar.LENGTH_SHORT).show();
+            } else {
+                Snackbar.make(view, resID, Snackbar.LENGTH_SHORT).show();
+            }
 
         }catch (Exception e){
             e.printStackTrace();

@@ -38,11 +38,11 @@ public class SAccounts {
 
 
 
-    public int getUserAccountID() {
+    public String getUserAccountID() {
         if (hasUserAccount()) {
-            return Integer.parseInt(mAccountManager.getUserData(getUserAccount(), "UserID"));
+            return mAccountManager.getUserData(getUserAccount(), "UserID");
         }else {
-            return 20053;
+            return "20053";
         }
     }
 
@@ -58,7 +58,7 @@ public class SAccounts {
         return mAccountManager;
     }
 
-    public void createAccount(String name,int UserID) {
+    public void createAccount(String name,String UserID) {
         final Account account = new Account(name, ACCOUNT_TYPE) ;
         Bundle data = new Bundle();
         data.putString("UserID", String.valueOf(UserID));

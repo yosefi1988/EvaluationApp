@@ -53,9 +53,9 @@ public interface ApiServiceTubeless {
                               @Query("Password") String Password,
                               @Query("AndroidId") String AndroidId);
 
-    @POST("api/CheckLoginUser")
-    Call<Object> login(@Query("UserName") String userName,
-                       @Query("UserName") String Password,
+    @GET("api/CheckLoginUser")
+    Call<java.lang.Object> login(@Query("UserName") String userName,
+                       @Query("Password") String Password,
                        @Query("AndroidId") String AndroidId,
                        @Query("LoginUser") String LoginUser,
                        @Query("LoginPass") String LoginPass);

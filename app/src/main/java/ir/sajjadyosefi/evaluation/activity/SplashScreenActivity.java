@@ -46,18 +46,16 @@ public class SplashScreenActivity extends TubelessActivity {
 
         SAccounts sAccounts = new SAccounts(getContext());
 
-        // TODO: 6/14/2019 unComment this
 //        if (sAccounts.hasUserAccount()) {
-        if (true) {
-            Global.IDUser = sAccounts.getUserAccountID();
+//            Global.user = sAccounts.getUserAccountID();
             initDb();
-        }else {
-            //redirect ro login
-            //start activity for result
-            Intent i = new Intent(getContext(), LoginActivity.class);
-            i.putExtra("From" , "SplashScreen");
-            getActivity().startActivityForResult(i, 1);
-        }
+//        }else {
+//            //redirect ro login
+//            //start activity for result
+//            Intent i = new Intent(getContext(), LoginActivity.class);
+//            i.putExtra("From" , "SplashScreen");
+//            getActivity().startActivityForResult(i, 1);
+//        }
 
 
 
@@ -173,7 +171,9 @@ public class SplashScreenActivity extends TubelessActivity {
                         )
                 .execute();
 
-        if (configList.size() == 0){
+
+//        if (configList.size() == 0){
+        if (true){
             //clear db config
             new Delete().from(Config.class).execute();
 
@@ -181,7 +181,9 @@ public class SplashScreenActivity extends TubelessActivity {
             //get from server
             Global.apiManagerTubeless.getSelects(new TubelessRetrofitCallback<java.lang.Object>(getContext(), getRootActivity(), true, null, new Callback<java.lang.Object>() {
                 @Override
-                public void onResponse(Call<java.lang.Object> call, Response<Object> response) {
+                public void onResponse(Call<java.lang.Object> call, Response<java.lang.Object> response) {
+                    finish();
+
                     Gson gson = new Gson();
                     JsonElement jsonElement = gson.toJsonTree(response.body());
                     AbfaxSelects responseX = gson.fromJson(jsonElement, AbfaxSelects.class);
