@@ -156,15 +156,15 @@ public class LoginActivity extends TubelessActivity {
             public void onResponse(Call<Object> call, Response<Object> response) {
                 Gson gson = new Gson();
                 JsonElement jsonElement = gson.toJsonTree(response.body());
-                LoginResponse responseX = gson.fromJson(jsonElement.getAsString(), LoginResponse.class);
+                LoginResponse responseX = gson.fromJson(jsonElement, LoginResponse.class);
 
 //                        for (TimelineItem item : responseX.getBlogItem()) {
 //                            mTimelineItemList.add(item);
 //                        }
 //                        adapter.notifyDataSetChanged();
 
-                Global.user = responseX.getObject();
-                accounts(UserName , responseX.getObject());
+//                Global.user = responseX.getObject();
+//                accounts(UserName , responseX.getObject());
 
                 Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
 
@@ -179,10 +179,10 @@ public class LoginActivity extends TubelessActivity {
 
 
 
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("result","ok");
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
+//                Intent returnIntent = new Intent();
+//                returnIntent.putExtra("result","ok");
+//                setResult(Activity.RESULT_OK,returnIntent);
+//                finish();
             }
 
             @Override

@@ -67,12 +67,12 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             this.mTimelineItemList = timelineItemList;
             this.adapter = this;
 
-//            if (CommonClass.isNetworkConnected(context)) {
-//                loadFromServer(context, rootview, 1, false);
-//            }else {
-//                Gson gson = new Gson();
-//                loadTasksFromDatabaseAndShowInRecyclerView(gson);
-//            }
+            if (CommonClass.isNetworkConnected(context)) {
+                loadFromServer(context, rootview, 1, false);
+            }else {
+                Gson gson = new Gson();
+                loadTasksFromDatabaseAndShowInRecyclerView(gson);
+            }
         }
     }
 

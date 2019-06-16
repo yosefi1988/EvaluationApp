@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+
+import ir.sajjadyosefi.evaluation.classes.model.responses.ServerResponse;
 import ir.sajjadyosefi.evaluation.model.exception.TubelessException;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
@@ -66,46 +68,36 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
         afterResponse();
 
 
-        try {
-            mCallback.onResponse(call,response);
-        }catch (Exception ex){
-            int a = 2;
-            a++;
-        }
+        Gson gson = new Gson();
+        JsonElement jsonElement = gson.toJsonTree(response.body());
+        ServerResponseBase responseX = null;
 
-//
-////        ServerResponse responseX = (ServerResponse) response.body();
-//
-//        Gson gson = new Gson();
-//        JsonElement jsonElement = gson.toJsonTree(response.body());
-//        ServerResponseBase responseX = null;
-//
-//        try {
-//            if (response.body() == null)
-//                throw new Exception();
-//
-//            responseX = gson.fromJson(jsonElement, ServerResponseBase.class);
-//            if (response.body() != null ) {
-//                if (responseX.getTubelessException().getCode() != 0) {
-//                    if (responseX.getTubelessException().getCode() == 800) {
-//                        if (call != null && response != null)
-//                            mCallback.onResponse(call,response);
-//                    } else {
-//                        throw responseX.getTubelessException();
-//                    }
-//                }else {
-//                    throw responseX.getTubelessException();
-//                }
-//            }else {
-//                throw responseX.getTubelessException();
-//            }
-//        } catch (TubelessException sException) {
-//            sException.printStackTrace();
-//            if (showResult)
-//                sException.handleServerMessage(mContext,rootView,responseX);
-//        }catch (Exception sException) {
-//            sException.printStackTrace();
-//        }
+        try {
+            if (response.body() == null)
+                throw new Exception();
+
+            responseX = gson.fromJson(jsonElement, ServerResponseBase.class);
+            if (response.body() != null ) {
+                if (responseX.getTubelessException().getCode() != 0) {
+                    if (responseX.getTubelessException().getCode() == 800) {
+                        if (call != null && response != null)
+                            mCallback.onResponse(call,response);
+                    } else {
+                        throw responseX.getTubelessException();
+                    }
+                }else {
+                    throw responseX.getTubelessException();
+                }
+            }else {
+                throw responseX.getTubelessException();
+            }
+        } catch (TubelessException sException) {
+            sException.printStackTrace();
+            if (showResult)
+                sException.handleServerMessage(mContext,rootView,responseX);
+        }catch (Exception sException) {
+            sException.printStackTrace();
+        }
 
     }
 

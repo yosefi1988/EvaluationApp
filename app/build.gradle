@@ -37,7 +37,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     //    implementation 'com.github.mmoamenn:ProgressWindow_Android:0.0.2'
     implementation 'com.tuyenmonkey:mkloader:1.4.0'
-    implementation project(':ProgressWindow')
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'me.henrytao:smooth-app-bar-layout:25.3.1.0'
@@ -48,7 +47,9 @@ dependencies {
 
     implementation 'org.osmdroid:osmdroid-android:6.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation project(path: ':ucropx')
     implementation project(path: ':libraryKMPAutoComplete')
+    implementation project(path: ':ucropx')
+    implementation project(':ProgressWindow')
+
 
 }

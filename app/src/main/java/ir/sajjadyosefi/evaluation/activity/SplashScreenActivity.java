@@ -46,16 +46,16 @@ public class SplashScreenActivity extends TubelessActivity {
 
         SAccounts sAccounts = new SAccounts(getContext());
 
-//        if (sAccounts.hasUserAccount()) {
-//            Global.user = sAccounts.getUserAccountID();
+        if (sAccounts.hasUserAccount()) {
+            Global.user = sAccounts.getUserAccountID();
             initDb();
-//        }else {
-//            //redirect ro login
-//            //start activity for result
-//            Intent i = new Intent(getContext(), LoginActivity.class);
-//            i.putExtra("From" , "SplashScreen");
-//            getActivity().startActivityForResult(i, 1);
-//        }
+        }else {
+            //redirect ro login
+            //start activity for result
+            Intent i = new Intent(getContext(), LoginActivity.class);
+            i.putExtra("From" , "SplashScreen");
+            getActivity().startActivityForResult(i, 1);
+        }
 
 
 
@@ -172,8 +172,7 @@ public class SplashScreenActivity extends TubelessActivity {
                 .execute();
 
 
-//        if (configList.size() == 0){
-        if (true){
+        if (configList.size() == 0){
             //clear db config
             new Delete().from(Config.class).execute();
 
