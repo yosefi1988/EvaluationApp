@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+//apply from: '../mavenpush.gradle'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 23
+        versionName "2.2.2-native"
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix 'ucrop_'
+
+    sourceSets.main {
+        jni.srcDirs = []
+    }
+
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    //implementation 'com.akexorcist:localizationactivity:1.2.2'
+
+}
