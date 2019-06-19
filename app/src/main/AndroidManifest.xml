@@ -59,7 +59,8 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:name=".activity.MainActivity" >
         </activity>
-
+        <activity android:name=".activity.business.StepOneActivity" >
+        </activity>
 
 
 
@@ -88,7 +89,7 @@
         <activity android:name=".activity.business.SearchResultActivity" ></activity>
 
         <activity android:name=".activity.ReadBlogActivity" ></activity>
-        <activity android:name=".activity.account.DetailsActivity" ></activity>
+        <activity android:name=".activity.business.DetailsActivity" ></activity>
 
         <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
         <activity

@@ -42,6 +42,7 @@ import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.PickerBuil
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.accounting.LoginResponse;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
+import ir.sajjadyosefi.evaluation.model.main.TimelineItem;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import ir.sajjadyosefi.evaluation.classes.utility.DeviceUtil;
 import retrofit2.Call;
@@ -163,8 +164,8 @@ public class LoginActivity extends TubelessActivity {
 //                        }
 //                        adapter.notifyDataSetChanged();
 
-//                Global.user = responseX.getObject();
-//                accounts(UserName , responseX.getObject());
+                Global.user = responseX.getObject();
+                accounts(UserName , responseX.getObject());
 
                 Toast.makeText(getContext(),getContext().getString(R.string.welcome) ,Toast.LENGTH_LONG).show();
 
@@ -179,10 +180,10 @@ public class LoginActivity extends TubelessActivity {
 
 
 
-//                Intent returnIntent = new Intent();
-//                returnIntent.putExtra("result","ok");
-//                setResult(Activity.RESULT_OK,returnIntent);
-//                finish();
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result","ok");
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
             }
 
             @Override

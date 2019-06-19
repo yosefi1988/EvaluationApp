@@ -1,7 +1,6 @@
 package ir.sajjadyosefi.evaluation.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,15 +18,12 @@ import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.account.LoginActivity;
-import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.SAccounts;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
-import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
+import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
-import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
 import ir.sajjadyosefi.evaluation.classes.utility.DateConverterSjd;
-import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.db.Config;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
@@ -178,14 +174,13 @@ public class SplashScreenActivity extends TubelessActivity {
 
 
             //get from server
-            Global.apiManagerTubeless.getSelects(new TubelessRetrofitCallback<java.lang.Object>(getContext(), getRootActivity(), true, null, new Callback<java.lang.Object>() {
+            Global.apiManagerTubeless.getSelects(new LoginRequest(), new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
                 @Override
-                public void onResponse(Call<java.lang.Object> call, Response<java.lang.Object> response) {
-                    finish();
+                public void onResponse(Call<Object> call, Response<Object> response) {
 
                     Gson gson = new Gson();
                     JsonElement jsonElement = gson.toJsonTree(response.body());
-                    AbfaxSelects responseX = gson.fromJson(jsonElement, AbfaxSelects.class);
+//                    AbfaxSelects responseX = gson.fromJson(jsonElement, AbfaxSelects.class);
 
 
                     Config configNew = new Config();
@@ -196,13 +191,14 @@ public class SplashScreenActivity extends TubelessActivity {
                     //save to db
                     configNew.save();
 
-                    //init model in GLobal
-                    AbfaxSelects model = gson.fromJson(configList.get(0).ServerConfig ,AbfaxSelects.class);
+                    //init allSelects in GLobal
+                    Global.allSelects = gson.fromJson(jsonElement ,AbfaxSelects.class);
                     startMainActivity();
+                    finish();
                 }
 
                 @Override
-                public void onFailure(Call<java.lang.Object> call, Throwable t) {
+                public void onFailure(Call<Object> call, Throwable t) {
 
                     int a = 5 ;
                     a++;
@@ -211,9 +207,9 @@ public class SplashScreenActivity extends TubelessActivity {
 
 
         }else {
-            //init model in GLobal
+            //init allSelects in GLobal
             Gson gson = new Gson();
-            AbfaxSelects model = gson.fromJson(configList.get(0).ServerConfig ,AbfaxSelects.class);
+            Global.allSelects = gson.fromJson(configList.get(0).ServerConfig ,AbfaxSelects.class);
             startMainActivity();
         }
 

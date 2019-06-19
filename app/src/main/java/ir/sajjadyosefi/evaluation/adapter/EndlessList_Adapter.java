@@ -18,8 +18,10 @@ import com.google.gson.JsonElement;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
+import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
 import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
+import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.business.Task;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.classes.Global;
@@ -37,6 +39,8 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static  final int LAST_ITEM = 99;
     public static final int WASTER_WATER = 1;
     public static final int TASKS = 2;
+    public static final int FILES = 3;
+    private boolean deletable;
 
     public int listType = 0;
 
@@ -68,12 +72,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             this.adapter = this;
 
             if (CommonClass.isNetworkConnected(context)) {
-                loadFromServer(context, rootview, 1, false);
+                loadFromServer(context, rootview);
             }else {
                 Gson gson = new Gson();
                 loadTasksFromDatabaseAndShowInRecyclerView(gson);
             }
         }
+
     }
 
 
@@ -86,6 +91,19 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         this.adapter = this ;
     }
 
+    //FILES
+    public EndlessList_Adapter(Context context, LinearLayoutManager mLayoutManager, View rootview, List<TubelessObject> fileItemList, int type, boolean deletable) {
+        if (type == FILES) {
+            this.mContext = context;
+            this.mLayoutManager = mLayoutManager;
+            this.mRecyclerView = rootview.findViewById(R.id.recyclerView);
+            this.mTimelineItemList = fileItemList;
+            this.adapter = this;
+            this.deletable = deletable ;
+        }
+
+
+    }
 
 
     ///////////////////////  ViewHolder   /////////////////////////
@@ -146,6 +164,16 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
         }
     }
+    public class FileViewHolder extends ParentViewHolder {
+        public TextView textView;
+        public Button buttonDelete;
+
+        public FileViewHolder(View itemView) {
+            super(itemView);
+            textView                = (TextView) itemView.findViewById(R.id.textView);
+            buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
+        }
+    }
     public class AddViewHolder extends ParentViewHolder {
         public Button buttonSubmit;
 
@@ -191,6 +219,22 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 return holder;
             }
         }
+        if (listType == FILES){
+            if (viewType == LAST_ITEM) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_files, parent, false);
+                return new AddViewHolder(view);
+            }
+            if (viewType == FILES) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_file, parent, false);
+                FileViewHolder viewHolder = new FileViewHolder(view);
+                return viewHolder;
+            }
+            if (viewType == 0) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_progress, parent, false);
+                ProgressViewHolder holder = new ProgressViewHolder(view);
+                return holder;
+            }
+        }
 
         return  null;
     }
@@ -220,23 +264,31 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 //((EndOfListHolder)holder)
             }
         }
+        if (listType == FILES) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == FILES) {
+                ((File)mTimelineItemList.get(position)).prepareYafteItem(mContext, (FileViewHolder) holder, mTimelineItemList, position,adapter,deletable);
+            }else {
+                //LAST ITEM
+                //((EndOfListHolder)holder)
+            }
+        }
 //        setAnimation(holder.itemView, position);
     }
 
 
-    private void loadFromServer(Context context, View rootview, int current_page, boolean isRefresh) {
-        Global.apiManagerTubeless.getTasks(current_page,new TubelessRetrofitCallback<Object>(context, rootview, true, null, new Callback<Object>() {
+    private void loadFromServer(Context context, View rootview) {
+        Global.apiManagerTubeless.getTasks(new LoginRequest(),new TubelessRetrofitCallback<Object>(context, rootview, true, null, new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 Gson gson = new Gson();
                 JsonElement jsonElement = gson.toJsonTree(response.body());
-                ListTasks serverTaskList = gson.fromJson(jsonElement.getAsString() , ListTasks.class);
+                ListTasks serverTaskList = gson.fromJson(jsonElement , ListTasks.class);
 
                 for (Task serverTask : serverTaskList.getObject()) {
 
                     List<ir.sajjadyosefi.evaluation.model.db.Task> databaseTaskList = new Select()
                             .from(ir.sajjadyosefi.evaluation.model.db.Task.class)
-                            .where("taskID = ?", serverTask.getId()
+                            .where("taskID = ?", serverTask.getSerialRequestCode()
                             )
                             .execute();
 
@@ -246,7 +298,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                         //insert
                         ir.sajjadyosefi.evaluation.model.db.Task ttttt = new ir.sajjadyosefi.evaluation.model.db.Task();
                         ttttt.editedTask = gson.toJson(serverTask) ;
-                        ttttt.taskID = serverTask.getId();
+                        ttttt.taskID = serverTask.getSerialRequestCode();
                         ttttt.orginalTask = gson.toJson(serverTask);
                         ttttt.save();
 
@@ -254,9 +306,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                     }else if (databaseTaskList.size() == 1){
                         //update
                         new Update(ir.sajjadyosefi.evaluation.model.db.Task.class)
-                            .set("orginalTask = ?" , gson.toJson(serverTask))
-                            .where("taskID = ?", serverTask.getId())
-                            .execute();
+                                .set("orginalTask = ?" , gson.toJson(serverTask))
+                                .where("taskID = ?", serverTask.getSerialRequestCode())
+                                .execute();
 
                     }else {
 
@@ -285,6 +337,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         for (ir.sajjadyosefi.evaluation.model.db.Task item : databaseTaskList) {
             Task dbTask = gson.fromJson(item.editedTask, Task.class);
+            dbTask.type = TASKS;
             mTimelineItemList.add(dbTask);
         }
         adapter.notifyDataSetChanged();
@@ -311,6 +364,10 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         if (listType == TASKS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
+        if (listType == FILES)
+            return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
         else return 0;
     }
 

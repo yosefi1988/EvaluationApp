@@ -1,26 +1,91 @@
-package ir.sajjadyosefi.evaluation.activity.account;
+package ir.sajjadyosefi.evaluation.activity.business;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import ir.sajjadyosefi.evaluation.R;
-import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 
-public class DetailsActivity extends TubelessActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.refactor.kmpautotextview.ItemData;
+import cn.refactor.kmpautotextview.KMPAutoComplTextView;
+import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
+import ir.sajjadyosefi.evaluation.classes.Global;
+import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
+import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
+
+
+public class RequestCountActivity extends TubelessActivity {
 
 
     private static final String TAG = "sssssssssssssss";
     private int RC_SIGN_IN = 1000;
 
+
+    KMPAutoComplTextView complTextView;
+
+    RecyclerView                    mRecyclerViewTimeline;
+    EndlessList_Adapter             adapter_Posts;
+    LinearLayoutManager             mLayoutManager;
+    List<TubelessObject>            taskItemList = new ArrayList<TubelessObject>();
+
+
+    Button ButtonSms,ButtonCall,buttonk,buttonBack,buttonNext;
+    TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
+
+    Activity activity ;
+    String LastFileSelected = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
+        setContentView(R.layout.activity_request_count);
+        setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
-        setContentView(R.layout.activity_details);
+        buttonNext = findViewById(R.id.buttonNext);
+        buttonBack = findViewById(R.id.buttonBack);
+
+
+        //type 5
+        if (Global.CurrentTask == null ){
+
+        }else {
+            complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
+            ArrayList<ItemData> list = new ArrayList<>();
+
+            for (UsageListItem item: Global.CurrentTask.getUsageList()) {
+                ItemData sss = new ItemData(item.getUsageDesc().toString() , item.getUsageTypeIdReq()+"","");
+                list.add(sss);
+            }
+            complTextView.setDatas(list);
+
+            complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+                @Override
+                public void onPopupItemClick(CharSequence charSequence) {
+                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
+
+
 
 //        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 //                .requestEmail()
@@ -54,7 +119,25 @@ public class DetailsActivity extends TubelessActivity {
 //                bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 
 
+
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(getContext(), NetworkActivity.class));
+                finish();
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(getContext(), SubscriptionsActivity.class));
+                finish();
+            }
+        });
     }
+
+
 
 //    private void accounts() {
 //        SAccounts sAccounts = new SAccounts(getContext());
@@ -67,6 +150,9 @@ public class DetailsActivity extends TubelessActivity {
 ////        accountAuthenticator.addAccount();
 ////        accountAuthenticator.
 //    }
+
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

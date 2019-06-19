@@ -38,20 +38,20 @@ public class MainActivity extends TubelessActivity {
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
 
-        TubelessObject aaaaaa = new Task();
-        ((Task) aaaaaa).setCount(5);
-        ((Task) aaaaaa).setLength(10);
-        ((Task) aaaaaa).setSiphon(true);
-        ((Task) aaaaaa).setDiameter(10);
-        ((Task) aaaaaa).setType(TASKS);
-        taskItemList.add(aaaaaa);
-
-        TubelessObject aaaaaa2 = new Task();
-        ((Task) aaaaaa2).setLength(100);
-        ((Task) aaaaaa2).setSiphon(false);
-        ((Task) aaaaaa2).setSubscribeCode("54514");
-        ((Task) aaaaaa2).setType(TASKS);
-        taskItemList.add(aaaaaa2);
+//        TubelessObject aaaaaa = new Task();
+//        ((Task) aaaaaa).setCount(5);
+//        ((Task) aaaaaa).setLength(10);
+//        ((Task) aaaaaa).setSiphon(true);
+//        ((Task) aaaaaa).setDiameter(10);
+//        ((Task) aaaaaa).setType(TASKS);
+//        taskItemList.add(aaaaaa);
+//
+//        TubelessObject aaaaaa2 = new Task();
+//        ((Task) aaaaaa2).setLength(100);
+//        ((Task) aaaaaa2).setSiphon(false);
+//        ((Task) aaaaaa2).setSubscribeCode("54514");
+//        ((Task) aaaaaa2).setType(TASKS);
+//        taskItemList.add(aaaaaa2);
 
         loadTasksFromServer(getRootActivity());
     }

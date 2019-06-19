@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
+import ir.sajjadyosefi.evaluation.model.business.Task;
 import ir.sajjadyosefi.evaluation.model.main.User;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperPost;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperService;
@@ -16,7 +18,6 @@ import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperService;
 public class Global extends Application {
 
     public static final int IDApplicationVersion = 101;
-    public static String user = null;
 
     private static Context mContext;
     public static String token;
@@ -25,10 +26,14 @@ public class Global extends Application {
 
 
 
+
 //    __________ global _______
 //    selects
 //    task Item
-//    user
+    public static String user = null;
+    public static AbfaxSelects allSelects;
+    public static Task CurrentTask = null;
+
 //
 //    ________ database _________
 //    selects

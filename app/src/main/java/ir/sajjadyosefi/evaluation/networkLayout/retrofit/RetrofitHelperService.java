@@ -18,9 +18,9 @@ public class RetrofitHelperService {
     private static ApiServiceTubeless service;
     private static RetrofitHelperService apiManager;
 
-    private static final String userName = "ApiService";
-    private static final String password = "BandarAndroid";
-    private static String androidId ;
+    public static final String systemUserName = "ApiService";
+    public static final String systemPassword = "BandarAndroid";
+    public static String androidId ;
 
 
     private RetrofitHelperService() {
@@ -52,17 +52,17 @@ public class RetrofitHelperService {
 
     ///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
-    public void getSelects(TubelessRetrofitCallback<Object> callback) {
-        Call<Object> userCall = service.selectValues(userName,password, androidId);
+    public void getSelects(LoginRequest request,TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.selectValues(request);
         userCall.enqueue(callback);
     }
     public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<java.lang.Object> callback) {
-        Call<java.lang.Object> userCall = service.login(userName,password, androidId,request.getLoginUser(),request.getLoginPass());
+        Call<java.lang.Object> userCall = service.login(request);
         userCall.enqueue(callback);
     }
 
-    public void getTasks(int index, TubelessRetrofitCallback<Object> callback) {
-        Call<Object> userCall = service.getAllTasks(index,150);
+    public void getTasks(LoginRequest request, TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.GetAllEvaluationRequest(request);
         userCall.enqueue(callback);
     }
     ///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM

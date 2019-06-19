@@ -26,7 +26,7 @@ public interface ApiServiceTubeless {
 //                                       @Query("site") String site);
 
 //    @POST("api/CheckLoginUser")
-//    Call<Object> login(@Query("UserName") String userName,
+//    Call<Object> login(@Query("UserName") String systemUserName,
 //                       @Query("UserName") String Password,
 //                       @Query("AndroidId") String AndroidId,
 //                       @Query("LoginUser") String LoginUser,
@@ -43,24 +43,14 @@ public interface ApiServiceTubeless {
 
 
 
-    @GET("Api/TimeLine/getTasks")
-    Call<Object> getAllTasks(@Query("index") int index,
-                             @Query("count") int count);
+    @POST("api/GetAllEvaluationRequest")
+    Call<Object> GetAllEvaluationRequest(@Body LoginRequest request);
 
 
-    @GET("api/GetAllSelect")
-    Call<Object> selectValues(@Query("UserName") String UserName ,
-                              @Query("Password") String Password,
-                              @Query("AndroidId") String AndroidId);
+    @POST("api/GetAllSelect")
+    Call<Object> selectValues(@Body LoginRequest request);
 
-    @GET("api/CheckLoginUser")
-    Call<java.lang.Object> login(@Query("UserName") String userName,
-                       @Query("Password") String Password,
-                       @Query("AndroidId") String AndroidId,
-                       @Query("LoginUser") String LoginUser,
-                       @Query("LoginPass") String LoginPass);
-
-
-
+    @POST("api/CheckLoginUser")
+    Call<java.lang.Object> login(@Body LoginRequest request);
 
 }

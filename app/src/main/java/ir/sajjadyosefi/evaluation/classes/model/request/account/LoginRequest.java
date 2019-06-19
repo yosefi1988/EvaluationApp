@@ -1,9 +1,10 @@
 package ir.sajjadyosefi.evaluation.classes.model.request.account;
 
-import ir.sajjadyosefi.evaluation.classes.Global;
+import static ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperService.androidId;
+import static ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperService.systemPassword;
+import static ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperService.systemUserName;
 
 public class LoginRequest {
-
 
     private String UserName;
     private String Password;
@@ -11,9 +12,19 @@ public class LoginRequest {
     private String LoginPass;
     private String AndroidId;
 
-    public LoginRequest(String loginUser, String loginPass) {
-        LoginUser = loginUser;
-        LoginPass = loginPass;
+    public LoginRequest() {
+        UserName = systemUserName;
+        Password = systemPassword;
+        AndroidId = androidId;
+    }
+
+    public LoginRequest(String userPhone, String userPassword) {
+        UserName = systemUserName;
+        Password = systemPassword;
+
+        LoginUser = userPhone;
+        LoginPass = userPassword;
+        AndroidId = androidId;
     }
 
 
