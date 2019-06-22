@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="right"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:background="@color/fb_background_color"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/editTextCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/shadow_left"
+            android:drawablePadding="15dp"
+            android:hint="@string/mobile_number"
+            android:textDirection="locale"
+            android:inputType="text"
+            android:gravity="start"
+            android:text="09123333333"
+            android:textAlignment="viewStart"
+            android:padding="16dp" />
+
+        <EditText
+            android:id="@+id/editTextValue"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:gravity="start"
+            android:textAlignment="viewStart"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/shadow_left"
+            android:drawablePadding="15dp"
+            android:inputType="textPassword"
+            android:text="Ar_123456"
+            android:hint="@string/password"
+            android:padding="16dp" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_search"
+            android:text="ثبت"
+            android:textAllCaps="false"
+            android:textColor="@color/buttonsTextColor"
+            android:layout_alignParentLeft="true"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

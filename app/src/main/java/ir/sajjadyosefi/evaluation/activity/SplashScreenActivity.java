@@ -25,6 +25,7 @@ import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
 import ir.sajjadyosefi.evaluation.classes.utility.DateConverterSjd;
 import ir.sajjadyosefi.evaluation.model.db.Config;
+import ir.sajjadyosefi.evaluation.model.db.Task;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,6 +58,7 @@ public class SplashScreenActivity extends TubelessActivity {
 
 
        // dialog.show();
+
 
 //        Category restaurants = new Category();
 //        restaurants.name = "Restaurants";

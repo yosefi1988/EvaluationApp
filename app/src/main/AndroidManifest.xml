@@ -35,7 +35,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <meta-data android:name="AA_DB_NAME" android:value="EvaluationDatabase" />
-        <meta-data android:name="AA_DB_VERSION" android:value="2" />
+        <meta-data android:name="AA_DB_VERSION" android:value="5" />
 
         <service android:name=".TopWindowService"/>
         <service android:name=".classes.service.AuthenticatorService">

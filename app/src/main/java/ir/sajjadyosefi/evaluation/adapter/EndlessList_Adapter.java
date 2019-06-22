@@ -3,6 +3,8 @@ package ir.sajjadyosefi.evaluation.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
@@ -17,10 +20,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.MainActivity;
+import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
+import ir.sajjadyosefi.evaluation.dialog.CustomDialogClass;
 import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.business.Task;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
@@ -40,6 +47,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int WASTER_WATER = 1;
     public static final int TASKS = 2;
     public static final int FILES = 3;
+    public static final int SUBSCRIPTIONS = 4;
     private boolean deletable;
 
     public int listType = 0;
@@ -82,7 +90,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     }
 
 
-    //WasterWater
+    //WasterWater - Subscriptions
     public EndlessList_Adapter(Context context, LinearLayoutManager mLayoutManager, View rootview, List<TubelessObject> wasterWaterList) {
         this.mContext = context ;
         this.mLayoutManager = mLayoutManager;
@@ -164,6 +172,20 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
         }
     }
+
+    public class SubscribeViewHolder extends ParentViewHolder {
+        public TextView textViewValue;
+        public TextView textViewCode;
+        public Button buttonDelete;
+
+        public SubscribeViewHolder(View itemView) {
+            super(itemView);
+            textViewValue                = (TextView) itemView.findViewById(R.id.textViewValue);
+            textViewCode                = (TextView) itemView.findViewById(R.id.textViewCode);
+            buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
+        }
+    }
+
     public class FileViewHolder extends ParentViewHolder {
         public TextView textView;
         public Button buttonDelete;
@@ -191,13 +213,29 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         if (listType == WASTER_WATER) {
             if (viewType == LAST_ITEM) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_waster_water, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item, parent, false);
                 return new AddViewHolder(view);
             }
             if (viewType == WASTER_WATER) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_waster_water, parent, false);
                 WasterWaterViewHolder yafteItemViewHolder = new WasterWaterViewHolder(view);
                 return yafteItemViewHolder;
+            }
+            if (viewType == 0) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_progress, parent, false);
+                ProgressViewHolder holder = new ProgressViewHolder(view);
+                return holder;
+            }
+        }
+        if (listType == SUBSCRIPTIONS) {
+            if (viewType == LAST_ITEM) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item, parent, false);
+                return new AddViewHolder(view);
+            }
+            if (viewType == SUBSCRIPTIONS) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_subscribe, parent, false);
+                SubscribeViewHolder viewHolder = new SubscribeViewHolder(view);
+                return viewHolder;
             }
             if (viewType == 0) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_progress, parent, false);
@@ -258,6 +296,25 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
             }
         }
+        if (listType == SUBSCRIPTIONS) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == SUBSCRIPTIONS) {
+                ((OldSubscribeListItem)mTimelineItemList.get(position)).prepareYafteItem(mContext, (SubscribeViewHolder) holder, mTimelineItemList, position,adapter);
+            }else {
+                //LAST ITEM
+                ((AddViewHolder)holder).buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        Intent i = new Intent(mContext, WasterWaterAddActivity.class);
+//                        ((Activity)mContext).startActivityForResult(i, 1);
+
+                        CustomDialogClass cdd = new CustomDialogClass((Activity) mContext);
+                        cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        cdd.show();
+                    }
+                });
+
+            }
+        }
         if (listType == TASKS) {
             if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == TASKS) {
                 ((Task)mTimelineItemList.get(position)).prepareYafteItem(mContext, (TaskViewHolder) holder, mTimelineItemList, position,adapter);
@@ -290,35 +347,44 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 JsonElement jsonElement = gson.toJsonTree(response.body());
                 ListTasks serverTaskList = gson.fromJson(jsonElement , ListTasks.class);
 
-                for (Task serverTask : serverTaskList.getObject()) {
-
-                    List<ir.sajjadyosefi.evaluation.model.db.Task> databaseTaskList = new Select()
-                            .from(ir.sajjadyosefi.evaluation.model.db.Task.class)
-                            .where("taskID = ?", serverTask.getSerialRequestCode()
-                            )
-                            .execute();
+                try {
 
 
-
-                    if (databaseTaskList.size() == 0){
-                        //insert
-                        ir.sajjadyosefi.evaluation.model.db.Task ttttt = new ir.sajjadyosefi.evaluation.model.db.Task();
-                        ttttt.editedTask = gson.toJson(serverTask) ;
-                        ttttt.taskID = serverTask.getSerialRequestCode();
-                        ttttt.orginalTask = gson.toJson(serverTask);
-                        ttttt.save();
+                    for (Task serverTask : serverTaskList.getObject()) {
 
 
-                    }else if (databaseTaskList.size() == 1){
-                        //update
-                        new Update(ir.sajjadyosefi.evaluation.model.db.Task.class)
-                                .set("orginalTask = ?" , gson.toJson(serverTask))
-                                .where("taskID = ?", serverTask.getSerialRequestCode())
+                        List<ir.sajjadyosefi.evaluation.model.db.Task> databaseTaskList = new Select()
+                                .from(ir.sajjadyosefi.evaluation.model.db.Task.class)
+                                .where("taskID = ?", serverTask.getSerialRequestCode()
+                                )
                                 .execute();
 
-                    }else {
 
+
+                        if (databaseTaskList.size() == 0){
+                            //insert
+                            ir.sajjadyosefi.evaluation.model.db.Task ttttt = new ir.sajjadyosefi.evaluation.model.db.Task();
+                            ttttt.editedTask = gson.toJson(serverTask) ;
+                            ttttt.taskID = serverTask.getSerialRequestCode();
+                            ttttt.orginalTask = gson.toJson(serverTask);
+                            ttttt.save();
+
+
+                        }else if (databaseTaskList.size() == 1){
+                            //update
+                            new Update(ir.sajjadyosefi.evaluation.model.db.Task.class)
+                                    .set("orginalTask = ?" , gson.toJson(serverTask))
+                                    .where("taskID = ?", serverTask.getSerialRequestCode())
+                                    .execute();
+
+                        }else {
+
+                        }
                     }
+
+                }catch (Exception ex){
+                    ex.getMessage();
+                    Toast.makeText(context ,"اپ را پاک کنید و مجدد نصب کنید",Toast.LENGTH_LONG).show();
                 }
                 loadTasksFromDatabaseAndShowInRecyclerView(gson);
             }
@@ -366,6 +432,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     @Override
     public int getItemViewType(int position) {
         if (listType == WASTER_WATER)
+            return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
+        if (listType == SUBSCRIPTIONS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
 
         if (listType == TASKS)
