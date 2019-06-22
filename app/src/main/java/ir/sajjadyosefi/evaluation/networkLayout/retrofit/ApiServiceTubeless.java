@@ -51,6 +51,6 @@ public interface ApiServiceTubeless {
     Call<Object> selectValues(@Body LoginRequest request);
 
     @POST("api/CheckLoginUser")
-    Call<java.lang.Object> login(@Body LoginRequest request);
+    Call<Object> login(@Body LoginRequest request);
 
 }

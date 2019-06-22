@@ -3,14 +3,20 @@ package ir.sajjadyosefi.evaluation.model.business;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 
 
 import java.util.List;
 
+import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.business.DetailsActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.MapActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
+import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.TempActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
@@ -45,6 +51,44 @@ public class Task extends TubelessObject {
         //holder.textViewServicesType.setText(request.getAddress());
         //holder.textViewState.setText(text.toString());
 
+        holder.buttonMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(mContext, holder.buttonMenu);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.main_fab);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu_sms:
+                                //handle menu1 click
+                                String number = request.getCellPhone();  // The number on which you want to send SMS
+                                (mContext).startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
+                                break;
+                            case R.id.menu_call:
+                                //handle menu2 click
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:" + request.getCellPhone()));
+                                (mContext).startActivity(intent);
+                                break;
+                            case R.id.menu_place:
+                                //handle menu3 click
+                                Intent intentx1 = new Intent(mContext, MapActivity.class);
+                                intentx1.putExtra("latitude" , request.getLocationX());
+                                intentx1.putExtra("longitude" , request.getLocationY());
+                                (mContext).startActivity(intentx1);
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
+            }
+        });
 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override

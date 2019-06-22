@@ -97,6 +97,7 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/buttonBack"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="40dp"
@@ -107,6 +108,7 @@
 
 
             <Button
+                android:id="@+id/buttonNext"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="40dp"

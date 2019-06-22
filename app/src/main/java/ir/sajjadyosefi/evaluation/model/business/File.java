@@ -7,6 +7,7 @@ import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
+import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.utility.RoundedCornersTransformation;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
@@ -80,6 +81,10 @@ public class File extends TubelessObject {
             @Override
             public void onClick(View view) {
                 mTimelineItemList.remove(position);
+
+                if (mTimelineItemList.size() == 0 )
+                    holder.textView.setText(R.string.not_any_file);
+
                 adapter.notifyDataSetChanged();
             }
         });

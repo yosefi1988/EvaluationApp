@@ -2,6 +2,7 @@ package ir.sajjadyosefi.evaluation.activity.business;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,8 +46,6 @@ public class DetailsActivity extends TubelessActivity {
     private int RC_SIGN_IN = 1000;
 
 
-    KMPAutoComplTextView complTextView;
-
     RecyclerView                    mRecyclerViewTimeline;
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
@@ -69,65 +68,18 @@ public class DetailsActivity extends TubelessActivity {
 
         buttonStart = findViewById(R.id.buttonStart);
         buttonBack = findViewById(R.id.buttonBack);
+        textViewNameFamily1 = findViewById(R.id.textViewNameFamily1);
+        TextViewSerial = findViewById(R.id.TextViewSerial);
+        textViewDate = findViewById(R.id.textViewDate);
+        textViewNameFamily2 = findViewById(R.id.textViewNameFamily2);
+        textViewMobile = findViewById(R.id.textViewMobile);
+        TextViewCodePosti = findViewById(R.id.TextViewCodePosti);
+        TextViewAddress = findViewById(R.id.TextViewAddress);
+        ButtonSms = findViewById(R.id.ButtonSms);
+        ButtonCall = findViewById(R.id.ButtonCall);
+        buttonk = findViewById(R.id.buttonk);
 
-        if (Global.CurrentTask == null ){
-
-        }else {
-            complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
-            ArrayList<ItemData> list = new ArrayList<>();
-
-            for (UsageListItem item: Global.CurrentTask.getUsageList()) {
-                ItemData sss = new ItemData(item.getUsageDesc().toString() , item.getUsageTypeIdReq()+"","");
-                list.add(sss);
-            }
-            complTextView.setDatas(list);
-
-            complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
-                @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-
-
-
-
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestEmail()
-//                .build();
-
-
-
-
-//        final GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        updateUI(account);
-
-// Set the dimensions of the sign-in button.
-//        SignInButton signInButton = findViewById(R.id.sign_in_button);
-//        signInButton.setSize(SignInButton.SIZE_STANDARD);
-//
-//        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-//                startActivityForResult(signInIntent, RC_SIGN_IN);
-//            }
-//        });
-
-
-//
-//        intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-//        intent.putExtra(ADD_ACCOUNT, true);
-//        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//                bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-
-
-        filltestFile();
-        loadTasksFromServer(getRootActivity());
+        fillWigets();
 
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +95,41 @@ public class DetailsActivity extends TubelessActivity {
 
             }
         });
+    }
+
+    private void fillWigets() {
+        textViewNameFamily1.setText(Global.CurrentTask.getLastName());
+        TextViewSerial.setText(Global.CurrentTask.getSerialRequestCode());
+        textViewDate.setText(Global.CurrentTask.getTaskDate());
+        textViewNameFamily2.setText(Global.CurrentTask.getLastName());
+        textViewMobile.setText(Global.CurrentTask.getCellPhone());
+        TextViewCodePosti.setText(Global.CurrentTask.getPostalCode());
+        TextViewAddress.setText(Global.CurrentTask.getAddress());
+
+        buttonk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            //xxxxxxxxxxxxxx
+            }
+        });
+
+        ButtonCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + Global.CurrentTask.getCellPhone()));
+                (getContext()).startActivity(intent);
+            }
+        });
+        ButtonSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = Global.CurrentTask.getCellPhone();  // The number on which you want to send SMS
+                (getContext()).startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
+            }
+        });
+        //file
+        filltestFile();
     }
 
     private void filltestFile() {
@@ -188,23 +175,6 @@ public class DetailsActivity extends TubelessActivity {
 ////        accountAuthenticator.
 //    }
 
-
-    private void loadTasksFromServer(View rootview) {
-        mRecyclerViewTimeline           = (RecyclerView) rootview.findViewById(R.id.recyclerView);
-        mRecyclerViewTimeline.setHasFixedSize(true);
-        mRecyclerViewTimeline.setItemAnimator(new DefaultItemAnimator());
-        mLayoutManager = new LinearLayoutManager(getContext());
-        adapter_Posts = new EndlessList_Adapter(
-                getContext(),
-                mLayoutManager,
-                rootview,
-                taskItemList,
-                FILES,
-                true);
-        adapter_Posts.listType = FILES;
-        mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
-        mRecyclerViewTimeline.setAdapter(adapter_Posts);
-    }
 
 
     @Override

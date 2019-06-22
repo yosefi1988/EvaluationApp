@@ -78,7 +78,7 @@ public class PaintActivity extends TubelessActivity  implements View.OnClickList
         {
             Intent choosePictureIntent = new Intent(
                     Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(choosePictureIntent, 0);
         }
         else if (v == savePicture)

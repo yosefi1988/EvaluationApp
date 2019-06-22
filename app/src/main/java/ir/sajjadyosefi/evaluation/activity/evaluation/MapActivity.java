@@ -71,13 +71,22 @@ public class MapActivity extends TubelessActivity {
 
 
 
+        double aLatitude = 31.00 ;
+        double aLongitude = 31.00 ;
+
+        if (getIntent().hasExtra("latitude")) {
+            aLatitude = getIntent().getExtras().getDouble("latitude");
+            aLongitude = getIntent().getExtras().getDouble("longitude");
+        }
+
+
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
         IMapController mapController = map.getController();
         mapController.setZoom(15.5);
-        GeoPoint startPoint = new GeoPoint(35.69, 51.42);
+        GeoPoint startPoint = new GeoPoint(aLatitude, aLongitude);
         mapController.setCenter(startPoint);
 
 //        MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()), map);

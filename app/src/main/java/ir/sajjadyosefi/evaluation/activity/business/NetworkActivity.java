@@ -45,7 +45,7 @@ public class NetworkActivity extends TubelessActivity {
     List<TubelessObject>            taskItemList = new ArrayList<TubelessObject>();
 
 
-    Button ButtonSms,ButtonCall,buttonk,buttonBack,buttonNext;
+    Button ButtonSms,ButtonCall,buttonk, battonNo, battonYes;
     TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
 
     Activity activity ;
@@ -58,8 +58,8 @@ public class NetworkActivity extends TubelessActivity {
         setContentView(R.layout.activity_network);
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
-        buttonNext = findViewById(R.id.buttonNext);
-        buttonBack = findViewById(R.id.buttonBack);
+        battonYes = findViewById(R.id.battonYes);
+        battonNo = findViewById(R.id.battonNo);
 
 
         //type 5
@@ -120,19 +120,19 @@ public class NetworkActivity extends TubelessActivity {
 
 
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
+        battonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(getContext(),  WasterWaterActivity.class));
-                finish();
+
+
             }
         });
 
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        battonNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
-                finish();
+
+
             }
         });
     }

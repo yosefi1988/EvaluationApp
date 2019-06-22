@@ -27,6 +27,7 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
@@ -71,9 +72,11 @@ public class StepOneActivity extends TubelessActivity {
             complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
             ArrayList<ItemData> list = new ArrayList<>();
 
-            for (UsageListItem item: Global.CurrentTask.getUsageList()) {
-                ItemData sss = new ItemData(item.getUsageDesc().toString() , item.getUsageTypeIdReq()+"","");
-                list.add(sss);
+            for (AbfaxSelectsObject item: Global.allSelects.getObject()) {
+                if (item.getType() == 5) {
+                    ItemData sss = new ItemData(item.getTextValue(), item.getKeyValue() + "", item.getType() + "");
+                    list.add(sss);
+                }
             }
             complTextView.setDatas(list);
 

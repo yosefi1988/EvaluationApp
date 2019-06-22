@@ -177,9 +177,11 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public class AddViewHolder extends ParentViewHolder {
         public Button buttonSubmit;
 
+
         public AddViewHolder(View itemView) {
             super(itemView);
             buttonSubmit            = (Button) itemView.findViewById(R.id.submit);
+
         }
     }
     //////////////////// End ViewHolder   /////////////////////////
@@ -222,7 +224,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         if (listType == FILES){
             if (viewType == LAST_ITEM) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_files, parent, false);
-                return new AddViewHolder(view);
+                return new EndOfListHolder(view);
             }
             if (viewType == FILES) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_file, parent, false);
@@ -261,7 +263,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 ((Task)mTimelineItemList.get(position)).prepareYafteItem(mContext, (TaskViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
                 //LAST ITEM
-                //((EndOfListHolder)holder)
+//
+//                if (mTimelineItemList.size() == 0 )
+//                    ((EndOfListHolder)holder).textView.setText(R.string.not_any_file);
             }
         }
         if (listType == FILES) {
@@ -269,7 +273,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 ((File)mTimelineItemList.get(position)).prepareYafteItem(mContext, (FileViewHolder) holder, mTimelineItemList, position,adapter,deletable);
             }else {
                 //LAST ITEM
-                //((EndOfListHolder)holder)
+
+                if (mTimelineItemList.size() == 0 )
+                    ((EndOfListHolder)holder).textView.setText(R.string.not_any_file);
             }
         }
 //        setAnimation(holder.itemView, position);

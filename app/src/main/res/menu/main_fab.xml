@@ -2,24 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/menu_attachment"
+            android:id="@+id/menu_sms"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Attachments" />
+            android:title="sms" />
 
     <item
-            android:id="@+id/menu_image"
+            android:id="@+id/menu_call"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Images" />
+            android:title="تماس" />
 
     <item
             android:id="@+id/menu_place"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Places" />
-
-    <item
-            android:id="@+id/menu_emoticon"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Emoticon" />
-
+            android:title="نمایش روی نقشه" />
 
 </menu>

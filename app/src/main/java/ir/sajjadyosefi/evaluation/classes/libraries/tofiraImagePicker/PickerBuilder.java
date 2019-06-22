@@ -44,12 +44,12 @@ public class PickerBuilder {
 
     }
 
-    public PickerBuilder setOnImageReceivedListener(PickerBuilder.onImageReceivedListener listener) {
+    public PickerBuilder setOnImageReceivedListener(onImageReceivedListener listener) {
         pickerManager.setOnImageReceivedListener(listener);
         return this;
     }
 
-    public PickerBuilder setOnPermissionRefusedListener(PickerBuilder.onPermissionRefusedListener listener) {
+    public PickerBuilder setOnPermissionRefusedListener(onPermissionRefusedListener listener) {
         pickerManager.setOnPermissionRefusedListener(listener);
         return this;
     }

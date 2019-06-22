@@ -101,37 +101,6 @@ public class SplashScreenActivity extends TubelessActivity {
 //                .execute();
 
 
-        TextView textView = findViewById(R.id.textViewVersion);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //creating a popup menu
-                PopupMenu popup = new PopupMenu(getContext(),findViewById(R.id.textViewVersion));
-                //inflating menu from xml resource
-                popup.inflate(R.menu.main_fab);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu_image:
-                                //handle menu1 click
-                                break;
-                            case R.id.menu_place:
-                                //handle menu2 click
-                                break;
-                            case R.id.menu_emoticon:
-                                //handle menu3 click
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                //displaying the popup
-                popup.show();
-            }
-        });
-
 
     }
 

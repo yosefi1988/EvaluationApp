@@ -56,8 +56,8 @@ public class RetrofitHelperService {
         Call<Object> userCall = service.selectValues(request);
         userCall.enqueue(callback);
     }
-    public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<java.lang.Object> callback) {
-        Call<java.lang.Object> userCall = service.login(request);
+    public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.login(request);
         userCall.enqueue(callback);
     }
 
