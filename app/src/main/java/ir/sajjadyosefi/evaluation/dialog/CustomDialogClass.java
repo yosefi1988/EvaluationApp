@@ -10,13 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
 public class CustomDialogClass extends Dialog implements View.OnClickListener {
 
     public Activity c;
     public Dialog d;
     public EditText editTextCode, editTextValue;
-    public Button buttonSave;
+    public Button buttonSave,buttonCancel;
+    public static OldSubscribeListItem subscribeItem = null;
 
     public CustomDialogClass(Activity a) {
         super(a);
@@ -33,6 +37,8 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
         editTextValue = (EditText) findViewById(R.id.editTextValue);
         buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(this);
+        buttonCancel = (Button) findViewById(R.id.buttonCancel);
+        buttonCancel.setOnClickListener(this);
 
     }
 
@@ -40,6 +46,14 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonSave:
+                subscribeItem = new OldSubscribeListItem();
+                subscribeItem.setSubscriberCode(Integer.parseInt(editTextCode.getText().toString()));
+                subscribeItem.setTblRequestSubscriberId(Integer.parseInt(editTextValue.getText().toString()));
+                subscribeItem.setType(SUBSCRIPTIONS);
+                dismiss();
+                break;
+            case R.id.buttonCancel:
+                subscribeItem = null;
                 dismiss();
                 break;
             default:

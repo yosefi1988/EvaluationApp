@@ -175,4 +175,5 @@
     <string name="edit">ویرایش</string>
     <string name="end_of_file_list">فایل بیشتری وجود ندارد</string>
     <string name="not_any_file">هیچ فایلی وجود ندارد</string>
+    <string name="request">درخواست</string>
 </resources>

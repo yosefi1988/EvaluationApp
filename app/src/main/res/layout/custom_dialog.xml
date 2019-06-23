@@ -26,7 +26,7 @@
             android:textDirection="locale"
             android:inputType="text"
             android:gravity="start"
-            android:text="09123333333"
+            android:text="1233"
             android:textAlignment="viewStart"
             android:padding="16dp" />
 
@@ -42,22 +42,42 @@
             android:drawableLeft="@drawable/shadow_left"
             android:drawablePadding="15dp"
             android:inputType="textPassword"
-            android:text="Ar_123456"
+            android:text="123"
             android:hint="@string/password"
             android:padding="16dp" />
 
-        <Button
-            android:id="@+id/buttonSave"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/btn_search"
-            android:text="ثبت"
-            android:textAllCaps="false"
-            android:textColor="@color/buttonsTextColor"
-            android:layout_alignParentLeft="true"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_search"
+                android:text="ثبت"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonsTextColor"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_search"
+                android:text="انصراف"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonsTextColor"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

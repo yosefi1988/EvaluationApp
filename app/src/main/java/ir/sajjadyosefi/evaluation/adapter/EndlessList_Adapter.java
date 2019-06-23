@@ -2,6 +2,7 @@ package ir.sajjadyosefi.evaluation.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
 import ir.sajjadyosefi.evaluation.dialog.CustomDialogClass;
 import ir.sajjadyosefi.evaluation.model.business.File;
@@ -48,6 +51,8 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int TASKS = 2;
     public static final int FILES = 3;
     public static final int SUBSCRIPTIONS = 4;
+    public static final int COUNT_REQUEST = 5;
+    public static final int COUNT_REQUEST_EDITED = 6;
     private boolean deletable;
 
     public int listType = 0;
@@ -90,7 +95,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     }
 
 
-    //WasterWater - Subscriptions
+    //WasterWater - Subscriptions - usageListRequest
     public EndlessList_Adapter(Context context, LinearLayoutManager mLayoutManager, View rootview, List<TubelessObject> wasterWaterList) {
         this.mContext = context ;
         this.mLayoutManager = mLayoutManager;
@@ -196,6 +201,25 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
         }
     }
+
+    public class UsageViewHolder extends ParentViewHolder {
+        public TextView textViewUsageDesc , textViewCount ;
+        public CheckBox checkBoxNeedSeparationReq ;
+
+        public TextView textViewCount2 ;
+        public CheckBox checkBoxNeedSeparationReq2 ;
+
+        public UsageViewHolder(View itemView) {
+            super(itemView);
+            textViewUsageDesc                   = (TextView) itemView.findViewById(R.id.textViewUsageDesc);
+            textViewCount                       = (TextView) itemView.findViewById(R.id.textViewCount);
+            checkBoxNeedSeparationReq           = (CheckBox) itemView.findViewById(R.id.checkBoxNeedSeparationReq);
+
+            textViewCount2                       = (TextView) itemView.findViewById(R.id.textViewCount2);
+            checkBoxNeedSeparationReq2           = (CheckBox) itemView.findViewById(R.id.checkBoxNeedSeparationReq2);
+        }
+    }
+
     public class AddViewHolder extends ParentViewHolder {
         public Button buttonSubmit;
 
@@ -242,6 +266,17 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 ProgressViewHolder holder = new ProgressViewHolder(view);
                 return holder;
             }
+        }
+        if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED ) {
+            View view = null;
+
+            if (viewType == COUNT_REQUEST) {
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_usage, parent, false);
+            }else if (viewType == COUNT_REQUEST_EDITED){
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_usage_edited, parent, false);
+            }
+            UsageViewHolder viewHolder = new UsageViewHolder(view);
+            return viewHolder;
         }
         if (listType == TASKS) {
             if (viewType == LAST_ITEM) {
@@ -310,9 +345,23 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                         CustomDialogClass cdd = new CustomDialogClass((Activity) mContext);
                         cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         cdd.show();
+                        cdd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                if (CustomDialogClass.subscribeItem != null){
+                                    mTimelineItemList.add(CustomDialogClass.subscribeItem);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
                     }
                 });
 
+            }
+        }
+        if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED ) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && (mTimelineItemList.get(position).getType() == COUNT_REQUEST || mTimelineItemList.get(position).getType() == COUNT_REQUEST_EDITED )) {
+                ((UsageListItem)mTimelineItemList.get(position)).prepareYafteItem(mContext, (UsageViewHolder) holder, mTimelineItemList, position,adapter);
             }
         }
         if (listType == TASKS) {
@@ -419,7 +468,10 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     ///////////////////////  ok   /////////////////////////
     @Override
     public int getItemCount() {
-        return mTimelineItemList.size() + 1;
+        if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED)
+            return mTimelineItemList.size() ;
+        else
+            return mTimelineItemList.size() + 1;
     }
 
     @Override
@@ -436,6 +488,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         if (listType == SUBSCRIPTIONS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
+        if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED)
+            return mTimelineItemList.get(position).getType();
 
         if (listType == TASKS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
