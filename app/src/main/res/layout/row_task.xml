@@ -17,12 +17,23 @@
         android:textDirection="ltr"
         android:orientation="horizontal" >
 
+        <ImageButton
+            android:id="@+id/buttonMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            android:background="@drawable/btn_menu"
+            android:text="@string/menu"
+            android:textAllCaps="false"
+            android:textColor="#fff" />
+
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:textDirection="rtl"
             android:layout_gravity="start"
-            android:gravity="start"
+            android:gravity="center"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_height="match_parent"
@@ -129,15 +140,7 @@
         android:textDirection="ltr"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/buttonMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/btn_search"
-            android:text="@string/menu"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
+
         <Button
             android:id="@+id/buttonEdit"
             android:layout_width="wrap_content"

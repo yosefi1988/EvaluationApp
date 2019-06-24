@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import ir.sajjadyosefi.evaluation.activity.MainActivity;
 import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
@@ -53,6 +55,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int SUBSCRIPTIONS = 4;
     public static final int COUNT_REQUEST = 5;
     public static final int COUNT_REQUEST_EDITED = 6;
+    public static final int TODO = 7;
     private boolean deletable;
 
     public int listType = 0;
@@ -95,7 +98,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     }
 
 
-    //WasterWater - Subscriptions - usageListRequest
+    //WasterWater - Subscriptions - usageListRequest - todoList
     public EndlessList_Adapter(Context context, LinearLayoutManager mLayoutManager, View rootview, List<TubelessObject> wasterWaterList) {
         this.mContext = context ;
         this.mLayoutManager = mLayoutManager;
@@ -141,7 +144,8 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public class TaskViewHolder extends ParentViewHolder {
         public View rootView;
         public TextView textViewName,textViewFamily,textViewRequestType,textViewServicesType,textViewDate,textViewState;
-        public Button buttonMenu,buttonEdit,buttonSend;
+        public ImageButton buttonMenu;
+        public Button buttonEdit,buttonSend;
 
         public TaskViewHolder(View itemView) {
             super(itemView);
@@ -154,7 +158,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             textViewDate                = (TextView) itemView.findViewById(R.id.textViewDate);
             textViewState                = (TextView) itemView.findViewById(R.id.textViewState);
 
-            buttonMenu            = (Button) itemView.findViewById(R.id.buttonMenu);
+            buttonMenu            = (ImageButton) itemView.findViewById(R.id.buttonMenu);
             buttonEdit            = (Button) itemView.findViewById(R.id.buttonEdit);
             buttonSend            = (Button) itemView.findViewById(R.id.buttonSend);
         }
@@ -164,6 +168,15 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         public EndOfListHolder (View itemView) {
             super(itemView);
             textView                = (TextView) itemView.findViewById(R.id.textView);
+        }
+    }
+    public class ToDotViewHolder extends ParentViewHolder {
+        public TextView textView;
+        public CheckBox checkBox;
+        public ToDotViewHolder (View itemView) {
+            super(itemView);
+            textView                = (TextView) itemView.findViewById(R.id.textView);
+            checkBox                = (CheckBox) itemView.findViewById(R.id.checkBox);
         }
     }
 
@@ -294,6 +307,22 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 return holder;
             }
         }
+        if (listType == TODO) {
+            if (viewType == LAST_ITEM) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_tasks, parent, false);
+                return new EndOfListHolder(view);
+            }
+            if (viewType == TODO) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_todo, parent, false);
+                ToDotViewHolder yafteItemViewHolder = new ToDotViewHolder(view);
+                return yafteItemViewHolder;
+            }
+            if (viewType == 0) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_progress, parent, false);
+                ProgressViewHolder holder = new ProgressViewHolder(view);
+                return holder;
+            }
+        }
         if (listType == FILES){
             if (viewType == LAST_ITEM) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_files, parent, false);
@@ -372,6 +401,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 //
 //                if (mTimelineItemList.size() == 0 )
 //                    ((EndOfListHolder)holder).textView.setText(R.string.not_any_file);
+            }
+        }
+        if (listType == TODO) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == TODO) {
+                ((AbfaxSelectsObject)mTimelineItemList.get(position)).prepareYafteItem(mContext, (ToDotViewHolder) holder, mTimelineItemList, position,adapter);
+            }else {
+
             }
         }
         if (listType == FILES) {
@@ -470,6 +506,8 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public int getItemCount() {
         if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED)
             return mTimelineItemList.size() ;
+        else if (listType == TODO)
+            return mTimelineItemList.size() ;
         else
             return mTimelineItemList.size() + 1;
     }
@@ -494,6 +532,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         if (listType == TASKS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
+        if (listType == TODO)
+            return mTimelineItemList.get(position).getType();
 
         if (listType == FILES)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();

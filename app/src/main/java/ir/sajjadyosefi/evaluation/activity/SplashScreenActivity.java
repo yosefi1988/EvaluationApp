@@ -18,6 +18,8 @@ import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.account.LoginActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.ToDoListActivity;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.SAccounts;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
@@ -191,6 +193,7 @@ public class SplashScreenActivity extends TubelessActivity {
 
     private void startMainActivity() {
         Intent autoActivityIntent =  new Intent(getContext(), MainActivity.class);
+//        autoActivityIntent =  new Intent(getContext(), ToDoListActivity.class);
 //                Bundle bundleAuto = new Bundle();
 //                bundleAuto.putString("type","NEW_Auto");
 //                bundleAuto.putString("BankNumber" , phoneNumber );

@@ -104,7 +104,7 @@ public class RequestCountActivity extends TubelessActivity {
 //        SAccounts sAccounts = new SAccounts(getContext());
 ////        sAccounts.getAccountManager().addAccount()
 //
-//        final Account account = new Account("accountName", "ir.sajjadyosefi.tubeless") ;
+//        final Account account = new Account("accountName", "ir.sajjadyosefi.evaluation") ;
 //        sAccounts.getAccountManager().addAccountExplicitly(account, "accountPassword",null);
 //
 //        AccountAuthenticator accountAuthenticator = new AccountAuthenticator(getContext());

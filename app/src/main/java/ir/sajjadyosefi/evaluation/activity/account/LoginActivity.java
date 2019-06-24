@@ -111,39 +111,6 @@ public class LoginActivity extends TubelessActivity {
 
 
 
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        updateUI(account);
-
-
-//        PackageManager p = getPackageManager();
-//        p.setComponentEnabledSetting(getComponentName(), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-
-
-        //part 1
-        activity = this;
-        ArrayList<ItemData> list = new ArrayList<>();
-        for (int i = 0 ; i < 10 ; i ++ ) {
-            data.add(i + " - " +"xm" + i+"xm");
-
-            ItemData sss = new ItemData(i+"text" , i+"image" , i+"");
-            list.add(sss);
-        }
-
-
-
-        //part 2
-        complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
-        complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
-            @Override
-            public void onPopupItemClick(CharSequence charSequence) {
-                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        complTextView.setDatas(list);
-
-
-
-
         //selectFromCamera();
 
     }

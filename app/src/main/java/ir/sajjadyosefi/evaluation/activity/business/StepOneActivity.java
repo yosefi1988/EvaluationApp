@@ -74,7 +74,7 @@ public class StepOneActivity extends TubelessActivity {
 
             for (AbfaxSelectsObject item: Global.allSelects.getObject()) {
                 if (item.getType() == 5) {
-                    ItemData sss = new ItemData(item.getTextValue(), item.getKeyValue() + "", item.getType() + "");
+                    ItemData sss = new ItemData("- " + item.getTextValue(), item.getKeyValue() + "", item.getType() + "");
                     list.add(sss);
                 }
             }
@@ -150,7 +150,7 @@ public class StepOneActivity extends TubelessActivity {
 //        SAccounts sAccounts = new SAccounts(getContext());
 ////        sAccounts.getAccountManager().addAccount()
 //
-//        final Account account = new Account("accountName", "ir.sajjadyosefi.tubeless") ;
+//        final Account account = new Account("accountName", "ir.sajjadyosefi.evaluation") ;
 //        sAccounts.getAccountManager().addAccountExplicitly(account, "accountPassword",null);
 //
 //        AccountAuthenticator accountAuthenticator = new AccountAuthenticator(getContext());

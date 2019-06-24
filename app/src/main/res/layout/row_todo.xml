@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:gravity="right"
+    android:orientation="horizontal" >
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:textDirection="rtl"
+        android:layout_gravity="center"
+        android:gravity="start|center"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_height="match_parent"
+        android:text="تفکیک کاربر" />
+
+
+</LinearLayout>

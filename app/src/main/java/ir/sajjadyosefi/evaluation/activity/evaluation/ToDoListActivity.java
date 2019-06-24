@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.evaluation.activity.business;
+package ir.sajjadyosefi.evaluation.activity.evaluation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,17 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,20 +18,16 @@ import java.util.List;
 import cn.refactor.kmpautotextview.ItemData;
 import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
-import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
-import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
-import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterListActivity;
-import ir.sajjadyosefi.evaluation.activity.evaluation.drillingListActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.COUNT_REQUEST_EDITED;
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.TODO;
 
 
-public class NetworkActivity extends TubelessActivity {
+public class ToDoListActivity extends TubelessActivity {
 
 
     private static final String TAG = "sssssssssssssss";
@@ -51,7 +41,7 @@ public class NetworkActivity extends TubelessActivity {
     List<TubelessObject>            requestCountItemList = new ArrayList<TubelessObject>();
 
 
-    Button ButtonSms,ButtonCall,buttonk, battonNo, battonYes;
+    Button ButtonSms,ButtonCall,buttonk, buttonBack, buttonNext;
     TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
 
     Activity activity ;
@@ -61,26 +51,43 @@ public class NetworkActivity extends TubelessActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
-        setContentView(R.layout.activity_network);
+        setContentView(R.layout.activity_to_do);
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
-        battonYes = findViewById(R.id.battonYes);
-        battonNo = findViewById(R.id.battonNo);
-
-
-
-
-//        for (UsageListItem usageListItem : Global.CurrentTask.getUsageList()) {
-//            usageListItem.type = COUNT_REQUEST_EDITED;
-//            requestCountItemList.add(usageListItem);
-//        }
-        prepareList(getRootActivity());
+        buttonNext = findViewById(R.id.buttonNext);
+        buttonBack = findViewById(R.id.buttonBack);
 
 
 
 
 
-        battonYes.setOnClickListener(new View.OnClickListener() {
+        //type 4
+        if (Global.allSelects != null) {
+            for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                if (item.getType() == 6) {
+                    AbfaxSelectsObject sss = new AbfaxSelectsObject("- " + item.getTextValue(), item.getKeyValue());
+                    sss.setType(TODO);
+                    requestCountItemList.add(sss);
+                }
+            }
+            prepareList(getRootActivity());
+        }
+
+
+
+
+
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getContext(),SignatureActivity.class);
+                (getActivity()).startActivity(i);
+
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -89,23 +96,6 @@ public class NetworkActivity extends TubelessActivity {
             }
         });
 
-        battonNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(getContext(), drillingListActivity.class);
-                (getActivity()).startActivity(i);
-            }
-        });
-
-        if (true){
-            Intent i = new Intent(getContext(), AddNetworkActivity.class);
-            (getActivity()).startActivityForResult(i, 1);
-        }else {
-            //only show
-
-
-        }
     }
 
 
@@ -119,7 +109,7 @@ public class NetworkActivity extends TubelessActivity {
                 mLayoutManager,
                 rootview,
                 requestCountItemList);
-        adapter_Posts.listType = COUNT_REQUEST_EDITED;
+        adapter_Posts.listType = TODO;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
 

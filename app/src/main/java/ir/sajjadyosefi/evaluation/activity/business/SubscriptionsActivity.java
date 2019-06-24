@@ -98,6 +98,7 @@ public class SubscriptionsActivity extends TubelessActivity {
 
 
 
+
         for (OldSubscribeListItem subscribeItem : Global.CurrentTask.getOldSubscribeList()) {
             subscribeItem.type = SUBSCRIPTIONS;
             subscribeItemList.add(subscribeItem);

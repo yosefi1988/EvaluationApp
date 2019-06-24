@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -340,6 +342,15 @@ public class KMPAutoComplTextView extends android.support.v7.widget.AppCompatAut
             return -1;
         } else
             return i - modeArr.length; // 返回模式串在主串中的头下标
+    }
+
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        ((KMPAutoComplTextView)this).setText("-");
+        ((KMPAutoComplTextView)this).showDropDown();
+        return super.onTouchEvent(event);
     }
 
 }

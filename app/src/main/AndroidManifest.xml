@@ -53,20 +53,53 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.account.LoginActivity" >
+
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.account.LoginActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.DetailsActivity" >
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
             android:name=".activity.MainActivity" >
         </activity>
-        <activity android:name=".activity.business.StepOneActivity" >
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.StepOneActivity" >
         </activity>
-        <activity android:name=".activity.business.SubscriptionsActivity" >
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.SubscriptionsActivity" >
         </activity>
-        <activity android:name=".activity.business.RequestCountActivity" >
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.RequestCountActivity" >
         </activity>
-        <activity android:name=".activity.business.NetworkActivity" >
+
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.NetworkActivity" >
         </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.drillingListActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.AddNetworkActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.WasterWaterListActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.ToDoListActivity" >
+        </activity>
+
 
 
 
@@ -95,7 +128,6 @@
         <activity android:name=".activity.business.SearchResultActivity" ></activity>
 
         <activity android:name=".activity.ReadBlogActivity" ></activity>
-        <activity android:name=".activity.business.DetailsActivity" ></activity>
 
         <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
         <activity

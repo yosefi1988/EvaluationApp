@@ -49,7 +49,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
     DrawableImageView choosenImageView;
 
     Button savePicture;
-    Button redButton;
+    Button redButton , buttonBack;
     Button getLastlocation;
 
     Bitmap bmp;
@@ -67,6 +67,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
 
         savePicture = (Button) this.findViewById(R.id.SavePictureButton);
         redButton = (Button) this.findViewById(R.id.redButton);
+        buttonBack = (Button) this.findViewById(R.id.buttonBack);
         getLastlocation = (Button) this.findViewById(R.id.getLastlocation);
 
         getLastlocation.setOnClickListener(new View.OnClickListener() {
@@ -99,24 +100,11 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                         });
             }
         });
-        redButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-                    bmpFactoryOptions.inJustDecodeBounds = true;
-                    bmp = BitmapFactory.decodeResource(getResources(), R.drawable.signback);
-                    bmpFactoryOptions.inJustDecodeBounds = false;
-                    bmp = BitmapFactory.decodeResource(getResources(), R.drawable.signback);
-                    alteredBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
-                    choosenImageView.setNewImage(alteredBitmap, bmp);
-                } catch (Exception e) {
-                    Log.v("ERROR", e.toString());
-                }
-            }
-        });
+
 
         savePicture.setOnClickListener(this);
+        redButton.setOnClickListener(this);
+        buttonBack.setOnClickListener(this);
 
 
         try {
@@ -192,15 +180,36 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
     }
 
     public void onClick(View v){
-        if (v == savePicture)
+        if (v == buttonBack) {
+            Intent i = new Intent(getContext(), ToDoListActivity.class);
+            (getActivity()).startActivity(i);
+        }
+        if (v == redButton) {
+            try {
+                BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+                bmpFactoryOptions.inJustDecodeBounds = true;
+                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.signback);
+                bmpFactoryOptions.inJustDecodeBounds = false;
+                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.signback);
+                alteredBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
+                choosenImageView.setNewImage(alteredBitmap, bmp);
+            } catch (Exception e) {
+                Log.v("ERROR", e.toString());
+            }
+        }if (v == savePicture)
         {
             if (checkStoragePermission()) {
-                saveSignature();
+                if (saveSignature()){
+                    Intent i = new Intent(getContext(), CommentActivity.class);
+                    (getActivity()).startActivity(i);
+                }
+            }else {
+                Toast.makeText(getContext(),"Permission" ,Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void saveSignature() {
+    private boolean saveSignature() {
         if (alteredBitmap != null)
         {
             ContentValues contentValues = new ContentValues(3);
@@ -222,8 +231,11 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
 
             } catch (Exception e) {
                 Log.v("EXCEPTION", e.getMessage());
+                return false;
             }
+            return true;
         }
+        return true;
     }
 
 
@@ -293,7 +305,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_STORAGE);
             }
