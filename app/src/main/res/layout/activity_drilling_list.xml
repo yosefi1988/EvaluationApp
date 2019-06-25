@@ -43,6 +43,7 @@
             android:orientation="horizontal" >
 
             <CheckBox
+                android:id="@+id/checkBox1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -54,6 +55,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
         <Button
+            android:id="@+id/button1"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="40dp"
@@ -80,6 +82,7 @@
             android:orientation="horizontal" >
 
             <CheckBox
+                android:id="@+id/checkBox2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -91,6 +94,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
         <Button
+            android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="40dp"

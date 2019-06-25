@@ -37,7 +37,6 @@ public class ToDoListActivity extends TubelessActivity {
     RecyclerView                    mRecyclerViewTimeline;
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
-    List<TubelessObject>            taskItemList = new ArrayList<TubelessObject>();
     List<TubelessObject>            requestCountItemList = new ArrayList<TubelessObject>();
 
 

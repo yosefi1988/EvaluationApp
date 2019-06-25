@@ -85,7 +85,8 @@
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
-            android:name=".activity.evaluation.drillingListActivity" >
+            android:name=".activity.evaluation.DrillingListActivity" >
+
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"

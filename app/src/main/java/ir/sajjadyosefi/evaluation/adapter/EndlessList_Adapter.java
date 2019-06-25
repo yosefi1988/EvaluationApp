@@ -28,6 +28,7 @@ import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
@@ -55,6 +56,11 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int SUBSCRIPTIONS = 4;
     public static final int COUNT_REQUEST = 5;
     public static final int COUNT_REQUEST_EDITED = 6;
+
+    public static final int DRILLING = 7;
+    public static final int DRILLING_A = 8;
+    public static final int DRILLING_F = 9;
+
     public static final int TODO = 7;
     private boolean deletable;
 
@@ -232,6 +238,17 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             checkBoxNeedSeparationReq2           = (CheckBox) itemView.findViewById(R.id.checkBoxNeedSeparationReq2);
         }
     }
+    public class DrillingViewHolder extends ParentViewHolder {
+        public TextView textViewText , textViewValue ;
+        public TextView textViewType;
+
+        public DrillingViewHolder(View itemView) {
+            super(itemView);
+            textViewText                   = (TextView) itemView.findViewById(R.id.textViewText);
+            textViewValue                       = (TextView) itemView.findViewById(R.id.textViewValue);
+            textViewType                       = (TextView) itemView.findViewById(R.id.textViewType);
+        }
+    }
 
     public class AddViewHolder extends ParentViewHolder {
         public Button buttonSubmit;
@@ -289,6 +306,11 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_usage_edited, parent, false);
             }
             UsageViewHolder viewHolder = new UsageViewHolder(view);
+            return viewHolder;
+        }
+        if (listType == DRILLING) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_drilling, parent, false);
+            DrillingViewHolder viewHolder = new DrillingViewHolder(view);
             return viewHolder;
         }
         if (listType == TASKS) {
@@ -391,6 +413,11 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED ) {
             if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && (mTimelineItemList.get(position).getType() == COUNT_REQUEST || mTimelineItemList.get(position).getType() == COUNT_REQUEST_EDITED )) {
                 ((UsageListItem)mTimelineItemList.get(position)).prepareYafteItem(mContext, (UsageViewHolder) holder, mTimelineItemList, position,adapter);
+            }
+        }
+        if (listType == DRILLING ) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && (mTimelineItemList.get(position).getType() == DRILLING_A || mTimelineItemList.get(position).getType() == DRILLING_F )) {
+                ((DrillingListItem)mTimelineItemList.get(position)).prepareYafteItem(mContext, (DrillingViewHolder) holder, mTimelineItemList, position,adapter);
             }
         }
         if (listType == TASKS) {
@@ -504,6 +531,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     ///////////////////////  ok   /////////////////////////
     @Override
     public int getItemCount() {
+        if (listType == DRILLING)
+            return mTimelineItemList.size() ;
+
         if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED)
             return mTimelineItemList.size() ;
         else if (listType == TODO)
@@ -526,6 +556,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         if (listType == SUBSCRIPTIONS)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
+
+        if (listType == DRILLING)
+            return mTimelineItemList.get(position).getType();
 
         if (listType == COUNT_REQUEST || listType == COUNT_REQUEST_EDITED)
             return mTimelineItemList.get(position).getType();
