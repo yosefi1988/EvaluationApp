@@ -27,15 +27,18 @@ import java.util.List;
 import cn.refactor.kmpautotextview.ItemData;
 import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.MainActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Content;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.FILES;
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.TASKS;
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.TODO;
 import static ir.sajjadyosefi.evaluation.model.business.File.MAP_1;
 import static ir.sajjadyosefi.evaluation.model.business.File.MAP_K;
 
@@ -86,13 +89,14 @@ public class DetailsActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
                 activity.startActivity(new Intent(getContext(),StepOneActivity.class));
+                finish();
             }
         });
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                //activity.startActivity(new Intent(getContext(),MainActivity.class));
+                finish();
             }
         });
     }
@@ -128,52 +132,54 @@ public class DetailsActivity extends TubelessActivity {
                 (getContext()).startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
             }
         });
+
         //file
-        filltestFile();
+        filltestFile(getRootActivity());
     }
 
-    private void filltestFile() {
+    private void filltestFile(View rootview) {
         //Global.CurrentTask.files
 
-        File kroki = new File();
-        kroki.setTitle("کروکی");
-        kroki.setName("asdasd.jpg");
-        kroki.setUrl("www.lsdfsdf.com/asdasd.jpg");
-        kroki.setFileType(MAP_K);
-        kroki.setType(FILES);
-        Global.CurrentTask.setFileKrocki(kroki);
 
 
-        File map1 = new File();
-        map1.setTitle("نقشه 1");
-        map1.setName("asdasd.jpg");
-        map1.setUrl("www.lsdfsdf.com/asdasd.jpg");
-        map1.setFileType(MAP_1);
-        map1.setType(FILES);
-//        Global.CurrentTask.setFileList(new ArrayList<>());
-//        Global.CurrentTask.getFileList().add(map1);
-//        Global.CurrentTask.getFileList().add(map1);
-//        Global.CurrentTask.getFileList().add(map1);
-//        Global.CurrentTask.getFileList().add(map1);
+        for (Content file: Global.CurrentTask.getContentList()) {
+//            if (file.getDownloadEarly()==1){
+//                File kroki = new File();
+//                kroki.setTitle(file.getDescription());
+//                kroki.setRequestContentId(file.getRequestContentId());
+//                kroki.setFrame(file.getFrame());
+//                kroki.setFileType(MAP_K);
+//                kroki.setType(FILES);
+//                Global.CurrentTask.setFileKrocki(kroki);
+//            }else {
+                File map1 = new File();
+                map1.setTitle(file.getDescription());
+                map1.setRequestContentId(file.getRequestContentId());
+                map1.setFrame(file.getFrame());
+                map1.setFileType(MAP_1);
+                map1.setType(FILES);
+                taskItemList.add(map1);
+//            }
+        }
 
-        taskItemList.add(map1);
-        taskItemList.add(map1);
-        taskItemList.add(map1);
-        taskItemList.add(map1);
-        taskItemList.add(map1);
+
+        mRecyclerViewTimeline           = (RecyclerView) rootview.findViewById(R.id.recyclerView);
+        mRecyclerViewTimeline.setHasFixedSize(true);
+        mRecyclerViewTimeline.setItemAnimator(new DefaultItemAnimator());
+        mLayoutManager = new LinearLayoutManager(getContext());
+        adapter_Posts = new EndlessList_Adapter(
+                getContext(),
+                mLayoutManager,
+                rootview,
+                taskItemList,
+                FILES,
+                false);
+        adapter_Posts.listType = FILES;
+        mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
+        mRecyclerViewTimeline.setAdapter(adapter_Posts);
+
+
     }
-
-//    private void accounts() {
-//        SAccounts sAccounts = new SAccounts(getContext());
-////        sAccounts.getAccountManager().addAccount()
-//
-//        final Account account = new Account("accountName", "ir.sajjadyosefi.evaluation") ;
-//        sAccounts.getAccountManager().addAccountExplicitly(account, "accountPassword",null);
-//
-//        AccountAuthenticator accountAuthenticator = new AccountAuthenticator(getContext());
-////        accountAuthenticator.addAccount();
-////        accountAuthenticator.
-//    }
 
 
 

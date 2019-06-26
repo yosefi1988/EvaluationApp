@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
@@ -134,15 +135,16 @@ public class DrillingListActivity extends TubelessActivity {
 
                 Intent i = new Intent(getContext(), ToDoListActivity.class);
                 (getActivity()).startActivity(i);
+                finish();
             }
         });
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(getContext(), WasterWaterListActivity.class);
+                Intent i = new Intent(getContext(), NetworkActivity.class);
                 (getActivity()).startActivity(i);
+                finish();
             }
         });
 

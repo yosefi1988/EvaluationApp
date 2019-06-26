@@ -82,7 +82,7 @@ public class ToDoListActivity extends TubelessActivity {
 
                 Intent i = new Intent(getContext(),SignatureActivity.class);
                 (getActivity()).startActivity(i);
-
+                finish();
             }
         });
 
@@ -90,8 +90,13 @@ public class ToDoListActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getContext(), WasterWaterListActivity.class);
-                (getActivity()).startActivity(i);
+//                Intent i = new Intent(getContext(), WasterWaterListActivity.class);
+//                (getActivity()).startActivity(i);
+
+                getActivity().startActivity(new Intent(getContext(), DrillingActivity.class));
+
+
+                finish();
             }
         });
 

@@ -17,6 +17,7 @@ import ir.sajjadyosefi.evaluation.activity.evaluation.MapActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.TempActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Content;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
@@ -40,7 +41,15 @@ public class Task extends TubelessObject {
     private List<File> fileList;
     private File fileKrocki;
     private List<OldSubscribeListItem> oldSubscribeList;
+    private List<Content> contentList;
 
+    public List<Content> getContentList() {
+        return contentList;
+    }
+
+    public void setContentList(List<Content> contentList) {
+        this.contentList = contentList;
+    }
 
     public void prepareYafteItem(Context mContext, EndlessList_Adapter.TaskViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
         Task request = (Task) mTimelineItemList.get(position);

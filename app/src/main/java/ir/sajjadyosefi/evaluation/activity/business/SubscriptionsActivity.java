@@ -75,13 +75,13 @@ public class SubscriptionsActivity extends TubelessActivity {
             complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
             ArrayList<ItemData> list = new ArrayList<>();
 
-            ItemData sss = new ItemData("موقت",  "1","");
+            ItemData sss = new ItemData("- موقت",  "1","");
             list.add(sss);
 
-            ItemData sss1 = new ItemData("دائم",  "2","");
+            ItemData sss1 = new ItemData("- دائم",  "2","");
             list.add(sss1);
 
-            ItemData sss2 = new ItemData("موقت به دائم" , "3","");
+            ItemData sss2 = new ItemData("- موقت به دائم" , "3","");
             list.add(sss2);
 
             complTextView.setDatas(list);

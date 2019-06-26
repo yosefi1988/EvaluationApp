@@ -16,6 +16,7 @@ import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterListActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingListActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
@@ -39,7 +40,7 @@ public class NetworkActivity extends TubelessActivity {
     List<TubelessObject>            requestCountItemList = new ArrayList<TubelessObject>();
 
 
-    Button ButtonSms,ButtonCall,buttonk, battonNo, battonYes;
+    Button ButtonSms,ButtonCall,buttonBack, battonNo, battonYes;
     TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
 
     Activity activity ;
@@ -54,6 +55,7 @@ public class NetworkActivity extends TubelessActivity {
 
         battonYes = findViewById(R.id.battonYes);
         battonNo = findViewById(R.id.battonNo);
+        buttonBack = findViewById(R.id.buttonBack);
 
 
 
@@ -71,9 +73,9 @@ public class NetworkActivity extends TubelessActivity {
         battonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent i = new Intent(getContext(), WasterWaterListActivity.class);
                 (getActivity()).startActivity(i);
+                finish();
             }
         });
 
@@ -81,8 +83,17 @@ public class NetworkActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getContext(), DrillingListActivity.class);
+                Intent i = new Intent(getContext(), DrillingActivity.class);
                 (getActivity()).startActivity(i);
+                finish();
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
+                finish();
             }
         });
 

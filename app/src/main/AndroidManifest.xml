@@ -64,7 +64,15 @@
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.WasterWaterActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".activity.MainActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.DrillingActivity" >
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
@@ -109,11 +117,17 @@
 
 
 
-
-        <activity android:name=".activity.evaluation.CommentActivity" ></activity>
-        <activity android:name=".activity.evaluation.MapActivity" ></activity>
-        <activity android:name=".activity.evaluation.PaintActivity" ></activity>
         <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.CommentActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.MapActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.evaluation.PaintActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".activity.evaluation.SignatureActivity"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -124,11 +138,19 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".activity.business.SearchByNationalCodeActivity" ></activity>
-        <activity android:name=".activity.business.SearchByNameActivity" ></activity>
-        <activity android:name=".activity.business.SearchResultActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.SearchByNationalCodeActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.SearchByNameActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.business.SearchResultActivity" ></activity>
 
-        <activity android:name=".activity.ReadBlogActivity" ></activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.ReadBlogActivity" ></activity>
 
         <activity android:name=".classes.libraries.tofiraImagePicker.TempActivity"></activity>
         <activity

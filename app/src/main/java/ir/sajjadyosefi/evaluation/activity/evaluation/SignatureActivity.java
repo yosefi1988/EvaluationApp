@@ -183,6 +183,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
         if (v == buttonBack) {
             Intent i = new Intent(getContext(), ToDoListActivity.class);
             (getActivity()).startActivity(i);
+            finish();
         }
         if (v == redButton) {
             try {
@@ -202,6 +203,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                 if (saveSignature()){
                     Intent i = new Intent(getContext(), CommentActivity.class);
                     (getActivity()).startActivity(i);
+                    finish();
                 }
             }else {
                 Toast.makeText(getContext(),"Permission" ,Toast.LENGTH_SHORT).show();

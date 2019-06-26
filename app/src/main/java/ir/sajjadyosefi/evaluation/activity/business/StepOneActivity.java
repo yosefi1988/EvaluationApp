@@ -129,7 +129,6 @@ public class StepOneActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
                 //SubscriptionsActivity
-
                 activity.startActivity(new Intent(getContext(),SubscriptionsActivity.class));
                 finish();
             }

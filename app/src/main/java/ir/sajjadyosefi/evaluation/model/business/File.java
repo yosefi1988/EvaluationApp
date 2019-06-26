@@ -19,19 +19,26 @@ public class File extends TubelessObject {
     public static int MAP_2 = 1002 ;
     public static int MAP_3 = 1003 ;
 
-    private String name;
     private String uri;
-    private String url;
     private String title;
     private int fileType;
+    private int requestContentId;
+    private int frame;
 
-
-    public String getName() {
-        return name;
+    public int getRequestContentId() {
+        return requestContentId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRequestContentId(int requestContentId) {
+        this.requestContentId = requestContentId;
+    }
+
+    public int getFrame() {
+        return frame;
+    }
+
+    public void setFrame(int frame) {
+        this.frame = frame;
     }
 
     public String getUri() {
@@ -40,14 +47,6 @@ public class File extends TubelessObject {
 
     public void setUri(String uri) {
         this.uri = uri;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getTitle() {
@@ -72,7 +71,7 @@ public class File extends TubelessObject {
         File file = (File) mTimelineItemList.get(position);
 
         StringBuilder text = new StringBuilder();
-        text.append(file.getName());
+        text.append(file.getTitle());
 
         holder.textView.setText(text.toString());
 

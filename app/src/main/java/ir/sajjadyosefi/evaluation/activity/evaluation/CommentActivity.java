@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,16 +19,24 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
+import ir.sajjadyosefi.evaluation.model.business.File;
+import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.FILES;
+import static ir.sajjadyosefi.evaluation.model.business.File.MAP_1;
+import static ir.sajjadyosefi.evaluation.model.business.File.MAP_K;
 
 
 public class CommentActivity extends TubelessActivity {
@@ -40,14 +52,19 @@ public class CommentActivity extends TubelessActivity {
     private TextView txtText;
     private EditText editTextComment;
     TextToSpeech t1;
+    List<TubelessObject> taskItemList = new ArrayList<TubelessObject>();
+    RecyclerView                    mRecyclerViewTimeline;
+    LinearLayoutManager             mLayoutManager;
+    EndlessList_Adapter             adapter_Posts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_comment);
-//        setRootActivity(((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
-//
+        setRootActivity(((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
+
 //        init(getContext());
 //
 //
@@ -111,7 +128,8 @@ public class CommentActivity extends TubelessActivity {
 //        });
 
 
-
+        //file
+        filltestFile(getRootActivity());
     }
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -249,5 +267,55 @@ public class CommentActivity extends TubelessActivity {
 
     }
 
+    private void filltestFile(View rootview) {
+        //Global.CurrentTask.files
+
+//        File kroki = new File();
+//        kroki.setTitle("کروکی");
+//        kroki.setName("asdasd.jpg");
+//        kroki.setUrl("www.lsdfsdf.com/asdasd.jpg");
+//        kroki.setFileType(MAP_K);
+//        kroki.setType(FILES);
+//        Global.CurrentTask.setFileKrocki(kroki);
+//
+//
+//        File map1 = new File();
+//        map1.setTitle("نقشه 1");
+//        map1.setName("asdasd.jpg");
+//        map1.setUrl("www.lsdfsdf.com/asdasd.jpg");
+//        map1.setFileType(MAP_1);
+//        map1.setType(FILES);
+//        Global.CurrentTask.setFileList(new ArrayList<>());
+//        Global.CurrentTask.getFileList().add(map1);
+//        Global.CurrentTask.getFileList().add(map1);
+//        Global.CurrentTask.getFileList().add(map1);
+//        Global.CurrentTask.getFileList().add(map1);
+
+//        taskItemList.add(map1);
+//        taskItemList.add(map1);
+//        taskItemList.add(map1);
+//        taskItemList.add(map1);
+//        taskItemList.add(map1);
+
+
+
+
+        mRecyclerViewTimeline           = (RecyclerView) rootview.findViewById(R.id.recyclerView);
+        mRecyclerViewTimeline.setHasFixedSize(true);
+        mRecyclerViewTimeline.setItemAnimator(new DefaultItemAnimator());
+        mLayoutManager = new LinearLayoutManager(getContext());
+        adapter_Posts = new EndlessList_Adapter(
+                getContext(),
+                mLayoutManager,
+                rootview,
+                taskItemList,
+                FILES,
+                true);
+        adapter_Posts.listType = FILES;
+        mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
+        mRecyclerViewTimeline.setAdapter(adapter_Posts);
+
+
+    }
 
 }

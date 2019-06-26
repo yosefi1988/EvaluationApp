@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:gravity="right"
-    android:textDirection="rtl"
-    android:layoutDirection="rtl"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/fb_background_color"
-    android:padding="4dp">
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    android:padding="20dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:text="حفاری توسط شرکت"
+        android:textColor="#4267b2"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layoutDirection="rtl"
+        android:paddingTop="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,19 +56,17 @@
                 android:layout_marginTop="5dp"
                 android:textStyle="bold" />
 
-            <cn.refactor.kmpautotextview.KMPAutoComplTextView
-                android:id="@+id/tvAutoCompl"
+            <Button
+                android:id="@+id/send"
                 android:layout_width="0dp"
                 android:layout_weight="8"
-                android:layout_height="55dp"
-                android:completionThreshold="1"
-                app:completionHighlightColor="@color/colorAccent"
-                android:layout_margin="3dp"
-                android:padding="3dp"
-                app:completionTextColor="#80000000"
-                android:background="@drawable/bg_auto"
-                app:completionTextSize="18sp"
-                app:completionIgnoreCase="true"/>
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="انواع پوشش ها"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonsTextColor"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +91,6 @@
 
 
             <EditText
-                android:id="@+id/editTextValue"
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="wrap_content"
@@ -87,39 +105,27 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_search"
-                android:text="ثبت"
-                android:textAllCaps="false"
-                android:textColor="@color/buttonsTextColor"
-                android:layout_alignParentLeft="true"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/buttonCancel"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_search"
-                android:text="انصراف"
-                android:textAllCaps="false"
-                android:textColor="@color/buttonsTextColor"
-                android:layout_alignParentLeft="true"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+
+        <Button
+                android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_search"
+            android:text="@string/reg"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -61,7 +61,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int DRILLING_A = 8;
     public static final int DRILLING_F = 9;
 
-    public static final int TODO = 7;
+    public static final int TODO = 10;
     private boolean deletable;
 
     public int listType = 0;

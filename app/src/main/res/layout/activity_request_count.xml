@@ -56,15 +56,14 @@
 
             <CheckBox
                 android:id="@+id/checkBox"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="5dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"  />
 
             <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="6"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:paddingRight="10dp"

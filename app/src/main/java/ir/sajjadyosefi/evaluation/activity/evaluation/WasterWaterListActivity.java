@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.tuyenmonkey.mkloader.model.Circle;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
+import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
@@ -33,6 +36,7 @@ public class WasterWaterListActivity extends TubelessActivity {
     LinearLayoutManager             mLayoutManager;
     private RecyclerView            mRecyclerViewTimeline;
     private View                    emptyView;
+    Button buttonBack, buttonNext;
 
     List<TubelessObject> WasterWaterList = new ArrayList<TubelessObject>();
     EndlessList_Adapter adapter_Posts;
@@ -64,6 +68,14 @@ public class WasterWaterListActivity extends TubelessActivity {
         setContentView(R.layout.activity_wastewater_list);
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
+
+
+        buttonNext = findViewById(R.id.buttonNext);
+        buttonBack = findViewById(R.id.buttonBack);
+
+
+
+
         TubelessObject aaaaaa = new WasterWater();
         ((WasterWater) aaaaaa).setCount(5);
         ((WasterWater) aaaaaa).setLength(10);
@@ -82,6 +94,22 @@ public class WasterWaterListActivity extends TubelessActivity {
         prepareList(getRootActivity());
 
 
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                getActivity().startActivity(new Intent(getContext(), DrillingListActivity.class));
+                getActivity().startActivity(new Intent(getContext(), DrillingActivity.class));
+                finish();
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivity(new Intent(getContext(), NetworkActivity.class));
+                finish();
+            }
+        });
     }
 
 

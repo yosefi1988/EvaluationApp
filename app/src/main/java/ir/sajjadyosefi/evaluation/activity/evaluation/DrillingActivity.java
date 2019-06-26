@@ -12,8 +12,6 @@ import com.google.gson.Gson;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
-import ir.sajjadyosefi.evaluation.model.main.TimelineItem;
-
 /**
  * Created by sajjad on 2/11/2018.
  */
@@ -21,7 +19,7 @@ import ir.sajjadyosefi.evaluation.model.main.TimelineItem;
 public class DrillingActivity extends AppCompatActivity {
 
     Context mContext = null;
-    Button button1 , button2;
+    Button button1 , button2 , buttonBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,20 +27,36 @@ public class DrillingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drilling);
         mContext = this;
 
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        buttonBack = findViewById(R.id.buttonBack);
+
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, WasterWaterListActivity.class);
+                (mContext).startActivity(i);
+                finish();
+            }
+        });
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mContext, DrillingListActivity.class);
                 (mContext).startActivity(i);
+                finish();
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mContext,  NetworkActivity.class);
+                Intent i = new Intent(mContext,  ToDoListActivity.class);
                 (mContext).startActivity(i);
+                finish();
+
             }
         });
     }

@@ -51,6 +51,7 @@
                     android:layout_weight="7"
                     android:layoutDirection="ltr"
                     android:text="671671643545715475"
+                    android:textSize="20dp"
                     android:textDirection="ltr" />
             </LinearLayout>
 
@@ -74,6 +75,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
+                    android:textSize="18dp"
                     android:text="سه شنبه 15/8/1395" />
             </LinearLayout>
 
@@ -97,6 +99,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
+                    android:textSize="18dp"
                     android:text="سجاد یوسفی" />
             </LinearLayout>
 
@@ -131,6 +134,7 @@
                         android:layoutDirection="ltr"
                         android:text="09999816652"
                         android:textDirection="ltr"
+                        android:textSize="18dp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -190,6 +194,7 @@
                     android:layout_weight="7"
                     android:layoutDirection="ltr"
                     android:text="5162958551"
+                    android:textSize="18dp"
                     android:textDirection="ltr" />
             </LinearLayout>
 
@@ -213,6 +218,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
+                    android:textSize="15dp"
                     android:text="تهران - شهرقدس - خیابان صاحب الزمان - کوچه شهید رجایی - پلاک  62  طبقه سوم واحد 16" />
             </LinearLayout>
 

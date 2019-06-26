@@ -23,7 +23,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="22dp"
             android:gravity="center_horizontal"
-            android:text=""
+            android:text="امکان واگذاری"
             android:textColor="#4267b2"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -34,12 +34,13 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal" >
 
-        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+        <RadioButton
+            android:id="@+id/checkBox1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" />
+
+
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
             android:layout_width="0dp"
             android:layout_weight="7"
@@ -54,12 +55,13 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal" >
 
-        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+        <RadioButton
+            android:id="@+id/checkBox2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" />
+
+
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
             android:layout_width="0dp"
             android:layout_weight="7"
@@ -74,14 +76,14 @@
             android:layoutDirection="rtl"
             android:orientation="horizontal" >
 
-            <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textStyle="bold" />
+        <RadioButton
+            android:id="@+id/checkBox3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
 
-            <LinearLayout
+
+        <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
@@ -114,7 +116,11 @@
                         android:completionThreshold="1"
                         app:completionHighlightColor="@color/colorAccent"
                         app:completionTextColor="#80000000"
-                        android:layout_marginTop="-10dp"
+                        android:layout_margin="3dp"
+                        android:padding="3dp"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"
+                        android:background="@drawable/bg_auto"
                         app:completionTextSize="18sp"
                         app:completionIgnoreCase="true"/>
 
@@ -134,12 +140,13 @@
         android:layoutDirection="rtl"
         android:orientation="horizontal" >
 
-        <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+        <RadioButton
+            android:id="@+id/checkBox4"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" />
+
+
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
             android:layout_width="0dp"
             android:layout_weight="7"

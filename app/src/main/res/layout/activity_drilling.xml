@@ -36,10 +36,22 @@
             android:src="@drawable/pngk"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"/>
+
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_search"
+            android:text="بازگشت"
+            android:textAllCaps="false"
+            android:textColor="#fff" />
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+
             android:background="@drawable/btn_search"
             android:text="توسط شرکت"
             android:textAllCaps="false"
