@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import java.util.List;
 import cn.refactor.kmpautotextview.ItemData;
 import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.evaluation.CommentActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
@@ -33,7 +37,7 @@ import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 
-public class StepOneActivity extends TubelessActivity {
+public class StepOneActivity extends TubelessActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
 
     private static final String TAG = "sssssssssssssss";
@@ -49,10 +53,12 @@ public class StepOneActivity extends TubelessActivity {
 
 
     Button ButtonSms,ButtonCall,buttonk,buttonBack,buttonNext;
-    TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
+    TextView textView4,textView3,textView2,textView1;
 
     Activity activity ;
     String LastFileSelected = null;
+
+    RadioButton radioButton1,radioButton2,radioButton3,radioButton4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,26 @@ public class StepOneActivity extends TubelessActivity {
         buttonNext = findViewById(R.id.buttonNext);
         buttonBack = findViewById(R.id.buttonBack);
 
+        radioButton1 = findViewById(R.id.radioButton1);
+        radioButton2 = findViewById(R.id.radioButton2);
+        radioButton3 = findViewById(R.id.radioButton3);
+        radioButton4 = findViewById(R.id.radioButton4);
+
+        textView1 = findViewById(R.id.textView1);
+        textView2 = findViewById(R.id.textView2);
+        textView3 = findViewById(R.id.textView3);
+        textView4 = findViewById(R.id.textView4);
+
+
+        radioButton1.setOnCheckedChangeListener(this);
+        radioButton2.setOnCheckedChangeListener(this);
+        radioButton3.setOnCheckedChangeListener(this);
+        radioButton4.setOnCheckedChangeListener(this);
+
+        textView1.setOnClickListener(this);
+        textView2.setOnClickListener(this);
+        textView3.setOnClickListener(this);
+        textView4.setOnClickListener(this);
 
         //type 5
         if (Global.CurrentTask == null ){
@@ -129,8 +155,19 @@ public class StepOneActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
                 //SubscriptionsActivity
-                activity.startActivity(new Intent(getContext(),SubscriptionsActivity.class));
-                finish();
+
+                if (radioButton4.isChecked() == true || radioButton2.isChecked() == true || radioButton3.isChecked() == true ){
+                    //اخرین صفحه
+                    Intent intent = new Intent(getContext(), CommentActivity.class);
+                    intent.putExtra("backType" , "stepOne");
+                    activity.startActivity(intent);
+                    finish();
+                }else if (radioButton1.isChecked() == true ) {
+                    activity.startActivity(new Intent(getContext(), SubscriptionsActivity.class));
+                    finish();
+                }else {
+                    Toast.makeText(getContext(),"یکی از موارد را انتخاب کنید",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -183,6 +220,67 @@ public class StepOneActivity extends TubelessActivity {
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
 //            updateUI(null);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (b == true) {
+            if (compoundButton == radioButton1) {
+                radioButton1.setChecked(b);
+                radioButton2.setChecked(!b);
+                radioButton3.setChecked(!b);
+                radioButton4.setChecked(!b);
+                complTextView.setEnabled(false);
+            } else if (compoundButton == radioButton2) {
+                radioButton1.setChecked(!b);
+                radioButton2.setChecked(b);
+                radioButton3.setChecked(!b);
+                radioButton4.setChecked(!b);
+                complTextView.setEnabled(false);
+            }else if (compoundButton == radioButton3) {
+                radioButton1.setChecked(!b);
+                radioButton2.setChecked(!b);
+                radioButton3.setChecked(b);
+                radioButton4.setChecked(!b);
+                complTextView.setEnabled(true);
+            }else if (compoundButton == radioButton4) {
+                radioButton1.setChecked(!b);
+                radioButton2.setChecked(!b);
+                radioButton3.setChecked(!b);
+                radioButton4.setChecked(b);
+                complTextView.setEnabled(false);
+            }
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == textView1) {
+            radioButton1.setChecked(true);
+            radioButton2.setChecked(false);
+            radioButton3.setChecked(false);
+            radioButton4.setChecked(false);
+            complTextView.setEnabled(false);
+        } else if (view == textView2) {
+            radioButton1.setChecked(false);
+            radioButton2.setChecked(true);
+            radioButton3.setChecked(false);
+            radioButton4.setChecked(false);
+            complTextView.setEnabled(false);
+        }else if (view == textView3) {
+            radioButton1.setChecked(false);
+            radioButton2.setChecked(false);
+            radioButton3.setChecked(true);
+            radioButton4.setChecked(false);
+            complTextView.setEnabled(true);
+        }else if (view == textView4) {
+            radioButton1.setChecked(false);
+            radioButton2.setChecked(false);
+            radioButton3.setChecked(false);
+            radioButton4.setChecked(true);
+            complTextView.setEnabled(false);
         }
     }
 }

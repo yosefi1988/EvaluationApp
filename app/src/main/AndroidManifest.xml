@@ -76,6 +76,7 @@
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"
             android:name=".activity.business.StepOneActivity" >
         </activity>
         <activity

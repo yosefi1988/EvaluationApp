@@ -35,15 +35,17 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/checkBox1"
+            android:id="@+id/radioButton1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
 
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textView1"
             android:layout_width="0dp"
             android:layout_weight="7"
+            android:clickable="true"
             android:layout_height="wrap_content"
             android:text="امکان واگذاری وجود دارد" />
     </LinearLayout>
@@ -56,17 +58,19 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/checkBox2"
+            android:id="@+id/radioButton2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
 
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textView2"
             android:layout_width="0dp"
+            android:clickable="true"
             android:layout_weight="7"
             android:layout_height="wrap_content"
-            android:text="سه شنبه 15/8/1395"  />
+            android:text="امکان واگذاری وجود ندارد"  />
     </LinearLayout>
     <include layout="@layout/_part_horizontal_line"></include>
 
@@ -77,7 +81,7 @@
             android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/checkBox3"
+            android:id="@+id/radioButton3"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
@@ -94,9 +98,11 @@
                 android:orientation="vertical" >
 
                 <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layoutDirection="rtl"
                     android:textDirection="rtl"
+                    android:clickable="true"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="امکان واگذاری به شرط مهیا سازی ذیل وجود دارد" />
@@ -118,6 +124,7 @@
                         app:completionTextColor="#80000000"
                         android:layout_margin="3dp"
                         android:padding="3dp"
+                        android:enabled="false"
                         android:layoutDirection="rtl"
                         android:textDirection="rtl"
                         android:background="@drawable/bg_auto"
@@ -141,13 +148,15 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/checkBox4"
+            android:id="@+id/radioButton4"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
 
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+            android:id="@+id/textView4"
+            android:clickable="true"
             android:layout_width="0dp"
             android:layout_weight="7"
             android:layout_height="wrap_content"

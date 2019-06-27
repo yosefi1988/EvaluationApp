@@ -22,11 +22,10 @@
             android:background="@drawable/bg_search"
             android:drawableLeft="@drawable/shadow_left"
             android:drawablePadding="15dp"
-            android:hint="@string/mobile_number"
+            android:hint="کد اشتراک"
             android:textDirection="locale"
-            android:inputType="text"
             android:gravity="start"
-            android:text="1233"
+            android:inputType="number"
             android:textAlignment="viewStart"
             android:padding="16dp" />
 
@@ -41,9 +40,8 @@
             android:background="@drawable/bg_search"
             android:drawableLeft="@drawable/shadow_left"
             android:drawablePadding="15dp"
-            android:inputType="textPassword"
-            android:text="123"
-            android:hint="@string/password"
+            android:inputType="number"
+            android:hint="رقم مصرف"
             android:padding="16dp" />
 
 

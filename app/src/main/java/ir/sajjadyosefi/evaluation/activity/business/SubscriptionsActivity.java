@@ -115,8 +115,12 @@ public class SubscriptionsActivity extends TubelessActivity {
 
                 //RequestCountActivity
 
-                activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
-                finish();
+                if (complTextView.getText().length() < 5){
+                    Toast.makeText(getContext(),"نوع واگذاری را انتخاب کنید" ,Toast.LENGTH_LONG).show();
+                }else {
+                    activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
+                    finish();
+                }
             }
         });
 

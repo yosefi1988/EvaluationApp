@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
@@ -46,11 +47,16 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonSave:
-                subscribeItem = new OldSubscribeListItem();
-                subscribeItem.setSubscriberCode(Integer.parseInt(editTextCode.getText().toString()));
-                subscribeItem.setTblRequestSubscriberId(Integer.parseInt(editTextValue.getText().toString()));
-                subscribeItem.setType(SUBSCRIPTIONS);
-                dismiss();
+                try {
+                    subscribeItem = new OldSubscribeListItem();
+                    subscribeItem.setSubscriberCode(Integer.parseInt(editTextCode.getText().toString()));
+                    subscribeItem.setTblRequestSubscriberId(Integer.parseInt(editTextValue.getText().toString()));
+                    subscribeItem.setType(SUBSCRIPTIONS);
+                    dismiss();
+                }catch (Exception ex){
+                    Toast.makeText(getContext(),"مقادیر ورودی صحیح نیست" , Toast.LENGTH_LONG).show();
+                }
+
                 break;
             case R.id.buttonCancel:
                 subscribeItem = null;
