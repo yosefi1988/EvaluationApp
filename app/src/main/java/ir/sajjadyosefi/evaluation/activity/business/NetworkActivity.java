@@ -24,6 +24,8 @@ import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.COUNT_REQUEST_EDITED;
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.NETWORK;
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
 
 public class NetworkActivity extends TubelessActivity {
@@ -118,7 +120,7 @@ public class NetworkActivity extends TubelessActivity {
                 mLayoutManager,
                 rootview,
                 requestCountItemList);
-        adapter_Posts.listType = COUNT_REQUEST_EDITED;
+        adapter_Posts.listType = NETWORK;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
 

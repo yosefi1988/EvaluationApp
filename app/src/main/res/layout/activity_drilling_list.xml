@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content" />
 
             <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:id="@+id/textView1"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -59,10 +60,13 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="40dp"
-            android:background="@drawable/btn_search"
+            android:background="@drawable/btn_selector"
             android:text="افزودن حفاری"
             android:textAllCaps="false"
+            android:enabled="false"
             android:textColor="#fff" />
+
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/mojaveze_fAb"
@@ -87,6 +91,7 @@
                 android:layout_height="wrap_content" />
 
             <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -98,8 +103,9 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="40dp"
-            android:background="@drawable/btn_search"
+            android:background="@drawable/btn_selector"
             android:text="افزودن حفاری"
+            android:enabled="false"
             android:textAllCaps="false"
             android:textColor="#fff" />
     </LinearLayout>

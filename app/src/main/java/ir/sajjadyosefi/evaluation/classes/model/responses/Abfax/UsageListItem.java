@@ -1,13 +1,21 @@
 package ir.sajjadyosefi.evaluation.classes.model.responses.Abfax;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
+import ir.sajjadyosefi.evaluation.activity.EditUsageCountActivity;
+import ir.sajjadyosefi.evaluation.activity.account.LoginActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
+
+import static com.activeandroid.Cache.getContext;
 
 /**
  * Created by sajjad on 10/31/2016.
@@ -96,5 +104,16 @@ public class UsageListItem  extends TubelessObject {
             holder.textViewCount2.setText(usageListItem.getWaterMainUnitQtyReq2() + "");
             holder.checkBoxNeedSeparationReq2.setChecked(usageListItem.needSeparationReq2 == 1 ? true : false);
         }
+
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gson gson = new Gson();
+                Intent i = new Intent(mContext, EditUsageCountActivity.class);
+                i.putExtra("Object" ,  gson.toJson(usageListItem));
+                i.putExtra("index" ,  position);
+                ((Activity)mContext).startActivityForResult(i, 1);
+            }
+        });
     }
 }

@@ -56,6 +56,10 @@
 
         <activity
             android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.EditUsageCountActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".activity.account.LoginActivity" >
         </activity>
         <activity

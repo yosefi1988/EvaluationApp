@@ -18,7 +18,10 @@ import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.account.LoginActivity;
+import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
+import ir.sajjadyosefi.evaluation.activity.business.RequestCountActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.CommentActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingListActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.ToDoListActivity;
 import ir.sajjadyosefi.evaluation.classes.Global;
@@ -26,6 +29,8 @@ import ir.sajjadyosefi.evaluation.classes.SAccounts;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
 import ir.sajjadyosefi.evaluation.classes.utility.DateConverterSjd;
 import ir.sajjadyosefi.evaluation.model.db.Config;
 import ir.sajjadyosefi.evaluation.model.db.Task;
@@ -194,7 +199,7 @@ public class SplashScreenActivity extends TubelessActivity {
 
     private void startMainActivity() {
         Intent autoActivityIntent =  new Intent(getContext(), MainActivity.class);
-//        autoActivityIntent =  new Intent(getContext(),  .class);
+        autoActivityIntent =  new Intent(getContext(),  NetworkActivity.class);
 //                Bundle bundleAuto = new Bundle();
 //                bundleAuto.putString("type","NEW_Auto");
 //                bundleAuto.putString("BankNumber" , phoneNumber );

@@ -45,6 +45,7 @@
                 android:layout_margin="3dp"
                 android:padding="3dp"
                 app:completionTextColor="#80000000"
+                android:hint="انتخاب کنید"
                 android:background="@drawable/bg_auto"
                 app:completionTextSize="18sp"
                 app:completionIgnoreCase="true"/>
@@ -78,8 +79,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_search"
                 android:drawablePadding="15dp"
-                android:hint="4"
+                android:hint="مثال : 5"
                 android:textDirection="locale"
+                android:inputType="number"
                 android:gravity="start"
                 android:textAlignment="viewStart"
                 android:padding="16dp" />

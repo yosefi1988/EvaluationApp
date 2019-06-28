@@ -37,8 +37,8 @@ public class OldSubscribeListItem  extends TubelessObject {
 
         StringBuilder text = new StringBuilder();
 
-        holder.textViewCode.setText(  "کد:"  +subscribe.getSubscriberCode() + "");
-        holder.textViewValue.setText("مصرف" + subscribe.getTblRequestSubscriberId() + "");
+        holder.textViewCode.setText(  " کد: "  +subscribe.getSubscriberCode() + "");
+        holder.textViewValue.setText(" مصرف: " + subscribe.getTblRequestSubscriberId() + "");
 
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override

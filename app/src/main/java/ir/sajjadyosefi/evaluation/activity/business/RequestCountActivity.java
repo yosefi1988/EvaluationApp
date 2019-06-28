@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,12 +72,13 @@ public class RequestCountActivity extends TubelessActivity {
 
 
 
-        for (UsageListItem usageListItem : Global.CurrentTask.getUsageList()) {
-            usageListItem.type = COUNT_REQUEST_EDITED;
-            requestCountItemList.add(usageListItem);
+        if (Global.CurrentTask != null) {
+            for (UsageListItem usageListItem : Global.CurrentTask.getUsageList()) {
+                usageListItem.type = COUNT_REQUEST;
+                requestCountItemList.add(usageListItem);
+            }
         }
         prepareList(getRootActivity());
-
 
 
 
@@ -131,20 +133,28 @@ public class RequestCountActivity extends TubelessActivity {
 
 
 
-
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK) {
+                String result = data.getStringExtra("result");
+                int indexxx = data.getIntExtra("index", 0);
+
+                Gson gson = new Gson();
+                UsageListItem item = gson.fromJson(result, UsageListItem.class);
+
+                ((UsageListItem) requestCountItemList.get(indexxx)).setEdited(true);
+                ((UsageListItem) requestCountItemList.get(indexxx)).setNeedSeparationReq2(item.getNeedSeparationReq2());
+                ((UsageListItem) requestCountItemList.get(indexxx)).setType(COUNT_REQUEST_EDITED);
+                ((UsageListItem) requestCountItemList.get(indexxx)).setWaterMainUnitQtyReq2(item.getWaterMainUnitQtyReq2());
+
+                adapter_Posts.notifyItemChanged(indexxx);
+            }
         }
     }
+
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);

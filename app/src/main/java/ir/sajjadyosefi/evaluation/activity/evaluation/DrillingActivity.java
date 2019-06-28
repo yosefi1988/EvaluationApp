@@ -35,7 +35,7 @@ public class DrillingActivity extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mContext, WasterWaterListActivity.class);
+                Intent i = new Intent(mContext, NetworkActivity.class);
                 (mContext).startActivity(i);
                 finish();
             }

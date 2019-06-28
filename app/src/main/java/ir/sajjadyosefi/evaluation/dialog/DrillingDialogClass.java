@@ -102,7 +102,7 @@ public class DrillingDialogClass extends Dialog implements View.OnClickListener 
                     Toast.makeText(getContext(), "مقداری وارد نکرده اید", Toast.LENGTH_LONG).show();
                 } else {
                     newItem.setValue(editTextValue.getText().toString());
-                    newItem.setType(DRILLING_TYPE);
+                    //newItem.setType(DRILLING_TYPE);
                     dismiss();
                 }
                 break;

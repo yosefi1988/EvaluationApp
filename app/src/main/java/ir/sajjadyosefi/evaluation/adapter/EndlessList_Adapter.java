@@ -25,11 +25,13 @@ import com.google.gson.JsonElement;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.MainActivity;
 import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
+import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
@@ -62,6 +64,8 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int DRILLING_F = 9;
 
     public static final int TODO = 10;
+    public static final int NETWORK = 11;
+
     private boolean deletable;
 
     public int listType = 0;
@@ -185,6 +189,15 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             checkBox                = (CheckBox) itemView.findViewById(R.id.checkBox);
         }
     }
+    public class NetworkViewHolder extends ParentViewHolder {
+        public TextView textView;
+        public CheckBox checkBox;
+        public NetworkViewHolder (View itemView) {
+            super(itemView);
+            textView                = (TextView) itemView.findViewById(R.id.textView);
+            checkBox                = (CheckBox) itemView.findViewById(R.id.checkBox);
+        }
+    }
 
     public class WasterWaterViewHolder extends ParentViewHolder {
         public TextView textView;
@@ -226,6 +239,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         public CheckBox checkBoxNeedSeparationReq ;
 
         public TextView textViewCount2 ;
+        public View rootView ;
         public CheckBox checkBoxNeedSeparationReq2 ;
 
         public UsageViewHolder(View itemView) {
@@ -233,6 +247,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             textViewUsageDesc                   = (TextView) itemView.findViewById(R.id.textViewUsageDesc);
             textViewCount                       = (TextView) itemView.findViewById(R.id.textViewCount);
             checkBoxNeedSeparationReq           = (CheckBox) itemView.findViewById(R.id.checkBoxNeedSeparationReq);
+            rootView                    = (View) itemView.findViewById(R.id.rootView);
 
             textViewCount2                       = (TextView) itemView.findViewById(R.id.textViewCount2);
             checkBoxNeedSeparationReq2           = (CheckBox) itemView.findViewById(R.id.checkBoxNeedSeparationReq2);
@@ -241,12 +256,15 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public class DrillingViewHolder extends ParentViewHolder {
         public TextView textViewText , textViewValue ;
         public TextView textViewType;
+        public Button buttonDelete;
 
         public DrillingViewHolder(View itemView) {
             super(itemView);
-            textViewText                   = (TextView) itemView.findViewById(R.id.textViewText);
+            textViewText                        = (TextView) itemView.findViewById(R.id.textViewText);
             textViewValue                       = (TextView) itemView.findViewById(R.id.textViewValue);
-            textViewType                       = (TextView) itemView.findViewById(R.id.textViewType);
+            textViewType                        = (TextView) itemView.findViewById(R.id.textViewType);
+            buttonDelete                        = (Button) itemView.findViewById(R.id.buttonDelete);
+
         }
     }
 
@@ -345,6 +363,22 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 return holder;
             }
         }
+        if (listType == NETWORK) {
+            if (viewType == LAST_ITEM) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item, parent, false);
+                return new AddViewHolder(view);
+            }
+            if (viewType == NETWORK) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_netwo, parent, false);
+                NetworkViewHolder yafteItemViewHolder = new NetworkViewHolder(view);
+                return yafteItemViewHolder;
+            }
+            if (viewType == 0) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_progress, parent, false);
+                ProgressViewHolder holder = new ProgressViewHolder(view);
+                return holder;
+            }
+        }
         if (listType == FILES){
             if (viewType == LAST_ITEM) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item_files, parent, false);
@@ -435,6 +469,20 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 ((AbfaxSelectsObject)mTimelineItemList.get(position)).prepareYafteItem(mContext, (ToDotViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
 
+            }
+        }
+        if (listType == NETWORK) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == NETWORK) {
+                ((Network)mTimelineItemList.get(position)).prepareYafteItem(mContext, (NetworkViewHolder) holder, mTimelineItemList, position,adapter);
+            }else {
+                //LAST ITEM
+                ((AddViewHolder)holder).buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(mContext, AddNetworkActivity.class);
+                        ((Activity)mContext).startActivityForResult(i, 1);
+                    }
+                });
             }
         }
         if (listType == FILES) {
@@ -568,6 +616,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
         if (listType == TODO)
             return mTimelineItemList.get(position).getType();
+
+        if (listType == NETWORK)
+            return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
 
         if (listType == FILES)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();

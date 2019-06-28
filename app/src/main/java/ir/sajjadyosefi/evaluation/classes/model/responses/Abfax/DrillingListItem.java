@@ -1,10 +1,12 @@
 package ir.sajjadyosefi.evaluation.classes.model.responses.Abfax;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.CompoundButton;
 
 import java.util.List;
 
+import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
@@ -58,5 +60,16 @@ public class DrillingListItem extends TubelessObject {
             holder.textViewType.setText("فاضلاب");
 
 
+        holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTimelineItemList.remove(position);
+
+                if (mTimelineItemList.size() == 0 )
+                    holder.textViewText.setText("موردی برای حفاری وارد نشده است");
+
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
