@@ -49,7 +49,6 @@ public class WasterWaterListActivity extends TubelessActivity {
                 String result = data.getStringExtra("result");
 
                 if (result != null){
-
                     Gson gson = new Gson();
                     WasterWater wasterWaterItem = gson.fromJson(result,WasterWater.class);
                     WasterWaterList.add(wasterWaterItem);
@@ -73,23 +72,6 @@ public class WasterWaterListActivity extends TubelessActivity {
         buttonNext = findViewById(R.id.buttonNext);
         buttonBack = findViewById(R.id.buttonBack);
 
-
-
-
-        TubelessObject aaaaaa = new WasterWater();
-        ((WasterWater) aaaaaa).setCount(5);
-        ((WasterWater) aaaaaa).setLength(10);
-        ((WasterWater) aaaaaa).setSiphon(true);
-        ((WasterWater) aaaaaa).setDiameter(10);
-        ((WasterWater) aaaaaa).setType(WASTER_WATER);
-        WasterWaterList.add(aaaaaa);
-
-        TubelessObject aaaaaa2 = new WasterWater();
-        ((WasterWater) aaaaaa2).setLength(100);
-        ((WasterWater) aaaaaa2).setSiphon(false);
-        ((WasterWater) aaaaaa2).setSubscribeCode("54514");
-        ((WasterWater) aaaaaa2).setType(WASTER_WATER);
-        WasterWaterList.add(aaaaaa2);
 
         prepareList(getRootActivity());
 

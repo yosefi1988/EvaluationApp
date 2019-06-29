@@ -23,6 +23,14 @@ import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 public class WasterWater extends TubelessObject {
 
+    private int id;
+    private boolean Siphon;
+    private int count;
+    private int length;
+    private int diameter;
+    private String subscribeCode;
+
+
     public int getId() {
         return id;
     }
@@ -71,16 +79,6 @@ public class WasterWater extends TubelessObject {
         this.diameter = diameter;
     }
 
-    private int id;
-    private boolean Siphon;
-    private int count;
-    private int length;
-    private int diameter;
-    private String subscribeCode;
-
-    final int radius = 5;
-    final int margin = 5;
-    final Transformation transformation = new RoundedCornersTransformation(radius, margin);
 
     public void prepareYafteItem(Context mContext, EndlessList_Adapter.WasterWaterViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
         WasterWater wasterWater = (WasterWater) mTimelineItemList.get(position);
@@ -93,13 +91,22 @@ public class WasterWater extends TubelessObject {
             text.append(" ");
             text.append(wasterWater.length);
             text.append("متر");
+            text.append(" ");
+
+            text.append("کد اشتراک");
+            text.append(" ");
+            text.append(wasterWater.subscribeCode);
             holder.textView.setText(text.toString());
         }else {
             text.append("بدون سیفون");
             text.append(" ");
-            text.append("کد اشتراک");
+            text.append("طول مسیر");
             text.append(" ");
-            text.append(wasterWater.subscribeCode);
+            text.append(wasterWater.length);
+            text.append("متر");
+            text.append("-");
+            text.append("قطر سیفون");
+            text.append(wasterWater.diameter);
             holder.textView.setText(text.toString());
         }
 

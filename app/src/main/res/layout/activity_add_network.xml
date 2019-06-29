@@ -29,7 +29,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="22dp"
                 android:gravity="center_horizontal"
-                android:text="شبکه و انشعاب"
+                android:text="افزودن شبکه و انشعاب"
                 android:textColor="#4267b2"
                 android:textSize="26sp"
                 android:textStyle="bold" />

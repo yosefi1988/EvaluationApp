@@ -68,7 +68,7 @@ public class SubscriptionsActivity extends TubelessActivity {
         buttonBack = findViewById(R.id.buttonBack);
 
 
-        //type 5
+        //type موقت
         if (Global.CurrentTask == null ){
 
         }else {

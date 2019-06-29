@@ -69,20 +69,20 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
 
-
-        TubelessObject usageListItema = new DrillingListItem();
-        ((DrillingListItem) usageListItema).setId("10");
-        ((DrillingListItem) usageListItema).setValue("10");
-        ((DrillingListItem) usageListItema).setText("اسفالت");
-        ((DrillingListItem) usageListItema).setType(DRILLING_F);
-        drillingItemList.add(usageListItema);
-
-        TubelessObject usageListItem = new DrillingListItem();
-        ((DrillingListItem) usageListItem).setId("10");
-        ((DrillingListItem) usageListItem).setValue("10");
-        ((DrillingListItem) usageListItem).setText("خاکی");
-        ((DrillingListItem) usageListItem).setType(DRILLING_A);
-        drillingItemList.add(usageListItem);
+//
+//        TubelessObject usageListItema = new DrillingListItem();
+//        ((DrillingListItem) usageListItema).setId("10");
+//        ((DrillingListItem) usageListItema).setValue("10");
+//        ((DrillingListItem) usageListItema).setText("اسفالت");
+//        ((DrillingListItem) usageListItema).setType(DRILLING_F);
+//        drillingItemList.add(usageListItema);
+//
+//        TubelessObject usageListItem = new DrillingListItem();
+//        ((DrillingListItem) usageListItem).setId("10");
+//        ((DrillingListItem) usageListItem).setValue("10");
+//        ((DrillingListItem) usageListItem).setText("خاکی");
+//        ((DrillingListItem) usageListItem).setType(DRILLING_A);
+//        drillingItemList.add(usageListItem);
 
         prepareList(getRootActivity());
 

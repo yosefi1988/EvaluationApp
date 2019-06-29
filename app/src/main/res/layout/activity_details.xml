@@ -50,7 +50,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layoutDirection="ltr"
+                    android:gravity="center"
                     android:text="671671643545715475"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/bg_search"
                     android:textSize="20dp"
                     android:textDirection="ltr" />
             </LinearLayout>
@@ -75,7 +78,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
                     android:textSize="18dp"
+                    android:background="@drawable/bg_search"
                     android:text="سه شنبه 15/8/1395" />
             </LinearLayout>
 
@@ -100,6 +106,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:textSize="18dp"
+                    android:paddingTop="10dp"
+
+                    android:paddingRight="10dp"
+                    android:background="@drawable/bg_search"
                     android:text="سجاد یوسفی" />
             </LinearLayout>
 
@@ -133,7 +143,10 @@
                         android:layout_height="wrap_content"
                         android:layoutDirection="ltr"
                         android:text="09999816652"
+                        android:background="@drawable/bg_search"
                         android:textDirection="ltr"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -194,7 +207,10 @@
                     android:layout_weight="7"
                     android:layoutDirection="ltr"
                     android:text="5162958551"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
                     android:textSize="18dp"
+                    android:background="@drawable/bg_search"
                     android:textDirection="ltr" />
             </LinearLayout>
 
@@ -218,7 +234,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
+                    android:background="@drawable/bg_search"
                     android:textSize="15dp"
+                    android:padding="10dp"
                     android:text="تهران - شهرقدس - خیابان صاحب الزمان - کوچه شهید رجایی - پلاک  62  طبقه سوم واحد 16" />
             </LinearLayout>
 

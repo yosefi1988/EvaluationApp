@@ -167,7 +167,7 @@ public class AddNetworkActivity extends TubelessActivity {
                 }
             });
 
-            //type 2
+            //type 9
             KMPAutoComplTextView9 = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextView9);
             ArrayList<ItemData> list2 = new ArrayList<>();
 
