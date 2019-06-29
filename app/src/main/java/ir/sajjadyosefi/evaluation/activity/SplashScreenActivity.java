@@ -199,7 +199,7 @@ public class SplashScreenActivity extends TubelessActivity {
 
     private void startMainActivity() {
         Intent autoActivityIntent =  new Intent(getContext(), MainActivity.class);
-        autoActivityIntent =  new Intent(getContext(),  NetworkActivity.class);
+//        autoActivityIntent =  new Intent(getContext(),  NetworkActivity.class);
 //                Bundle bundleAuto = new Bundle();
 //                bundleAuto.putString("type","NEW_Auto");
 //                bundleAuto.putString("BankNumber" , phoneNumber );

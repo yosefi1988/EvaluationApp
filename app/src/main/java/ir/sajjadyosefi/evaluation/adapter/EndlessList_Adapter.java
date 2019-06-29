@@ -369,7 +369,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 return new AddViewHolder(view);
             }
             if (viewType == NETWORK) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_netwo, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_networ, parent, false);
                 NetworkViewHolder yafteItemViewHolder = new NetworkViewHolder(view);
                 return yafteItemViewHolder;
             }

@@ -40,17 +40,12 @@ public class Network extends TubelessObject {
     public void prepareYafteItem(Context mContext, EndlessList_Adapter.NetworkViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
 
         Network request = (Network) mTimelineItemList.get(position);
+
+
         holder.textView.setText(request.getTextValue() + "");
-        //holder.checkBox.setText(request.getKeyValue());
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //tooooooooooooooooast
 
-                int a = 4 ;
-                a++;
-            }
-        });
+
+
     }
 }

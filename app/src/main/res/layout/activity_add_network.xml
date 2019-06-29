@@ -67,6 +67,7 @@
                     app:completionTextColor="#80000000"
                     android:layout_margin="3dp"
                     android:padding="3dp"
+                    android:hint="@string/select"
                     android:background="@drawable/bg_auto"
                     android:layout_marginTop="-10dp"
                     app:completionTextSize="18sp"
@@ -98,6 +99,7 @@
                     app:completionTextColor="#80000000"
                     android:layout_margin="3dp"
                     android:padding="3dp"
+                    android:hint="@string/select"
                     android:background="@drawable/bg_auto"
                     android:layout_marginTop="-10dp"
                     app:completionTextSize="18sp"
@@ -139,6 +141,7 @@
                     app:completionHighlightColor="@color/colorAccent"
                     app:completionTextColor="#80000000"
                     android:layout_margin="3dp"
+                    android:hint="@string/select"
                     android:padding="3dp"
                     android:background="@drawable/bg_auto"
                     app:completionTextSize="18sp"
@@ -170,6 +173,7 @@
                     app:completionTextColor="#80000000"
                     android:layout_margin="3dp"
                     android:padding="3dp"
+                    android:hint="@string/select"
                     android:background="@drawable/bg_auto"
                     app:completionTextSize="18sp"
                     app:completionIgnoreCase="true"/>
@@ -190,17 +194,19 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextNationalCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:id="@+id/editTextTool"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
                     android:textDirection="rtl"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:textSize="25dp"
-                    android:text="50"
+                    android:textSize="20dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
+                    android:hint="مثال : 10"
+                    android:padding="5dp"
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp"
                     android:inputType="number"
@@ -262,6 +268,7 @@
                     app:completionTextColor="#80000000"
                     android:layout_margin="3dp"
                     android:padding="3dp"
+                    android:hint="@string/select"
                     android:background="@drawable/bg_auto"
                     app:completionTextSize="18sp"
                     app:completionIgnoreCase="true"/>
@@ -283,6 +290,7 @@
                     android:textStyle="bold" />
 
                 <cn.refactor.kmpautotextview.KMPAutoComplTextView
+                    android:id="@+id/KMPAutoComplTextViewSubUsage"
                     android:layout_width="0dp"
                     android:layout_weight="3"
                     android:layout_height="wrap_content"
@@ -292,6 +300,7 @@
                     app:completionTextSize="18sp"
                     android:layout_margin="3dp"
                     android:padding="3dp"
+                    android:hint="@string/select"
                     android:background="@drawable/bg_auto"
                     app:completionIgnoreCase="true"/>
 
@@ -311,18 +320,20 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextNationalCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:id="@+id/editTextCount"
+                    android:layout_height="wrap_content"
                     android:textDirection="rtl"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:textSize="25dp"
-                    android:text="20"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:textSize="20dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
                     android:paddingRight="10dp"
+                    android:hint="مثال : 3"
+                    android:padding="5dp"
                     android:paddingLeft="10dp"
                     android:inputType="number"
                     android:textAlignment="center"
@@ -366,6 +377,7 @@
                     app:completionHighlightColor="@color/colorAccent"
                     app:completionTextColor="#80000000"
                     android:layout_marginTop="-10dp"
+                    android:hint="@string/select"
                     app:completionTextSize="18sp"
                     app:completionIgnoreCase="true"/>
 
@@ -387,10 +399,12 @@
                     android:orientation="horizontal" >
 
                     <CheckBox
+                        android:id="@+id/checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
+                        android:id="@+id/textViewCheckbox"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -408,42 +422,11 @@
                     android:padding="3dp"
                     android:background="@drawable/bg_auto"
                     app:completionHighlightColor="@color/colorAccent"
+                    android:hint="@string/select"
                     app:completionTextColor="#80000000"
                     app:completionTextSize="18sp"
                     app:completionIgnoreCase="true"/>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
-                <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    android:text="تعداد"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editTextNationalCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:textDirection="rtl"
-                    android:foregroundGravity="center"
-                    android:gravity="center"
-                    android:textSize="25dp"
-                    android:text="6565"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    android:background="@drawable/bg_search" />
             </LinearLayout>
 
             <include layout="@layout/_part_horizontal_line"></include>
@@ -467,15 +450,6 @@
             android:textDirection="ltr"
             android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="40dp"
-                android:background="@drawable/btn_search"
-                android:text="افزودن"
-                android:textAllCaps="false"
-                android:textColor="#fff" />
 
 
             <Button
@@ -485,6 +459,16 @@
                 android:layout_height="40dp"
                 android:background="@drawable/btn_search"
                 android:text="انصراف"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_search"
+                android:text="افزودن"
                 android:textAllCaps="false"
                 android:textColor="#fff" />
 

@@ -7,6 +7,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,18 +23,24 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsUsageTypeInfoDetail;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.NETWORK;
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WASTER_WATER;
 
 public class AddNetworkActivity extends TubelessActivity {
 
 
-    KMPAutoComplTextView KMPAutoComplTextView10 , KMPAutoComplTextView4 , KMPAutoComplTextView8 , KMPAutoComplTextView9 , KMPAutoComplTextView3, KMPAutoComplTextView1,KMPAutoComplTextViewSubscribe;
+    KMPAutoComplTextView KMPAutoComplTextViewSubUsage, KMPAutoComplTextView10 , KMPAutoComplTextView4 , KMPAutoComplTextView8 , KMPAutoComplTextView9 , KMPAutoComplTextView3, KMPAutoComplTextView1,KMPAutoComplTextViewSubscribe;
     Button buttonSave , buttonCancel ;
 
+    TextView textViewCheckbox ;
+    CheckBox checkBox;
+    EditText editTextTool ,editTextCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,25 @@ public class AddNetworkActivity extends TubelessActivity {
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
         buttonSave = findViewById(R.id.buttonSave);
         buttonCancel = findViewById(R.id.buttonCancel);
+        textViewCheckbox = findViewById(R.id.textViewCheckbox);
+        checkBox = findViewById(R.id.checkBox);
+        editTextTool = findViewById(R.id.editTextTool);
+        editTextCount = findViewById(R.id.editTextCount);
+
+        textViewCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkBox.toggle();
+            }
+        });
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                KMPAutoComplTextViewSubscribe.setEnabled(b);
+            }
+        });
+
+
 
 
         if (Global.CurrentTask == null ){
@@ -74,6 +103,45 @@ public class AddNetworkActivity extends TubelessActivity {
             }
             KMPAutoComplTextView4.setDatas(list4);
             KMPAutoComplTextView4.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+                @Override
+                public void onPopupItemClick(CharSequence charSequence) {
+                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            //type subUsage
+            KMPAutoComplTextViewSubUsage = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewSubUsage);
+            ArrayList<ItemData> listSub = new ArrayList<>();
+            for (UsageListItem usageItem: Global.CurrentTask.getUsageList()) {
+                if (usageItem.isEdited() == true){
+                    if (usageItem.getWaterMainUnitQtyReq2() >= 1){
+                        for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
+                            if (xItem.getUsageTypeId() == usageItem.getUsageTypeIdReq()){
+
+                                ItemData sss = new ItemData("- " + xItem.getUsageInfoDetailDesc(), xItem.getUsageTypeInfoDetailId() + "", xItem.getUsageTypeInfoDetailId() + "");
+                                listSub.add(sss);
+
+                            }
+                        }
+                    }
+                    continue;
+                }else {
+                    if (usageItem.getWaterMainUnitQtyReq() >= 1){
+                        //کاربری درخواستی
+                        //usageItem.getUsageTypeIdReq()
+                        for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
+                            if (xItem.getUsageTypeId() == usageItem.getUsageTypeIdReq()){
+
+                                ItemData sss = new ItemData("- " + xItem.getUsageInfoDetailDesc(), xItem.getUsageTypeInfoDetailId() + "", xItem.getUsageTypeInfoDetailId() + "");
+                                listSub.add(sss);
+
+                            }
+                        }
+                    }
+                }
+            }
+            KMPAutoComplTextViewSubUsage.setDatas(listSub);
+            KMPAutoComplTextViewSubUsage.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
                 public void onPopupItemClick(CharSequence charSequence) {
                     Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
@@ -171,6 +239,7 @@ public class AddNetworkActivity extends TubelessActivity {
             });
 
 
+            ///Global.CurrentTask
 
         }
 
@@ -186,18 +255,173 @@ public class AddNetworkActivity extends TubelessActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WasterWater aaaaaa = new WasterWater();
-                ((WasterWater) aaaaaa).setCount(5);
-                ((WasterWater) aaaaaa).setLength(10);
-                ((WasterWater) aaaaaa).setSiphon(true);
-                ((WasterWater) aaaaaa).setDiameter(10);
-                ((WasterWater) aaaaaa).setType(WASTER_WATER);
+                boolean valid = true;
 
-                Gson gson = new Gson();
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("result",gson.toJson(aaaaaa));
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
+                if (KMPAutoComplTextView4.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView4.getText().subSequence(2,KMPAutoComplTextView4.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+                if (KMPAutoComplTextView8.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView8.getText().subSequence(2,KMPAutoComplTextView8.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+                if (KMPAutoComplTextView9.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView9.getText().subSequence(2,KMPAutoComplTextView9.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+                if (KMPAutoComplTextView3.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView3.getText().subSequence(2,KMPAutoComplTextView3.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+                if (KMPAutoComplTextView1.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView1.getText().subSequence(2,KMPAutoComplTextView1.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+                if (KMPAutoComplTextViewSubUsage.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsUsageTypeInfoDetail item : Global.allSelects.getUsageTypeInfoDetail()) {
+                        if (item.getUsageInfoDetailDesc().equals(KMPAutoComplTextViewSubUsage.getText().subSequence(2,KMPAutoComplTextViewSubUsage.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+                if (KMPAutoComplTextView10.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView10.getText().subSequence(2,KMPAutoComplTextView10.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+
+                if (checkBox.isChecked()){
+                    if (KMPAutoComplTextViewSubscribe.getText().length() == 0){
+                        valid = false;
+                    }else {
+                        boolean xv = false;
+                        for (OldSubscribeListItem item : Global.CurrentTask.getOldSubscribeList()) {
+
+                            String sVal = item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId();
+                            if (sVal.equals(KMPAutoComplTextViewSubscribe.getText().subSequence(2,KMPAutoComplTextViewSubscribe.getText().length()).toString())){
+                                xv = true;
+                                break;
+                            }
+                        }
+                        if (xv == false) {
+                            valid = xv;
+                        }
+                    }
+                }
+
+                if (editTextTool.getText().toString().length() == 0) {
+                    valid = false;
+                }
+                if (editTextCount.getText().toString().length() == 0) {
+                    valid = false;
+                }
+
+                if (valid){
+
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append(KMPAutoComplTextView4.getText());
+                    stringBuilder.append(" " );
+
+                    stringBuilder.append(KMPAutoComplTextView8.getText());
+                    stringBuilder.append(" " );
+
+                    stringBuilder.append(KMPAutoComplTextView9.getText());
+                    stringBuilder.append(" " );
+
+                    stringBuilder.append(KMPAutoComplTextView3.getText());
+                    stringBuilder.append(" " );
+
+                    stringBuilder.append(KMPAutoComplTextView1.getText());
+                    stringBuilder.append(" " );
+
+                    stringBuilder.append(KMPAutoComplTextView10.getText());
+                    stringBuilder.append(" " );
+
+
+                    stringBuilder.append(KMPAutoComplTextViewSubscribe.getText());
+                    stringBuilder.append(" " );
+
+
+                    Network aaaaaa = new Network(stringBuilder.toString(),1);
+                    ((Network) aaaaaa).setType(NETWORK);
+
+                    Gson gson = new Gson();
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("result",gson.toJson(aaaaaa));
+                    setResult(Activity.RESULT_OK,returnIntent);
+
+
+                    Toast.makeText(getContext(),"OK",Toast.LENGTH_LONG).show();
+                    finish();
+                }else {
+                    Toast.makeText(getContext(),"مقادیر را به درستی وارد نکرده اید",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

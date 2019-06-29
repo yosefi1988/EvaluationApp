@@ -13,17 +13,16 @@
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:textDirection="ltr"
-        android:gravity="center"
+        android:gravity="right"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_search"
-            android:text="@string/add"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

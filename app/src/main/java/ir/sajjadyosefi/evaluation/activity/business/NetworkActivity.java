@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,8 @@ import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterListActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingListActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
+import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.COUNT_REQUEST_EDITED;
@@ -125,5 +129,27 @@ public class NetworkActivity extends TubelessActivity {
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
 
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("result");
+
+                if (result != null){
+
+                    Gson gson = new Gson();
+                    Network wasterWaterItem = gson.fromJson(result,Network.class);
+                    requestCountItemList.add(wasterWaterItem);
+                    adapter_Posts.notifyDataSetChanged();
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
 }
