@@ -77,6 +77,7 @@
                 android:orientation="horizontal" >
 
                 <Button
+                    android:id="@+id/buttonCamera"
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:layout_height="40dp"
@@ -87,6 +88,7 @@
 
 
                 <Button
+                    android:id="@+id/buttonGallery"
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:layout_height="40dp"

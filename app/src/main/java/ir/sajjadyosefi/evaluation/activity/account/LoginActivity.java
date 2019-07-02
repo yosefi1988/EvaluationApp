@@ -56,7 +56,6 @@ public class LoginActivity extends TubelessActivity {
     private static final String TAG = "sssssssssssssss";
     private int RC_SIGN_IN = 1000;
     String wantPermission = Manifest.permission.READ_PHONE_STATE;
-    private static final int PERMISSION_REQUEST_CODE = 1;
 
     //var
 
@@ -65,21 +64,6 @@ public class LoginActivity extends TubelessActivity {
 
     EditText editTextPass, editTextPhone;
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    LoginRequest loginRequest = new LoginRequest();
-                    UserName = getPhone();
-//                    loginRequest.setAndroidId(DeviceUtil.GetAndroidId(getContext()));
-//                    LoginOrRegister(loginRequest);
-                } else {
-                    Toast.makeText(getActivity(),"Permission Denied. We can't get phone number.", Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,25 +201,6 @@ public class LoginActivity extends TubelessActivity {
         }
     }
 
-    private boolean checkPermission(String permission){
-        if (Build.VERSION.SDK_INT >= 23) {
-            int result = ContextCompat.checkSelfPermission(getActivity(), permission);
-            if (result == PackageManager.PERMISSION_GRANTED){
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
-
-    private void requestPermission(String permission){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)){
-            Toast.makeText(getActivity(), "Phone state permission allows us to get phone number. Please allow it for additional functionality.", Toast.LENGTH_LONG).show();
-        }
-        ActivityCompat.requestPermissions(getActivity(), new String[]{permission},PERMISSION_REQUEST_CODE);
-    }
 
     private String getPhone() {
         TelephonyManager phoneMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -263,34 +228,5 @@ public class LoginActivity extends TubelessActivity {
     List<String> data = new ArrayList<String>();
     KMPAutoComplTextView complTextView;
 
-    Activity activity ;
-    String LastFileSelected = null;
-    //ImageView imageViewAvatar,imageViewMedal;
 
-    private void selectFromCamera() {
-        new PickerBuilder(activity, PickerBuilder.SELECT_FROM_CAMERA)
-                .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
-                    @Override
-                    public void onImageReceived(Uri imageUri) {
-                        //Toast.makeText(EditProfileActivity.this,"Got image - " + imageUri,Toast.LENGTH_LONG).show();
-                        LastFileSelected = imageUri + "";
-                        //imageViewAvatar.setImageURI(imageUri);
-                    }
-                })
-                .setImageName("avatar")
-                .start();
-    }
-    private void selectFromGallery() {
-        new PickerBuilder(activity, PickerBuilder.SELECT_FROM_GALLERY)
-                .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
-                    @Override
-                    public void onImageReceived(Uri imageUri) {
-//                        Toast.makeText(EditProfileActivity.this,"Got image - " + imageUri,Toast.LENGTH_LONG).show();
-                        LastFileSelected = imageUri + "";
-                        //imageViewAvatar.setImageURI(imageUri);
-                    }
-                })
-                .setImageName("avatar")
-                .start();
-    }
 }

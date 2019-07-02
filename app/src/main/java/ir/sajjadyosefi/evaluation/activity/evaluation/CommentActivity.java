@@ -1,10 +1,16 @@
 package ir.sajjadyosefi.evaluation.activity.evaluation;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +28,7 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.PickerBuilder;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
 import ir.sajjadyosefi.evaluation.model.business.File;
@@ -46,6 +53,7 @@ public class CommentActivity extends TubelessActivity {
     protected static final int RESULT_SPEECH = 1;
     //take two Image Buttons
     private Button btnSpeak22;
+    Button buttonCamera , buttonGallery;
 
 
     //take one textview
@@ -64,6 +72,7 @@ public class CommentActivity extends TubelessActivity {
 
         setContentView(R.layout.activity_comment);
         setRootActivity(((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
+        activity = this;
 
 //        init(getContext());
 //
@@ -89,6 +98,8 @@ public class CommentActivity extends TubelessActivity {
 //        txtText = (TextView) findViewById(R.id.textView);
 //        btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
         btnSpeak22 = (Button) findViewById(R.id.ButtonGetVoice);
+        buttonCamera = (Button) findViewById(R.id.buttonCamera);
+        buttonGallery = (Button) findViewById(R.id.buttonGallery);
         editTextComment = (EditText) findViewById(R.id.editTextComment);
 //        btnRecord = (ImageButton) findViewById(R.id.btnRecord);
         // set the listener setOnClickListener for button “btnSpeak”
@@ -99,7 +110,19 @@ public class CommentActivity extends TubelessActivity {
             }
         });
 
+        buttonCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFromCamera();
+            }
+        });
 
+        buttonGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFromGallery();
+            }
+        });
 
 //        btnSpeak.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -316,6 +339,100 @@ public class CommentActivity extends TubelessActivity {
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
 
 
+    }
+
+
+
+    Activity activity ;
+    String LastFileSelected = null;
+    //ImageView imageViewAvatar,imageViewMedal;
+
+    private void selectFromCamera() {
+        new PickerBuilder(activity, PickerBuilder.SELECT_FROM_CAMERA)
+                .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
+                    @Override
+                    public void onImageReceived(Uri imageUri) {
+                        //Toast.makeText(EditProfileActivity.this,"Got image - " + imageUri,Toast.LENGTH_LONG).show();
+                        LastFileSelected = imageUri + "";
+                        //imageViewAvatar.setImageURI(imageUri);
+
+                        File map1 = new File();
+                        map1.setTitle(LastFileSelected.substring(LastFileSelected.lastIndexOf("/")+1));
+
+                        map1.setRequestContentId(1);
+                        map1.setFrame(1);
+                        map1.setFileType(MAP_1);
+                        map1.setUri(LastFileSelected);
+                        map1.setType(FILES);
+                        taskItemList.add(map1);
+                        adapter_Posts.notifyDataSetChanged();
+                    }
+                })
+                .setImageName("avatar")
+                .start();
+    }
+    private void selectFromGallery() {
+        new PickerBuilder(activity, PickerBuilder.SELECT_FROM_GALLERY)
+                .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
+                    @Override
+                    public void onImageReceived(Uri imageUri) {
+//                        Toast.makeText(EditProfileActivity.this,"Got image - " + imageUri,Toast.LENGTH_LONG).show();
+                        LastFileSelected = imageUri + "";
+                        //imageViewAvatar.setImageURI(imageUri);
+
+                        File map1 = new File();
+                        map1.setTitle(LastFileSelected.substring(LastFileSelected.lastIndexOf("/")+1));
+                        map1.setRequestContentId(1);
+                        map1.setFrame(1);
+                        map1.setFileType(MAP_1);
+                        map1.setUri(LastFileSelected);
+                        map1.setType(FILES);
+                        taskItemList.add(map1);
+                        adapter_Posts.notifyDataSetChanged();
+
+                    }
+                })
+                .setImageName("avatar")
+                .start();
+    }
+
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    LoginRequest loginRequest = new LoginRequest();
+//                    UserName = getPhone();
+//                    loginRequest.setAndroidId(DeviceUtil.GetAndroidId(getContext()));
+//                    LoginOrRegister(loginRequest);
+                } else {
+                    Toast.makeText(getActivity(),"Permission Denied. We can't get phone number.", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+
+    private void requestPermission(String permission){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)){
+            Toast.makeText(getActivity(), "Phone state permission allows us to get phone number. Please allow it for additional functionality.", Toast.LENGTH_LONG).show();
+        }
+        ActivityCompat.requestPermissions(getActivity(), new String[]{permission},PERMISSION_REQUEST_CODE);
+    }
+
+    private boolean checkPermission(String permission){
+        if (Build.VERSION.SDK_INT >= 23) {
+            int result = ContextCompat.checkSelfPermission(getActivity(), permission);
+            if (result == PackageManager.PERMISSION_GRANTED){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
 }
