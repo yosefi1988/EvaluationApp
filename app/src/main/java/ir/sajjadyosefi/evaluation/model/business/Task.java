@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.PopupMenu;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.refactor.kmpautotextview.ItemData;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.business.DetailsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.MapActivity;
@@ -42,6 +44,12 @@ public class Task extends TubelessObject {
     private File fileKrocki;
     private List<OldSubscribeListItem> oldSubscribeList;
     private List<Content> contentList;
+
+
+    public List<ItemData> listNetwork = new ArrayList<>();
+    public List<ItemData> listBranchs = new ArrayList<>();
+    public List<TubelessObject> NetworkAndBranch = new ArrayList<TubelessObject>();
+
 
     public List<Content> getContentList() {
         return contentList;

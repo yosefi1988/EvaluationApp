@@ -36,6 +36,8 @@ import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.TODO;
+
 
 public class StepOneActivity extends TubelessActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
@@ -44,12 +46,11 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
     private int RC_SIGN_IN = 1000;
 
 
-    KMPAutoComplTextView complTextView;
 
     RecyclerView                    mRecyclerViewTimeline;
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
-    List<TubelessObject>            taskItemList = new ArrayList<TubelessObject>();
+    List<TubelessObject>            requestCountItemList = new ArrayList<TubelessObject>();
 
 
     Button ButtonSms,ButtonCall,buttonk,buttonBack,buttonNext;
@@ -91,28 +92,20 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
         textView3.setOnClickListener(this);
         textView4.setOnClickListener(this);
 
+
+
         //type 5
-        if (Global.CurrentTask == null ){
-
-        }else {
-            complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
-            ArrayList<ItemData> list = new ArrayList<>();
-
-            for (AbfaxSelectsObject item: Global.allSelects.getObject()) {
+        if (Global.allSelects != null) {
+            for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                 if (item.getType() == 5) {
-                    ItemData sss = new ItemData("- " + item.getTextValue(), item.getKeyValue() + "", item.getType() + "");
-                    list.add(sss);
+                    AbfaxSelectsObject sss = new AbfaxSelectsObject("- " + item.getTextValue(), item.getKeyValue());
+                    sss.setType(TODO);
+                    requestCountItemList.add(sss);
                 }
             }
-            complTextView.setDatas(list);
-
-            complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
-                @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            prepareList(getRootActivity());
         }
+
 
 
 
@@ -231,28 +224,28 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
                 radioButton2.setChecked(!b);
                 radioButton3.setChecked(!b);
                 radioButton4.setChecked(!b);
-                complTextView.setEnabled(false);
+                adapter_Posts.enable = false;
             } else if (compoundButton == radioButton2) {
                 radioButton1.setChecked(!b);
                 radioButton2.setChecked(b);
                 radioButton3.setChecked(!b);
                 radioButton4.setChecked(!b);
-                complTextView.setEnabled(false);
+                adapter_Posts.enable = false;
             }else if (compoundButton == radioButton3) {
                 radioButton1.setChecked(!b);
                 radioButton2.setChecked(!b);
                 radioButton3.setChecked(b);
                 radioButton4.setChecked(!b);
-                complTextView.setEnabled(true);
+                adapter_Posts.enable = true;
             }else if (compoundButton == radioButton4) {
                 radioButton1.setChecked(!b);
                 radioButton2.setChecked(!b);
                 radioButton3.setChecked(!b);
                 radioButton4.setChecked(b);
-                complTextView.setEnabled(false);
+                adapter_Posts.enable = false;
             }
         }
-
+        adapter_Posts.notifyDataSetChanged();
     }
 
     @Override
@@ -262,25 +255,48 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
             radioButton2.setChecked(false);
             radioButton3.setChecked(false);
             radioButton4.setChecked(false);
-            complTextView.setEnabled(false);
+            adapter_Posts.enable = false;
+
         } else if (view == textView2) {
             radioButton1.setChecked(false);
             radioButton2.setChecked(true);
             radioButton3.setChecked(false);
             radioButton4.setChecked(false);
-            complTextView.setEnabled(false);
+            adapter_Posts.enable = false;
+
         }else if (view == textView3) {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
             radioButton3.setChecked(true);
             radioButton4.setChecked(false);
-            complTextView.setEnabled(true);
+            adapter_Posts.enable = true;
         }else if (view == textView4) {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
             radioButton3.setChecked(false);
             radioButton4.setChecked(true);
-            complTextView.setEnabled(false);
+            adapter_Posts.enable = false;
         }
+        adapter_Posts.notifyDataSetChanged();
     }
+
+
+
+    private void prepareList(View rootview) {
+        mRecyclerViewTimeline           = (RecyclerView) rootview.findViewById(R.id.recyclerView);
+        mRecyclerViewTimeline.setHasFixedSize(true);
+        mRecyclerViewTimeline.setItemAnimator(new DefaultItemAnimator());
+        mLayoutManager = new LinearLayoutManager(getContext());
+        adapter_Posts = new EndlessList_Adapter(
+                getContext(),
+                mLayoutManager,
+                rootview,
+                requestCountItemList);
+        adapter_Posts.listType = TODO;
+        adapter_Posts.enable = false;
+        mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
+        mRecyclerViewTimeline.setAdapter(adapter_Posts);
+
+    }
+
 }

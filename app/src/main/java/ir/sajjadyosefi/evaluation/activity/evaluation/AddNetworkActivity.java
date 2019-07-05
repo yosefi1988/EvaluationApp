@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.refactor.kmpautotextview.ItemData;
 import cn.refactor.kmpautotextview.KMPAutoComplTextView;
@@ -36,11 +38,17 @@ public class AddNetworkActivity extends TubelessActivity {
 
 
     KMPAutoComplTextView KMPAutoComplTextViewSubUsage, KMPAutoComplTextView10 , KMPAutoComplTextView4 , KMPAutoComplTextView8 , KMPAutoComplTextView9 , KMPAutoComplTextView3, KMPAutoComplTextView1,KMPAutoComplTextViewSubscribe;
+    KMPAutoComplTextView KMPAutoComplTextViewnetwork , KMPAutoComplTextViewBranch;
     Button buttonSave , buttonCancel ;
 
-    TextView textViewCheckbox ;
-    CheckBox checkBox;
-    EditText editTextTool ,editTextCount;
+    Button buttonNetworkReg , buttonNewNetwork;
+    Button buttonBranchReg , buttonNewBranch;
+
+    LinearLayout linearLayoutSubscribe ,linearLayoutNewNetwork,linearLayoutNetwork;
+    LinearLayout linearLayoutBranch ,linearLayoutNewBranch;
+    EditText editTextTool ,editTextCount,editTextCount2;
+
+    ArrayList<ItemData> list10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,25 +57,188 @@ public class AddNetworkActivity extends TubelessActivity {
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
         buttonSave = findViewById(R.id.buttonSave);
         buttonCancel = findViewById(R.id.buttonCancel);
-        textViewCheckbox = findViewById(R.id.textViewCheckbox);
-        checkBox = findViewById(R.id.checkBox);
         editTextTool = findViewById(R.id.editTextTool);
         editTextCount = findViewById(R.id.editTextCount);
+        editTextCount2 = findViewById(R.id.editTextCount2);
+        buttonNetworkReg = findViewById(R.id.buttonNetworkReg);
+        buttonBranchReg = findViewById(R.id.buttonBranchReg);
+        buttonNewBranch = findViewById(R.id.buttonNewBranch);
+        buttonNewNetwork = findViewById(R.id.buttonNewNetwork);
+        linearLayoutNetwork = findViewById(R.id.linearLayoutNetwork);
+        linearLayoutNewNetwork = findViewById(R.id.linearLayoutNewNetwork);
+        linearLayoutBranch = findViewById(R.id.linearLayoutBranch);
+        linearLayoutNewBranch = findViewById(R.id.linearLayoutNewBranch);
+        KMPAutoComplTextViewBranch = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewBranch);
 
-        textViewCheckbox.setOnClickListener(new View.OnClickListener() {
+        buttonNewNetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkBox.toggle();
+
+                linearLayoutNewNetwork.setVisibility(View.VISIBLE);
+                linearLayoutNetwork.setVisibility(View.GONE);
             }
         });
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        buttonNewBranch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                KMPAutoComplTextViewSubscribe.setEnabled(b);
+            public void onClick(View view) {
+
+                linearLayoutNewBranch.setVisibility(View.VISIBLE);
+                linearLayoutBranch.setVisibility(View.GONE);
             }
         });
 
+        buttonBranchReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean valid = true;
 
+                if (KMPAutoComplTextView9.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView9.getText().subSequence(2,KMPAutoComplTextView9.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+
+                if (KMPAutoComplTextView3.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView3.getText().subSequence(2,KMPAutoComplTextView3.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+
+                if (KMPAutoComplTextViewnetwork.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (ItemData item : Global.CurrentTask.listNetwork) {
+                        if (item.getText().equals(KMPAutoComplTextViewnetwork.getText().toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+
+
+                if (editTextTool.getText().toString().length() == 0) {
+                    valid = false;
+                }
+
+                if (valid) {
+
+                    ItemData itemNetwork = null;
+                    for (ItemData item : Global.CurrentTask.listNetwork) {
+                        if (item.getText().equals(KMPAutoComplTextViewnetwork.getText().toString())){
+                            itemNetwork = item;
+                            break;
+                        }
+                    }
+                    ItemData newItemData = new ItemData(
+                            "- انشعاب شماره " + (Global.CurrentTask.listBranchs.size() + 1) + "",
+                            (Global.CurrentTask.listBranchs.size() + 1) + "" ,
+                            itemNetwork.getMeta() + "-" + editTextTool.getText().toString());
+                    Global.CurrentTask.listBranchs.add(newItemData);
+
+                    KMPAutoComplTextView9.setText("");
+                    KMPAutoComplTextView3.setText("");
+                    editTextTool.setText("");
+
+                    linearLayoutBranch.setVisibility(View.VISIBLE);
+                    linearLayoutNewBranch.setVisibility(View.GONE);
+
+
+                    if (Global.CurrentTask == null ){
+
+                    }else {
+
+                        KMPAutoComplTextViewBranch.setDatas(Global.CurrentTask.listBranchs);
+                        KMPAutoComplTextViewBranch.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+                            @Override
+                            public void onPopupItemClick(CharSequence charSequence) {
+                                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }else {
+                    Toast.makeText(getContext(),"مقادیر انشعاب را به درستی وارد نکرده اید",Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+        });
+
+        buttonNetworkReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean valid = true;
+
+                if (KMPAutoComplTextView4.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView4.getText().subSequence(2,KMPAutoComplTextView4.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+
+                if (KMPAutoComplTextView8.getText().length() == 0){
+                    valid = false;
+                }else {
+                    boolean xv = false;
+                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                        if (item.getTextValue().equals(KMPAutoComplTextView8.getText().subSequence(2,KMPAutoComplTextView8.getText().length()).toString())){
+                            xv = true;
+                            break;
+                        }
+                    }
+                    if (xv == false) {
+                        valid = xv;
+                    }
+                }
+
+                if (valid) {
+                    ItemData newItemData = new ItemData("- شبکه شماره " + (Global.CurrentTask.listNetwork.size() + 1) + "",(Global.CurrentTask.listNetwork.size() + 1) + "" ,"");
+                    Global.CurrentTask.listNetwork.add(newItemData);
+
+                    KMPAutoComplTextView4.setText("");
+                    KMPAutoComplTextView8.setText("");
+
+                    linearLayoutNewNetwork.setVisibility(View.GONE);
+                    linearLayoutNetwork.setVisibility(View.VISIBLE);
+                    fillNetwork();
+
+
+                }else {
+                    Toast.makeText(getContext(),"مقادیر شبکه را به درستی وارد نکرده اید",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
         if (Global.CurrentTask == null ){
@@ -76,7 +247,8 @@ public class AddNetworkActivity extends TubelessActivity {
 
             //type 10
             KMPAutoComplTextView10 = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextView10);
-            ArrayList<ItemData> list10 = new ArrayList<>();
+            linearLayoutSubscribe = (LinearLayout) findViewById(R.id.linearLayoutSubscribe);
+            list10 = new ArrayList<>();
             for (AbfaxSelectsObject item: Global.allSelects.getObject()) {
                 if (item.getType() == 10) {
                     ItemData sss = new ItemData("- " + item.getTextValue(), item.getKeyValue() + "", item.getType() + "");
@@ -87,6 +259,15 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView10.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
                 public void onPopupItemClick(CharSequence charSequence) {
+                    //
+                    for (ItemData item : list10) {
+                        if (item.getText().equals(charSequence.toString()))
+                            if (item.getMeta().equals("0")){
+                                linearLayoutSubscribe.setVisibility(View.VISIBLE);
+                            }else {
+                                linearLayoutSubscribe.setVisibility(View.GONE);
+                            }
+                    }
                     Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -257,114 +438,14 @@ public class AddNetworkActivity extends TubelessActivity {
             public void onClick(View v) {
                 boolean valid = true;
 
-                if (KMPAutoComplTextView4.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
-                        if (item.getTextValue().equals(KMPAutoComplTextView4.getText().subSequence(2,KMPAutoComplTextView4.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
-                if (KMPAutoComplTextView8.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
-                        if (item.getTextValue().equals(KMPAutoComplTextView8.getText().subSequence(2,KMPAutoComplTextView8.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
-                if (KMPAutoComplTextView9.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
-                        if (item.getTextValue().equals(KMPAutoComplTextView9.getText().subSequence(2,KMPAutoComplTextView9.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
-                if (KMPAutoComplTextView3.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
-                        if (item.getTextValue().equals(KMPAutoComplTextView3.getText().subSequence(2,KMPAutoComplTextView3.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
-                if (KMPAutoComplTextView1.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
-                        if (item.getTextValue().equals(KMPAutoComplTextView1.getText().subSequence(2,KMPAutoComplTextView1.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
-                if (KMPAutoComplTextViewSubUsage.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsUsageTypeInfoDetail item : Global.allSelects.getUsageTypeInfoDetail()) {
-                        if (item.getUsageInfoDetailDesc().equals(KMPAutoComplTextViewSubUsage.getText().subSequence(2,KMPAutoComplTextViewSubUsage.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
-                if (KMPAutoComplTextView10.getText().length() == 0){
-                    valid = false;
-                }else {
-                    boolean xv = false;
-                    for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
-                        if (item.getTextValue().equals(KMPAutoComplTextView10.getText().subSequence(2,KMPAutoComplTextView10.getText().length()).toString())){
-                            xv = true;
-                            break;
-                        }
-                    }
-                    if (xv == false) {
-                        valid = xv;
-                    }
-                }
+                try {
 
-                if (checkBox.isChecked()){
-                    if (KMPAutoComplTextViewSubscribe.getText().length() == 0){
+                    if (KMPAutoComplTextViewBranch.getText().length() == 0) {
                         valid = false;
-                    }else {
+                    } else {
                         boolean xv = false;
-                        for (OldSubscribeListItem item : Global.CurrentTask.getOldSubscribeList()) {
-
-                            String sVal = item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId();
-                            if (sVal.equals(KMPAutoComplTextViewSubscribe.getText().subSequence(2,KMPAutoComplTextViewSubscribe.getText().length()).toString())){
+                        for (ItemData item : Global.CurrentTask.listBranchs) {
+                            if (item.getText().equals(KMPAutoComplTextViewBranch.getText().toString())) {
                                 xv = true;
                                 break;
                             }
@@ -373,57 +454,178 @@ public class AddNetworkActivity extends TubelessActivity {
                             valid = xv;
                         }
                     }
-                }
 
-                if (editTextTool.getText().toString().length() == 0) {
-                    valid = false;
-                }
-                if (editTextCount.getText().toString().length() == 0) {
-                    valid = false;
-                }
+                    if (KMPAutoComplTextView1.getText().length() == 0) {
+                        valid = false;
+                    } else {
+                        boolean xv = false;
+                        for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                            if (item.getTextValue().equals(KMPAutoComplTextView1.getText().subSequence(2, KMPAutoComplTextView1.getText().length()).toString())) {
+                                xv = true;
+                                break;
+                            }
+                        }
+                        if (xv == false) {
+                            valid = xv;
+                        }
+                    }
+                    if (KMPAutoComplTextViewSubUsage.getText().length() == 0) {
+                        valid = false;
+                    } else {
+                        boolean xv = false;
+                        for (AbfaxSelectsUsageTypeInfoDetail item : Global.allSelects.getUsageTypeInfoDetail()) {
+                            if (item.getUsageInfoDetailDesc().equals(KMPAutoComplTextViewSubUsage.getText().subSequence(2, KMPAutoComplTextViewSubUsage.getText().length()).toString())) {
+                                xv = true;
+                                break;
+                            }
+                        }
+                        if (xv == false) {
+                            valid = xv;
+                        }
+                    }
+                    if (KMPAutoComplTextView10.getText().length() == 0) {
+                        valid = false;
+                    } else {
+                        boolean xv = false;
+                        for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
+                            if (item.getTextValue().equals(KMPAutoComplTextView10.getText().subSequence(2, KMPAutoComplTextView10.getText().length()).toString())) {
+                                xv = true;
+                                break;
+                            }
+                        }
+                        if (xv == false) {
+                            valid = xv;
+                        }
+                    }
 
-                if (valid){
 
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append(KMPAutoComplTextView4.getText());
-                    stringBuilder.append(" " );
+                    for (ItemData itemx : list10) {
+                        if (itemx.getText().equals(KMPAutoComplTextView10.getText().toString()))
+                            if (itemx.getMeta().equals("0")) {
+                                //انتشعاب باید چک بشه
+                                if (KMPAutoComplTextViewSubscribe.getText().length() == 0) {
+                                    valid = false;
+                                } else {
+                                    boolean xv = false;
+                                    for (OldSubscribeListItem item : Global.CurrentTask.getOldSubscribeList()) {
 
-                    stringBuilder.append(KMPAutoComplTextView8.getText());
-                    stringBuilder.append(" " );
-
-                    stringBuilder.append(KMPAutoComplTextView9.getText());
-                    stringBuilder.append(" " );
-
-                    stringBuilder.append(KMPAutoComplTextView3.getText());
-                    stringBuilder.append(" " );
-
-                    stringBuilder.append(KMPAutoComplTextView1.getText());
-                    stringBuilder.append(" " );
-
-                    stringBuilder.append(KMPAutoComplTextView10.getText());
-                    stringBuilder.append(" " );
-
-
-                    stringBuilder.append(KMPAutoComplTextViewSubscribe.getText());
-                    stringBuilder.append(" " );
-
-
-                    Network aaaaaa = new Network(stringBuilder.toString(),1);
-                    ((Network) aaaaaa).setType(NETWORK);
-
-                    Gson gson = new Gson();
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result",gson.toJson(aaaaaa));
-                    setResult(Activity.RESULT_OK,returnIntent);
+                                        String sVal = item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId();
+                                        if (sVal.equals(KMPAutoComplTextViewSubscribe.getText().subSequence(2, KMPAutoComplTextViewSubscribe.getText().length()).toString())) {
+                                            xv = true;
+                                            break;
+                                        }
+                                    }
+                                    if (xv == false) {
+                                        valid = xv;
+                                    }
+                                }
+                            } else {
+                                linearLayoutSubscribe.setVisibility(View.GONE);
+                            }
+                    }
 
 
-                    Toast.makeText(getContext(),"OK",Toast.LENGTH_LONG).show();
-                    finish();
-                }else {
-                    Toast.makeText(getContext(),"مقادیر را به درستی وارد نکرده اید",Toast.LENGTH_LONG).show();
+                    if (editTextCount.getText().toString().length() == 0) {
+                        valid = false;
+                    }
+                    if (editTextCount2.getText().toString().length() == 0) {
+                        valid = false;
+                    }
+
+                    if (valid) {
+
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append(KMPAutoComplTextView4.getText());
+                        stringBuilder.append(" ");
+
+                        stringBuilder.append(KMPAutoComplTextView8.getText());
+                        stringBuilder.append(" ");
+
+                        stringBuilder.append(KMPAutoComplTextView9.getText());
+                        stringBuilder.append(" ");
+
+                        stringBuilder.append(KMPAutoComplTextView3.getText());
+                        stringBuilder.append(" ");
+
+                        stringBuilder.append(KMPAutoComplTextView1.getText());
+                        stringBuilder.append(" ");
+
+                        stringBuilder.append(KMPAutoComplTextView10.getText());
+                        stringBuilder.append(" ");
+
+
+                        stringBuilder.append(KMPAutoComplTextViewSubscribe.getText());
+                        stringBuilder.append(" ");
+
+
+                        Network aaaaaa = new Network(stringBuilder.toString(), 1);
+                        ((Network) aaaaaa).setType(NETWORK);
+
+                        Gson gson = new Gson();
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result", gson.toJson(aaaaaa));
+                        setResult(Activity.RESULT_OK, returnIntent);
+
+
+                        Toast.makeText(getContext(), "OK", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getContext(), "مقادیر را به درستی وارد نکرده اید", Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception ex){
+                    Toast.makeText(getContext(), "مقادیر را به درستی وارد نکرده اید", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (Global.CurrentTask.listNetwork.size() != 0){
+            fillNetwork();
+
+            linearLayoutNewNetwork.setVisibility(View.GONE);
+            linearLayoutNetwork.setVisibility(View.VISIBLE);
+
+            linearLayoutBranch.setVisibility(View.VISIBLE);
+            linearLayoutNewBranch.setVisibility(View.GONE);
+
+            try {
+                KMPAutoComplTextViewBranch.setDatas(Global.CurrentTask.listBranchs);
+
+//                KMPAutoComplTextViewnetwork.setText(Global.CurrentTask.listNetwork.get(0).getText());
+
+//                if (Global.CurrentTask == null ){
+//
+//                }else {
+//                    KMPAutoComplTextViewBranch.setDatas(Global.CurrentTask.listBranchs);
+//                }
+            }catch (Exception ex){
+
+            }
+        }
+    }
+
+    private void fillNetwork() {
+        ///////////////////////////network////////////////////////
+        if (Global.CurrentTask == null ){
+
+        }else {
+            KMPAutoComplTextViewnetwork = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewnetwork);
+
+            KMPAutoComplTextViewnetwork.setDatas(Global.CurrentTask.listNetwork);
+            KMPAutoComplTextViewnetwork.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
+                @Override
+                public void onPopupItemClick(CharSequence charSequence) {
+                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        ////////////////////////////////////////////////////
     }
 
 

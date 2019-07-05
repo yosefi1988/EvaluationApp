@@ -115,21 +115,16 @@
                     android:orientation="horizontal" >
 
 
-                    <cn.refactor.kmpautotextview.KMPAutoComplTextView
-                        android:id="@+id/tvAutoCompl"
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_below="@+id/login_title"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:completionThreshold="1"
-                        app:completionHighlightColor="@color/colorAccent"
-                        app:completionTextColor="#80000000"
-                        android:layout_margin="3dp"
-                        android:padding="3dp"
-                        android:enabled="false"
-                        android:layoutDirection="rtl"
-                        android:textDirection="rtl"
-                        android:background="@drawable/bg_auto"
-                        app:completionTextSize="18sp"
-                        app:completionIgnoreCase="true"/>
+                        android:layout_height="match_parent"
+                        android:descendantFocusability="afterDescendants"
+                        android:layout_marginBottom="100dp"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:background="#ecf0f1" />
 
                 </LinearLayout>
 

@@ -69,6 +69,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     private boolean deletable;
 
     public int listType = 0;
+    public boolean enable = true;
 
 
     private Context mContext;
@@ -466,7 +467,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         }
         if (listType == TODO) {
             if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == TODO) {
-                ((AbfaxSelectsObject)mTimelineItemList.get(position)).prepareYafteItem(mContext, (ToDotViewHolder) holder, mTimelineItemList, position,adapter);
+                ((AbfaxSelectsObject)mTimelineItemList.get(position)).prepareYafteItem(mContext, enable,(ToDotViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
 
             }

@@ -42,12 +42,17 @@ public class AbfaxSelectsObject  extends TubelessObject {
         this.textValue = textValue;
     }
 
-    public void prepareYafteItem(Context mContext, EndlessList_Adapter.ToDotViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
+    public void prepareYafteItem(Context mContext, boolean enable, EndlessList_Adapter.ToDotViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
 
         AbfaxSelectsObject request = (AbfaxSelectsObject) mTimelineItemList.get(position);
         holder.textView.setText(request.getTextValue() + "");
         //holder.checkBox.setText(request.getKeyValue());
 
+        if (enable){
+            holder.checkBox.setEnabled(enable);
+        }else {
+            holder.checkBox.setEnabled(enable);
+        }
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

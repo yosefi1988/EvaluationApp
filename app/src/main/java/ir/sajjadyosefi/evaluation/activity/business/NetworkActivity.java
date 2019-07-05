@@ -20,16 +20,13 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterListActivity;
-import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingListActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
+import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
-import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.COUNT_REQUEST_EDITED;
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.NETWORK;
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
 
 public class NetworkActivity extends TubelessActivity {
@@ -42,8 +39,6 @@ public class NetworkActivity extends TubelessActivity {
     RecyclerView                    mRecyclerViewTimeline;
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
-    List<TubelessObject>            taskItemList = new ArrayList<TubelessObject>();
-    List<TubelessObject>            requestCountItemList = new ArrayList<TubelessObject>();
 
 
     Button ButtonSms,ButtonCall,buttonBack, battonNo, battonYes;
@@ -51,6 +46,8 @@ public class NetworkActivity extends TubelessActivity {
 
     Activity activity ;
     String LastFileSelected = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +65,7 @@ public class NetworkActivity extends TubelessActivity {
 
 //        for (UsageListItem usageListItem : Global.CurrentTask.getUsageList()) {
 //            usageListItem.type = COUNT_REQUEST_EDITED;
-//            requestCountItemList.add(usageListItem);
+//            NetworkAndBranch.add(usageListItem);
 //        }
         prepareList(getRootActivity());
 
@@ -103,7 +100,7 @@ public class NetworkActivity extends TubelessActivity {
             }
         });
 
-        if (true){
+        if (Global.CurrentTask.NetworkAndBranch.size() == 0) {
             Intent i = new Intent(getContext(), AddNetworkActivity.class);
             (getActivity()).startActivityForResult(i, 1);
         }else {
@@ -123,7 +120,7 @@ public class NetworkActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
-                requestCountItemList);
+                Global.CurrentTask.NetworkAndBranch);
         adapter_Posts.listType = NETWORK;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
@@ -142,7 +139,7 @@ public class NetworkActivity extends TubelessActivity {
 
                     Gson gson = new Gson();
                     Network wasterWaterItem = gson.fromJson(result,Network.class);
-                    requestCountItemList.add(wasterWaterItem);
+                    Global.CurrentTask.NetworkAndBranch.add(wasterWaterItem);
                     adapter_Posts.notifyDataSetChanged();
                 }
             }
