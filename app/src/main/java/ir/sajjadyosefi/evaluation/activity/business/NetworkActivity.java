@@ -40,7 +40,6 @@ public class NetworkActivity extends TubelessActivity {
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
 
-
     Button ButtonSms,ButtonCall,buttonBack, battonNo, battonYes;
     TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
 
