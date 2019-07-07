@@ -23,16 +23,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import ir.sajjadyosefi.evaluation.R;
-import ir.sajjadyosefi.evaluation.activity.MainActivity;
-import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterMeter;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
 import ir.sajjadyosefi.evaluation.dialog.CustomDialogClass;
@@ -64,7 +62,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     public static final int DRILLING_F = 9;
 
     public static final int TODO = 10;
-    public static final int NETWORK = 11;
+    public static final int WATER_METER = 11;
 
     private boolean deletable;
 
@@ -192,11 +190,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     }
     public class NetworkViewHolder extends ParentViewHolder {
         public TextView textView;
-        public CheckBox checkBox;
+        public TextView textView2;
+        public Button buttonDelete;
         public NetworkViewHolder (View itemView) {
             super(itemView);
             textView                = (TextView) itemView.findViewById(R.id.textView);
-            checkBox                = (CheckBox) itemView.findViewById(R.id.checkBox);
+            textView2               = (TextView) itemView.findViewById(R.id.textView2);
+            buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
         }
     }
 
@@ -225,11 +225,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
     }
 
     public class FileViewHolder extends ParentViewHolder {
+        public View rootView;
         public TextView textView;
         public Button buttonDelete;
 
         public FileViewHolder(View itemView) {
             super(itemView);
+            rootView                    = (View) itemView.findViewById(R.id.rootView);
             textView                = (TextView) itemView.findViewById(R.id.textView);
             buttonDelete            = (Button) itemView.findViewById(R.id.buttonDelete);
         }
@@ -364,13 +366,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
                 return holder;
             }
         }
-        if (listType == NETWORK) {
+        if (listType == WATER_METER) {
             if (viewType == LAST_ITEM) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_last_item, parent, false);
                 return new AddViewHolder(view);
             }
-            if (viewType == NETWORK) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_networ, parent, false);
+            if (viewType == WATER_METER) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_water_meter, parent, false);
                 NetworkViewHolder yafteItemViewHolder = new NetworkViewHolder(view);
                 return yafteItemViewHolder;
             }
@@ -419,7 +421,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         }
         if (listType == SUBSCRIPTIONS) {
             if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == SUBSCRIPTIONS) {
-                ((OldSubscribeListItem)mTimelineItemList.get(position)).prepareYafteItem(mContext, (SubscribeViewHolder) holder, mTimelineItemList, position,adapter);
+                ((OldSubscribe)mTimelineItemList.get(position)).prepareYafteItem(mContext, (SubscribeViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
                 //LAST ITEM
                 ((AddViewHolder)holder).buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -472,9 +474,9 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
             }
         }
-        if (listType == NETWORK) {
-            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == NETWORK) {
-                ((Network)mTimelineItemList.get(position)).prepareYafteItem(mContext, (NetworkViewHolder) holder, mTimelineItemList, position,adapter);
+        if (listType == WATER_METER) {
+            if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == WATER_METER) {
+                ((WaterMeter)mTimelineItemList.get(position)).prepareYafteItem(mContext, (NetworkViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
                 //LAST ITEM
                 ((AddViewHolder)holder).buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -618,7 +620,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         if (listType == TODO)
             return mTimelineItemList.get(position).getType();
 
-        if (listType == NETWORK)
+        if (listType == WATER_METER)
             return position == mTimelineItemList.size() ? LAST_ITEM : mTimelineItemList.get(position).getType();
 
         if (listType == FILES)

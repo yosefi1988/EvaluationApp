@@ -2,7 +2,6 @@ package ir.sajjadyosefi.evaluation.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ir.sajjadyosefi.evaluation.R;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
@@ -21,7 +20,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     public Dialog d;
     public EditText editTextCode, editTextValue;
     public Button buttonSave,buttonCancel;
-    public static OldSubscribeListItem subscribeItem = null;
+    public static OldSubscribe subscribeItem = null;
 
     public CustomDialogClass(Activity a) {
         super(a);
@@ -48,7 +47,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.buttonSave:
                 try {
-                    subscribeItem = new OldSubscribeListItem();
+                    subscribeItem = new OldSubscribe();
                     subscribeItem.setSubscriberCode(Integer.parseInt(editTextCode.getText().toString()));
                     subscribeItem.setTblRequestSubscriberId(Integer.parseInt(editTextValue.getText().toString()));
                     subscribeItem.setType(SUBSCRIPTIONS);

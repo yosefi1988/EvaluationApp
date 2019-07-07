@@ -1,4 +1,4 @@
-package ir.sajjadyosefi.evaluation.classes.model.responses.Abfax;
+package ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch;
 
 import android.content.Context;
 import android.view.View;
@@ -11,7 +11,7 @@ import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 /**
  * Created by sajjad on 10/31/2016.
  */
-public class OldSubscribeListItem  extends TubelessObject {
+public class OldSubscribe extends TubelessObject {
 
     private int subscriberCode;
     private int tblRequestSubscriberId;
@@ -33,7 +33,7 @@ public class OldSubscribeListItem  extends TubelessObject {
     }
 
     public void prepareYafteItem(Context mContext, EndlessList_Adapter.SubscribeViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
-        OldSubscribeListItem subscribe = (OldSubscribeListItem) mTimelineItemList.get(position);
+        OldSubscribe subscribe = (OldSubscribe) mTimelineItemList.get(position);
 
         StringBuilder text = new StringBuilder();
 

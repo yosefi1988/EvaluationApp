@@ -18,10 +18,10 @@ import ir.sajjadyosefi.evaluation.activity.business.DetailsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.MapActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
-import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.TempActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Content;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 public class Task extends TubelessObject {
@@ -42,13 +42,13 @@ public class Task extends TubelessObject {
     private List<UsageListItem> usageList;
     private List<File> fileList;
     private File fileKrocki;
-    private List<OldSubscribeListItem> oldSubscribeList;
+    private List<OldSubscribe> oldSubscribeList;
     private List<Content> contentList;
 
 
-    public List<ItemData> listNetwork = new ArrayList<>();
-    public List<ItemData> listBranchs = new ArrayList<>();
-    public List<TubelessObject> NetworkAndBranch = new ArrayList<TubelessObject>();
+
+
+    public List<WaterNetwork> waterNetworks = new ArrayList<WaterNetwork>();
 
 
     public List<Content> getContentList() {
@@ -222,11 +222,11 @@ public class Task extends TubelessObject {
         this.usageList = usageList;
     }
 
-    public List<OldSubscribeListItem> getOldSubscribeList() {
+    public List<OldSubscribe> getOldSubscribeList() {
         return oldSubscribeList;
     }
 
-    public void setOldSubscribeList(List<OldSubscribeListItem> oldSubscribeList) {
+    public void setOldSubscribeList(List<OldSubscribe> oldSubscribeList) {
         this.oldSubscribeList = oldSubscribeList;
     }
 

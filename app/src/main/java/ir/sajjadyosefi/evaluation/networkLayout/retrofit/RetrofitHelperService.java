@@ -3,6 +3,7 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 
 import android.content.Context;
 
+import ir.sajjadyosefi.evaluation.classes.model.request.account.DownloadFileRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.utility.DeviceUtil;
 import retrofit2.Call;
@@ -58,6 +59,11 @@ public class RetrofitHelperService {
     }
     public void loginOrRregister(LoginRequest request, TubelessRetrofitCallback<Object> callback) {
         Call<Object> userCall = service.login(request);
+        userCall.enqueue(callback);
+    }
+
+    public void getDocument(DownloadFileRequest request, TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.documents(request);
         userCall.enqueue(callback);
     }
 

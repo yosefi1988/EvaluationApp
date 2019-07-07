@@ -3,12 +3,7 @@ package ir.sajjadyosefi.evaluation.activity.evaluation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,18 +12,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cn.refactor.kmpautotextview.ItemData;
 import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
-import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
-import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WASTER_WATER;
 
@@ -95,7 +87,7 @@ public class WasterWaterAddActivity extends TubelessActivity {
 
                     for (ItemData item : list) {
                         if (item.getText().equals(KMPAutoComplTextView2.getText().toString().substring(2,KMPAutoComplTextView2.getText().length()))){
-                            //((WasterWater) aaaaaa).setDiameter(Integer.parseInt(item.getMeta()));
+                            //((WasterWater) newWaterMeter).setDiameter(Integer.parseInt(item.getMeta()));
                             ((WasterWater) aaaaaa).setDiameter(1);
                         }
                     }
@@ -132,17 +124,17 @@ public class WasterWaterAddActivity extends TubelessActivity {
 
             complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
 
-                    if (charSequence.equals(list.get(0).getText())){
+                    if (itemData.equals(list.get(0).getText())){
                         //دارد
 
                         linearLayoutSubscribe.setVisibility(View.VISIBLE);
                         linearLayoutGhotr.setVisibility(View.GONE);
                         linearLayoutCount.setVisibility(View.GONE);
 
-                    }else if (charSequence.equals(list.get(1).getText())){
+                    }else if (itemData.equals(list.get(1).getText())){
                         //ندارد
 
                         linearLayoutSubscribe.setVisibility(View.GONE);
@@ -162,15 +154,15 @@ public class WasterWaterAddActivity extends TubelessActivity {
         KMPAutoComplTextViewSubscribe = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewSubscribe);
         ArrayList<ItemData> listSubscribe = new ArrayList<>();
 
-        for (OldSubscribeListItem item: Global.CurrentTask.getOldSubscribeList()) {
+        for (OldSubscribe item: Global.CurrentTask.getOldSubscribeList()) {
             ItemData sss = new ItemData("- " + item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId()  , item.getTblRequestSubscriberId() + "", item.getType() + "");
             listSubscribe.add(sss);
         }
         KMPAutoComplTextViewSubscribe.setDatas(listSubscribe);
         KMPAutoComplTextViewSubscribe.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
             @Override
-            public void onPopupItemClick(CharSequence charSequence) {
-                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+            public void onPopupItemClick(ItemData itemData) {
+                Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -189,8 +181,8 @@ public class WasterWaterAddActivity extends TubelessActivity {
         KMPAutoComplTextView2.setDatas(list2);
         KMPAutoComplTextView2.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
             @Override
-            public void onPopupItemClick(CharSequence charSequence) {
-                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+            public void onPopupItemClick(ItemData itemData) {
+                Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 

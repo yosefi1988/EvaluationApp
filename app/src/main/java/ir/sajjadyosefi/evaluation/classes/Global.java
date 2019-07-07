@@ -5,7 +5,13 @@ import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.refactor.kmpautotextview.ItemData;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterBranch;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
 import ir.sajjadyosefi.evaluation.model.business.Task;
 import ir.sajjadyosefi.evaluation.model.main.User;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.RetrofitHelperPost;
@@ -40,6 +46,9 @@ public class Global extends Application {
 //    task Item list
 
 
+    //اضافه شده توسط ارزیاب در هنگام بازدید از محل
+    public static List<WaterNetwork> listNetwork = new ArrayList<>();
+    public static List<WaterBranch> listBranchs = new ArrayList<>();
 
 
     @Override

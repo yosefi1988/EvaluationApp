@@ -3,7 +3,6 @@ package ir.sajjadyosefi.evaluation.activity.business;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,18 +26,15 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
-
-public class SubscriptionsActivity extends TubelessActivity {
+public class WasterWaterActivity extends TubelessActivity {
 
 
     private static final String TAG = "sssssssssssssss";
     private int RC_SIGN_IN = 1000;
-
 
 
     KMPAutoComplTextView complTextView;
@@ -46,7 +42,7 @@ public class SubscriptionsActivity extends TubelessActivity {
     RecyclerView                    mRecyclerViewTimeline;
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
-    List<TubelessObject>            subscribeItemList = new ArrayList<TubelessObject>();
+    List<TubelessObject>            taskItemList = new ArrayList<TubelessObject>();
 
 
     Button ButtonSms,ButtonCall,buttonk,buttonBack,buttonNext;
@@ -59,29 +55,24 @@ public class SubscriptionsActivity extends TubelessActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
-        setContentView(R.layout.activity_subscriptions);
+        setContentView(R.layout.activity_network);
         setRootActivity((ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0));
 
         buttonNext = findViewById(R.id.buttonNext);
         buttonBack = findViewById(R.id.buttonBack);
 
 
-        //type موقت
+        //type 5
         if (Global.CurrentTask == null ){
 
         }else {
             complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
             ArrayList<ItemData> list = new ArrayList<>();
 
-            ItemData sss = new ItemData("- موقت",  "1","");
-            list.add(sss);
-
-            ItemData sss1 = new ItemData("- دائم",  "2","");
-            list.add(sss1);
-
-            ItemData sss2 = new ItemData("- موقت به دائم" , "3","");
-            list.add(sss2);
-
+            for (UsageListItem item: Global.CurrentTask.getUsageList()) {
+                ItemData sss = new ItemData(item.getUsageDesc().toString() , item.getUsageTypeIdReq()+"","");
+                list.add(sss);
+            }
             complTextView.setDatas(list);
 
             complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
@@ -96,36 +87,51 @@ public class SubscriptionsActivity extends TubelessActivity {
 
 
 
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build();
 
-        for (OldSubscribe subscribeItem : Global.CurrentTask.getOldSubscribeList()) {
-            subscribeItem.type = SUBSCRIPTIONS;
-            subscribeItemList.add(subscribeItem);
-        }
 
-        prepareList(getRootActivity());
 
+
+//        final GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        updateUI(account);
+
+// Set the dimensions of the sign-in button.
+//        SignInButton signInButton = findViewById(R.id.sign_in_button);
+//        signInButton.setSize(SignInButton.SIZE_STANDARD);
+//
+//        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+//                startActivityForResult(signInIntent, RC_SIGN_IN);
+//            }
+//        });
+
+
+//
+//        intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, accountType);
+//        intent.putExtra(ADD_ACCOUNT, true);
+//        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+//                bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 
 
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //RequestCountActivity
-
-                if (complTextView.getText().length() < 5){
-                    Toast.makeText(getContext(),"نوع واگذاری را انتخاب کنید" ,Toast.LENGTH_LONG).show();
-                }else {
-                    activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
-                    finish();
-                }
+                //activity.startActivity(new Intent(getContext(),  .class));
+                finish();
             }
         });
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(getContext(), StepOneActivity.class));
+                activity.startActivity(new Intent(getContext(), NetworkActivity.class));
                 finish();
             }
         });
@@ -133,21 +139,18 @@ public class SubscriptionsActivity extends TubelessActivity {
 
 
 
-    private void prepareList(View rootview) {
-        mRecyclerViewTimeline           = (RecyclerView) rootview.findViewById(R.id.recyclerView);
-        mRecyclerViewTimeline.setHasFixedSize(true);
-        mRecyclerViewTimeline.setItemAnimator(new DefaultItemAnimator());
-        mLayoutManager = new LinearLayoutManager(getContext());
-        adapter_Posts = new EndlessList_Adapter(
-                getContext(),
-                mLayoutManager,
-                rootview,
-                subscribeItemList);
-        adapter_Posts.listType = SUBSCRIPTIONS;
-        mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
-        mRecyclerViewTimeline.setAdapter(adapter_Posts);
+//    private void accounts() {
+//        SAccounts sAccounts = new SAccounts(getContext());
+////        sAccounts.getAccountManager().addAccount()
+//
+//        final Account account = new Account("accountName", "ir.sajjadyosefi.evaluation") ;
+//        sAccounts.getAccountManager().addAccountExplicitly(account, "accountPassword",null);
+//
+//        AccountAuthenticator accountAuthenticator = new AccountAuthenticator(getContext());
+////        accountAuthenticator.addAccount();
+////        accountAuthenticator.
+//    }
 
-    }
 
 
 

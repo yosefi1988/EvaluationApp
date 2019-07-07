@@ -23,10 +23,12 @@ import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterListActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterBranch;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterMeter;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.NETWORK;
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WATER_METER;
 
 
 public class NetworkActivity extends TubelessActivity {
@@ -47,7 +49,6 @@ public class NetworkActivity extends TubelessActivity {
     String LastFileSelected = null;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,15 @@ public class NetworkActivity extends TubelessActivity {
         buttonBack = findViewById(R.id.buttonBack);
 
 
+        for (WaterNetwork waterNetworkItem :Global.CurrentTask.waterNetworks) {
+            for (WaterBranch waterBranchItem : waterNetworkItem.getWaterBranches() ) {
+                for (WaterMeter waterMeterItem : waterBranchItem.getWaterMeters()) {
+                    waterMeterItem.setWaterNetwork(waterNetworkItem);
+                    waterMeterItem.setWaterBranch(waterBranchItem);
+                    waterMeters.add(waterMeterItem);
+                }
+            }
+        }
 
 
 //        for (UsageListItem usageListItem : Global.CurrentTask.getUsageList()) {
@@ -99,7 +109,7 @@ public class NetworkActivity extends TubelessActivity {
             }
         });
 
-        if (Global.CurrentTask.NetworkAndBranch.size() == 0) {
+        if (Global.CurrentTask.waterNetworks.size() == 0) {
             Intent i = new Intent(getContext(), AddNetworkActivity.class);
             (getActivity()).startActivityForResult(i, 1);
         }else {
@@ -110,7 +120,19 @@ public class NetworkActivity extends TubelessActivity {
     }
 
 
+    List<TubelessObject> waterMeters = new ArrayList<>();
+
     private void prepareList(View rootview) {
+//        if (Global.CurrentTask.waterNetworks == null){
+//            Global.CurrentTask.waterNetworks = new ArrayList<>();
+//            WaterNetwork emptyNetwork = new WaterNetwork();
+//            emptyNetwork.setWaterBranches(new ArrayList<>());
+//            WaterBranch emptyWatherBranch = new WaterBranch();
+//            emptyWatherBranch.setWaterMeters(new ArrayList<>());
+//            emptyNetwork.getWaterBranches().add(emptyWatherBranch);
+//            Global.CurrentTask.waterNetworks.add(emptyNetwork);
+//        }
+
         mRecyclerViewTimeline           = (RecyclerView) rootview.findViewById(R.id.recyclerView);
         mRecyclerViewTimeline.setHasFixedSize(true);
         mRecyclerViewTimeline.setItemAnimator(new DefaultItemAnimator());
@@ -119,8 +141,8 @@ public class NetworkActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
-                Global.CurrentTask.NetworkAndBranch);
-        adapter_Posts.listType = NETWORK;
+                waterMeters);
+        adapter_Posts.listType = WATER_METER;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
 
@@ -136,10 +158,10 @@ public class NetworkActivity extends TubelessActivity {
 
                 if (result != null){
 
-                    Gson gson = new Gson();
-                    Network wasterWaterItem = gson.fromJson(result,Network.class);
-                    Global.CurrentTask.NetworkAndBranch.add(wasterWaterItem);
-                    adapter_Posts.notifyDataSetChanged();
+//                    Gson gson = new Gson();
+//                    WaterMeter kontor = gson.fromJson(result, WaterMeter.class);
+//                    Global.CurrentTask.NetworkAndBranch.add(kontor);
+//                    adapter_Posts.notifyDataSetChanged();
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {

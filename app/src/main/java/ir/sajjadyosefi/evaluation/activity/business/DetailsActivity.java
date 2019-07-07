@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,8 @@ public class DetailsActivity extends TubelessActivity {
     Activity activity ;
     String LastFileSelected = null;
 
+    public static ImageView ImageView ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,7 @@ public class DetailsActivity extends TubelessActivity {
         textViewMobile = findViewById(R.id.textViewMobile);
         TextViewCodePosti = findViewById(R.id.TextViewCodePosti);
         TextViewAddress = findViewById(R.id.TextViewAddress);
+        ImageView = findViewById(R.id.ImageView);
         ButtonSms = findViewById(R.id.ButtonSms);
         ButtonCall = findViewById(R.id.ButtonCall);
         buttonk = findViewById(R.id.buttonk);

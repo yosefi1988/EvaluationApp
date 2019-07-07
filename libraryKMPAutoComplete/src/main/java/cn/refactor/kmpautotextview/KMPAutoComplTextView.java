@@ -122,7 +122,8 @@ public class KMPAutoComplTextView extends android.support.v7.widget.AppCompatAut
                 if (mListener == null) {
                     return;
                 }
-                mListener.onPopupItemClick(KMPAutoComplTextView.this.getText().toString());
+//                mListener.onPopupItemClick(KMPAutoComplTextView.this);
+                mListener.onPopupItemClick(mSourceDatas.get(position).mTarget);
 //                mListener.onPopupItemClick(mSourceDatas.get(position).mTarget.getText());
             }
         });
@@ -276,8 +277,12 @@ public class KMPAutoComplTextView extends android.support.v7.widget.AppCompatAut
         }
     }
 
+//    public interface OnPopupItemClickListener {
+//        void onPopupItemClick(CharSequence charSequence);
+//    }
+
     public interface OnPopupItemClickListener {
-        void onPopupItemClick(CharSequence charSequence);
+        void onPopupItemClick(ItemData charSequence);
     }
 
     /**

@@ -3,6 +3,7 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 import android.graphics.Movie;
 import ir.sajjadyosefi.evaluation.classes.model.request.SearchRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
+import ir.sajjadyosefi.evaluation.classes.model.request.account.DownloadFileRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -33,8 +34,8 @@ public interface ApiServiceTubeless {
 //                       @Query("LoginPass") String LoginPass,
 //                       @Body LoginRequest request);
 
-    @GET("movies.json")
-    Call<List<Movie>> getMoviesService();
+//    @GET("movies.json")
+//    Call<List<Movie>> getMoviesService();
 
 //    @POST("/data/2.1")
 //    Call < T > postMovieDetails(
@@ -52,5 +53,9 @@ public interface ApiServiceTubeless {
 
     @POST("api/CheckLoginUser")
     Call<Object> login(@Body LoginRequest request);
+
+
+    @POST("api/DownloadFile")
+    Call<Object> documents(@Body DownloadFileRequest request);
 
 }

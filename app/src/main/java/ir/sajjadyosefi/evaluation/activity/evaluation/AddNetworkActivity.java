@@ -3,15 +3,11 @@ package ir.sajjadyosefi.evaluation.activity.evaluation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,17 +18,19 @@ import java.util.List;
 import cn.refactor.kmpautotextview.ItemData;
 import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsUsageTypeInfoDetail;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Network;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterBranch;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterMeter;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.NETWORK;
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WASTER_WATER;
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WATER_METER;
 
 public class AddNetworkActivity extends TubelessActivity {
 
@@ -49,6 +47,12 @@ public class AddNetworkActivity extends TubelessActivity {
     EditText editTextTool ,editTextCount,editTextCount2;
 
     ArrayList<ItemData> list10;
+
+
+    WaterNetwork selectedWaterNetwork = new WaterNetwork();
+    WaterBranch selectedWaterBranch = new WaterBranch();
+    WaterMeter newWaterMeter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +131,8 @@ public class AddNetworkActivity extends TubelessActivity {
                     valid = false;
                 }else {
                     boolean xv = false;
-                    for (ItemData item : Global.CurrentTask.listNetwork) {
-                        if (item.getText().equals(KMPAutoComplTextViewnetwork.getText().toString())){
+                    for (WaterNetwork item : Global.listNetwork) {
+                        if (item.getTitle().equals(KMPAutoComplTextViewnetwork.getText().toString())){
                             xv = true;
                             break;
                         }
@@ -145,18 +149,20 @@ public class AddNetworkActivity extends TubelessActivity {
 
                 if (valid) {
 
-                    ItemData itemNetwork = null;
-                    for (ItemData item : Global.CurrentTask.listNetwork) {
-                        if (item.getText().equals(KMPAutoComplTextViewnetwork.getText().toString())){
-                            itemNetwork = item;
-                            break;
-                        }
-                    }
-                    ItemData newItemData = new ItemData(
-                            "- انشعاب شماره " + (Global.CurrentTask.listBranchs.size() + 1) + "",
-                            (Global.CurrentTask.listBranchs.size() + 1) + "" ,
-                            itemNetwork.getMeta() + "-" + editTextTool.getText().toString());
-                    Global.CurrentTask.listBranchs.add(newItemData);
+//                    WaterNetwork itemNetwork = null;
+//                    for (WaterNetwork item : Global.listNetwork) {
+//                        if (item.getTitle().equals(KMPAutoComplTextViewnetwork.getText().toString())){
+//                            itemNetwork = item;
+//                            break;
+//                        }
+//                    }
+
+                    WaterBranch waterBranch = new WaterBranch();
+                    waterBranch.setTitle("- انشعاب شماره " + (Global.listBranchs.size() + 1));
+                    waterBranch.setId(Global.listBranchs.size() + 1);
+                    waterBranch.setWaterNetwork(selectedWaterNetwork);
+                    selectedWaterBranch = waterBranch;
+                    Global.listBranchs.add(waterBranch);
 
                     KMPAutoComplTextView9.setText("");
                     KMPAutoComplTextView3.setText("");
@@ -169,12 +175,16 @@ public class AddNetworkActivity extends TubelessActivity {
                     if (Global.CurrentTask == null ){
 
                     }else {
-
-                        KMPAutoComplTextViewBranch.setDatas(Global.CurrentTask.listBranchs);
+                        List<ItemData> tmpListNetwork = new ArrayList<>();
+                        for (WaterBranch waterBranchx : Global.listBranchs) {
+                            ItemData newItem = new ItemData(waterBranchx.getTitle(),waterBranchx.getId() + "");
+                            tmpListNetwork.add(newItem);
+                        }
+                        KMPAutoComplTextViewBranch.setDatas(tmpListNetwork);
                         KMPAutoComplTextViewBranch.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                             @Override
-                            public void onPopupItemClick(CharSequence charSequence) {
-                                Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                            public void onPopupItemClick(ItemData itemData) {
+                                Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -191,6 +201,8 @@ public class AddNetworkActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
                 boolean valid = true;
+                AbfaxSelectsObject item4 = null;
+                AbfaxSelectsObject item8 = null;
 
                 if (KMPAutoComplTextView4.getText().length() == 0){
                     valid = false;
@@ -199,6 +211,7 @@ public class AddNetworkActivity extends TubelessActivity {
                     for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                         if (item.getTextValue().equals(KMPAutoComplTextView4.getText().subSequence(2,KMPAutoComplTextView4.getText().length()).toString())){
                             xv = true;
+                            item4 = item;
                             break;
                         }
                     }
@@ -214,6 +227,7 @@ public class AddNetworkActivity extends TubelessActivity {
                     for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                         if (item.getTextValue().equals(KMPAutoComplTextView8.getText().subSequence(2,KMPAutoComplTextView8.getText().length()).toString())){
                             xv = true;
+                            item8 = item;
                             break;
                         }
                     }
@@ -223,8 +237,15 @@ public class AddNetworkActivity extends TubelessActivity {
                 }
 
                 if (valid) {
-                    ItemData newItemData = new ItemData("- شبکه شماره " + (Global.CurrentTask.listNetwork.size() + 1) + "",(Global.CurrentTask.listNetwork.size() + 1) + "" ,"");
-                    Global.CurrentTask.listNetwork.add(newItemData);
+                    WaterNetwork waterNetwork = new WaterNetwork();
+
+                    waterNetwork.setTitle("- شبکه شماره " + (Global.listNetwork.size() + 1) + "");
+                    waterNetwork.setWaterPipeNetworkMaterial(item8);
+                    waterNetwork.setDiameterWaterPipeNetwork(item4);
+                    waterNetwork.setId(Global.listNetwork.size() + 1);
+
+                    selectedWaterNetwork = waterNetwork ;
+                    Global.listNetwork.add(waterNetwork);
 
                     KMPAutoComplTextView4.setText("");
                     KMPAutoComplTextView8.setText("");
@@ -258,17 +279,17 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView10.setDatas(list10);
             KMPAutoComplTextView10.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
+                public void onPopupItemClick(ItemData itemData) {
                     //
                     for (ItemData item : list10) {
-                        if (item.getText().equals(charSequence.toString()))
+                        if (item.getText().equals(itemData.getText()))
                             if (item.getMeta().equals("0")){
                                 linearLayoutSubscribe.setVisibility(View.VISIBLE);
                             }else {
                                 linearLayoutSubscribe.setVisibility(View.GONE);
                             }
                     }
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -285,8 +306,8 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView4.setDatas(list4);
             KMPAutoComplTextView4.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -324,8 +345,8 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextViewSubUsage.setDatas(listSub);
             KMPAutoComplTextViewSubUsage.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -343,8 +364,8 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView8.setDatas(list8);
             KMPAutoComplTextView8.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -361,8 +382,8 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView9.setDatas(list2);
             KMPAutoComplTextView9.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -379,8 +400,8 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView3.setDatas(list3);
             KMPAutoComplTextView3.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -398,8 +419,8 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextView1.setDatas(list1);
             KMPAutoComplTextView1.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -407,15 +428,15 @@ public class AddNetworkActivity extends TubelessActivity {
             KMPAutoComplTextViewSubscribe = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewSubscribe);
             ArrayList<ItemData> listSubscribe = new ArrayList<>();
 
-            for (OldSubscribeListItem item: Global.CurrentTask.getOldSubscribeList()) {
+            for (OldSubscribe item: Global.CurrentTask.getOldSubscribeList()) {
                 ItemData sss = new ItemData("- " + item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId()  , item.getTblRequestSubscriberId() + "", item.getType() + "");
                 listSubscribe.add(sss);
             }
             KMPAutoComplTextViewSubscribe.setDatas(listSubscribe);
             KMPAutoComplTextViewSubscribe.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -444,8 +465,8 @@ public class AddNetworkActivity extends TubelessActivity {
                         valid = false;
                     } else {
                         boolean xv = false;
-                        for (ItemData item : Global.CurrentTask.listBranchs) {
-                            if (item.getText().equals(KMPAutoComplTextViewBranch.getText().toString())) {
+                        for (WaterBranch item : Global.listBranchs) {
+                            if (item.getTitle().equals(KMPAutoComplTextViewBranch.getText().toString())) {
                                 xv = true;
                                 break;
                             }
@@ -507,7 +528,7 @@ public class AddNetworkActivity extends TubelessActivity {
                                     valid = false;
                                 } else {
                                     boolean xv = false;
-                                    for (OldSubscribeListItem item : Global.CurrentTask.getOldSubscribeList()) {
+                                    for (OldSubscribe item : Global.CurrentTask.getOldSubscribeList()) {
 
                                         String sVal = item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId();
                                         if (sVal.equals(KMPAutoComplTextViewSubscribe.getText().subSequence(2, KMPAutoComplTextViewSubscribe.getText().length()).toString())) {
@@ -533,39 +554,30 @@ public class AddNetworkActivity extends TubelessActivity {
                     }
 
                     if (valid) {
-
                         StringBuilder stringBuilder = new StringBuilder();
                         stringBuilder.append(KMPAutoComplTextView4.getText());
-                        stringBuilder.append(" ");
-
-                        stringBuilder.append(KMPAutoComplTextView8.getText());
-                        stringBuilder.append(" ");
-
-                        stringBuilder.append(KMPAutoComplTextView9.getText());
-                        stringBuilder.append(" ");
-
+                        stringBuilder.append("/");
                         stringBuilder.append(KMPAutoComplTextView3.getText());
-                        stringBuilder.append(" ");
-
-                        stringBuilder.append(KMPAutoComplTextView1.getText());
-                        stringBuilder.append(" ");
-
-                        stringBuilder.append(KMPAutoComplTextView10.getText());
-                        stringBuilder.append(" ");
+                        stringBuilder.append("/");
+                        stringBuilder.append(KMPAutoComplTextViewSubUsage.getText());
 
 
-                        stringBuilder.append(KMPAutoComplTextViewSubscribe.getText());
-                        stringBuilder.append(" ");
+                        if (KMPAutoComplTextViewSubscribe.getText().length()>2) {
+                            StringBuilder stringBuilder2 = new StringBuilder();
+                            stringBuilder.append("اشتراک قبلی :");
+                            stringBuilder.append(KMPAutoComplTextViewSubscribe.getText());
 
-
-                        Network aaaaaa = new Network(stringBuilder.toString(), 1);
-                        ((Network) aaaaaa).setType(NETWORK);
+                            newWaterMeter = new WaterMeter(stringBuilder.toString(), stringBuilder2.toString(), 1);
+                            ((WaterMeter) newWaterMeter).setType(WATER_METER);
+                        }else {
+                            newWaterMeter = new WaterMeter(stringBuilder.toString(),"", 1);
+                            ((WaterMeter) newWaterMeter).setType(WATER_METER);
+                        }
 
                         Gson gson = new Gson();
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra("result", gson.toJson(aaaaaa));
+                        returnIntent.putExtra("result", gson.toJson(newWaterMeter));
                         setResult(Activity.RESULT_OK, returnIntent);
-
 
                         Toast.makeText(getContext(), "OK", Toast.LENGTH_LONG).show();
                         finish();
@@ -585,7 +597,7 @@ public class AddNetworkActivity extends TubelessActivity {
     protected void onStart() {
         super.onStart();
 
-        if (Global.CurrentTask.listNetwork.size() != 0){
+        if (Global.listNetwork.size() != 0){
             fillNetwork();
 
             linearLayoutNewNetwork.setVisibility(View.GONE);
@@ -595,15 +607,14 @@ public class AddNetworkActivity extends TubelessActivity {
             linearLayoutNewBranch.setVisibility(View.GONE);
 
             try {
-                KMPAutoComplTextViewBranch.setDatas(Global.CurrentTask.listBranchs);
 
-//                KMPAutoComplTextViewnetwork.setText(Global.CurrentTask.listNetwork.get(0).getText());
+                List<ItemData> tmpListNetwork = new ArrayList<>();
+                for (WaterBranch waterBranch : Global.listBranchs) {
+                    ItemData newItem = new ItemData(waterBranch.getTitle(),waterBranch.getId() + "");
+                    tmpListNetwork.add(newItem);
+                }
+                KMPAutoComplTextViewBranch.setDatas(tmpListNetwork);
 
-//                if (Global.CurrentTask == null ){
-//
-//                }else {
-//                    KMPAutoComplTextViewBranch.setDatas(Global.CurrentTask.listBranchs);
-//                }
             }catch (Exception ex){
 
             }
@@ -617,11 +628,22 @@ public class AddNetworkActivity extends TubelessActivity {
         }else {
             KMPAutoComplTextViewnetwork = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewnetwork);
 
-            KMPAutoComplTextViewnetwork.setDatas(Global.CurrentTask.listNetwork);
+            List<ItemData> tmpListNetwork = new ArrayList<>();
+            for (WaterNetwork waterNetwork : Global.listNetwork) {
+                ItemData newItem = new ItemData(waterNetwork.getTitle(),waterNetwork.getId() + "");
+                tmpListNetwork.add(newItem);
+            }
+            KMPAutoComplTextViewnetwork.setDatas(tmpListNetwork);
             KMPAutoComplTextViewnetwork.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
                 @Override
-                public void onPopupItemClick(CharSequence charSequence) {
-                    Toast.makeText(getBaseContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                public void onPopupItemClick(ItemData itemData) {
+                    Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
+
+                    for (WaterNetwork waterNetwork : Global.listNetwork) {
+                        if (waterNetwork.getId() == Integer.parseInt(itemData.getMeta())){
+                            selectedWaterNetwork = waterNetwork;
+                        }
+                    }
                 }
             });
         }

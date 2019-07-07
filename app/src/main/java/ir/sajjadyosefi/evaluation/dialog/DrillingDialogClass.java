@@ -18,11 +18,7 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
-
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.DRILLING_A;
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
 public class DrillingDialogClass extends Dialog implements View.OnClickListener {
 
@@ -76,11 +72,11 @@ public class DrillingDialogClass extends Dialog implements View.OnClickListener 
         complTextView.setDatas(list3);
         complTextView.setOnPopupItemClickListener(new KMPAutoComplTextView.OnPopupItemClickListener() {
             @Override
-            public void onPopupItemClick(CharSequence charSequence) {
-                Toast.makeText(getContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+            public void onPopupItemClick(ItemData itemData) {
+                Toast.makeText(getContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
 
                 for (ItemData item : list3) {
-                    if (item.getText().equals(charSequence.toString())){
+                    if (item.getText().equals(itemData.getText())){
                         newItem = new DrillingListItem();
                         newItem.setId(item.getMeta());
                         newItem.setText(item.getText());

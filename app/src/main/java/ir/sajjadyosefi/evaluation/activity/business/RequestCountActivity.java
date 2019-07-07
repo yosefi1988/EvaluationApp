@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
@@ -22,19 +20,15 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.refactor.kmpautotextview.ItemData;
-import cn.refactor.kmpautotextview.KMPAutoComplTextView;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.OldSubscribeListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.COUNT_REQUEST;
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.COUNT_REQUEST_EDITED;
-import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
 
 public class RequestCountActivity extends TubelessActivity {
