@@ -22,6 +22,7 @@ import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
+import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
 import ir.sajjadyosefi.evaluation.dialog.DrillingDialogClass;
@@ -42,7 +43,6 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
     RecyclerView                    mRecyclerViewTimeline;
     EndlessList_Adapter             adapter_Posts;
     LinearLayoutManager             mLayoutManager;
-    List<TubelessObject>            drillingItemList = new ArrayList<TubelessObject>();
 
 
     Button button1,button2, buttonBack, buttonNext;
@@ -105,7 +105,7 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
                     public void onDismiss(DialogInterface dialogInterface) {
                         if (DrillingDialogClass.newItem != null){
                             DrillingDialogClass.newItem.setType(DRILLING_A);
-                            drillingItemList.add(DrillingDialogClass.newItem);
+                            Global.CurrentTask.drillingItemList.add(DrillingDialogClass.newItem);
                             adapter_Posts.notifyDataSetChanged();
                         }
                     }
@@ -127,7 +127,7 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
                     public void onDismiss(DialogInterface dialogInterface) {
                         if (DrillingDialogClass.newItem != null){
                             DrillingDialogClass.newItem.setType(DRILLING_F);
-                            drillingItemList.add(DrillingDialogClass.newItem);
+                            Global.CurrentTask.drillingItemList.add(DrillingDialogClass.newItem);
                             adapter_Posts.notifyDataSetChanged();
                         }
                     }
@@ -140,7 +140,7 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
             @Override
             public void onClick(View view) {
 
-                if (drillingItemList.size() == 0){
+                if (Global.CurrentTask.drillingItemList.size() == 0){
                     Toast.makeText(getContext(),"موردی برای حفاری وارد نکرده اید",Toast.LENGTH_LONG).show();
                 }else {
                     Intent i = new Intent(getContext(), ToDoListActivity.class);
@@ -175,7 +175,7 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
                 getContext(),
                 mLayoutManager,
                 rootview,
-                drillingItemList);
+                Global.CurrentTask.drillingItemList);
         adapter_Posts.listType = DRILLING;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
@@ -190,13 +190,13 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
             if (b == false){
                 //remove Ab
                 List<TubelessObject> markedList = new ArrayList<>();
-                for (TubelessObject item: drillingItemList) {
+                for (TubelessObject item: Global.CurrentTask.drillingItemList) {
                     if(item.getType() == DRILLING_A){
                         markedList.add(item);
                     }
                 }
                 for (TubelessObject item: markedList) {
-                    drillingItemList.remove(item);
+                    Global.CurrentTask.drillingItemList.remove(item);
                 }
                 adapter_Posts.notifyDataSetChanged();
             }
@@ -206,13 +206,13 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
             if (b == false){
                 //remove F
                 List<TubelessObject> markedList = new ArrayList<>();
-                for (TubelessObject item: drillingItemList) {
+                for (TubelessObject item: Global.CurrentTask.drillingItemList) {
                     if(item.getType() == DRILLING_F){
                         markedList.add(item);
                     }
                 }
                 for (TubelessObject item: markedList) {
-                    drillingItemList.remove(item);
+                    Global.CurrentTask.drillingItemList.remove(item);
                 }
                 adapter_Posts.notifyDataSetChanged();
             }

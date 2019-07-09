@@ -158,10 +158,26 @@ public class NetworkActivity extends TubelessActivity {
 
                 if (result != null){
 
-//                    Gson gson = new Gson();
-//                    WaterMeter kontor = gson.fromJson(result, WaterMeter.class);
+                    Gson gson = new Gson();
+                    WaterMeter kontor = gson.fromJson(result, WaterMeter.class);
+
+//                    WaterMeter waterMeterItem;
+//                    waterMeterItem.setWaterNetwork(waterNetworkItem);
+//                    waterMeterItem.setWaterBranch(waterBranchItem);
+                    waterMeters.add(kontor);
 //                    Global.CurrentTask.NetworkAndBranch.add(kontor);
-//                    adapter_Posts.notifyDataSetChanged();
+                    adapter_Posts.notifyDataSetChanged();
+
+
+//                    for (WaterNetwork waterNetworkItem :Global.CurrentTask.waterNetworks) {
+//                        for (WaterBranch waterBranchItem : waterNetworkItem.getWaterBranches() ) {
+//                            for (WaterMeter waterMeterItem : waterBranchItem.getWaterMeters()) {
+//                                waterMeterItem.setWaterNetwork(waterNetworkItem);
+//                                waterMeterItem.setWaterBranch(waterBranchItem);
+//                                waterMeters.add(waterMeterItem);
+//                            }
+//                        }
+//                    }
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {

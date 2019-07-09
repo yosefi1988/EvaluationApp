@@ -49,6 +49,7 @@ public class Task extends TubelessObject {
 
 
     public List<WaterNetwork> waterNetworks = new ArrayList<WaterNetwork>();
+    public List<TubelessObject> drillingItemList = new ArrayList<TubelessObject>();
 
 
     public List<Content> getContentList() {

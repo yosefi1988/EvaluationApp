@@ -7,6 +7,7 @@ import java.util.List;
 
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsUsageTypeInfoDetail;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 /**
@@ -16,7 +17,7 @@ public class WaterMeter extends TubelessObject {
 
     //1
     private AbfaxSelectsObject diameterWaterMeter;
-    private AbfaxSelectsObject subUsage;
+    private AbfaxSelectsUsageTypeInfoDetail subUsage;
     private int countWaterMeter;
     private int countUnit;
     private AbfaxSelectsObject installStatus;
@@ -32,6 +33,17 @@ public class WaterMeter extends TubelessObject {
     private int keyValue;
     private String textValue;
     private String text2Value;
+    public boolean cleanOldLine ;
+
+
+    public boolean isCleanOldLine() {
+        return cleanOldLine;
+    }
+
+    public void setCleanOldLine(boolean cleanOldLine) {
+        this.cleanOldLine = cleanOldLine;
+    }
+
 
     public WaterMeter(String text, String text2, int key) {
         keyValue = key;
@@ -75,11 +87,11 @@ public class WaterMeter extends TubelessObject {
         this.diameterWaterMeter = diameterWaterMeter;
     }
 
-    public AbfaxSelectsObject getSubUsage() {
+    public AbfaxSelectsUsageTypeInfoDetail getSubUsage() {
         return subUsage;
     }
 
-    public void setSubUsage(AbfaxSelectsObject subUsage) {
+    public void setSubUsage(AbfaxSelectsUsageTypeInfoDetail subUsage) {
         this.subUsage = subUsage;
     }
 
@@ -157,7 +169,7 @@ public class WaterMeter extends TubelessObject {
         StringBuilder stringBuilder2 = new StringBuilder();
         stringBuilder2.append("کاربری");
         stringBuilder2.append(" ");
-        stringBuilder2.append(waterMeter.getSubUsage().getTextValue());
+        stringBuilder2.append(waterMeter.getSubUsage().getUsageInfoDetailDesc());
 
 
         if (waterMeter.getOldSubscribe() != null){

@@ -136,6 +136,8 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
         }
 
 
+
+
         try {
             choosenImageView.paint.setColor(Color.BLUE);
         }catch (Exception e){}
@@ -197,7 +199,9 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
             } catch (Exception e) {
                 Log.v("ERROR", e.toString());
             }
-        }if (v == savePicture)
+        }
+
+        if (v == savePicture)
         {
             if (checkStoragePermission()) {
                 if (saveSignature()){
@@ -206,7 +210,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                     finish();
                 }
             }else {
-                Toast.makeText(getContext(),"Permission" ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"Permission" ,Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -283,8 +287,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
     public boolean checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user

@@ -33,7 +33,7 @@ import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.classes.utility.CommonClass;
-import ir.sajjadyosefi.evaluation.dialog.CustomDialogClass;
+import ir.sajjadyosefi.evaluation.dialog.SubStractDialogClass;
 import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.business.Task;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
@@ -430,14 +430,14 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 //                        Intent i = new Intent(mContext, WasterWaterAddActivity.class);
 //                        ((Activity)mContext).startActivityForResult(i, 1);
 
-                        CustomDialogClass cdd = new CustomDialogClass((Activity) mContext);
+                        SubStractDialogClass cdd = new SubStractDialogClass((Activity) mContext);
                         cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         cdd.show();
                         cdd.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialogInterface) {
-                                if (CustomDialogClass.subscribeItem != null){
-                                    mTimelineItemList.add(CustomDialogClass.subscribeItem);
+                                if (SubStractDialogClass.subscribeItem != null){
+                                    mTimelineItemList.add(SubStractDialogClass.subscribeItem);
                                     adapter.notifyDataSetChanged();
                                 }
                             }

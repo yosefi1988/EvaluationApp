@@ -116,6 +116,11 @@ public class SubscriptionsActivity extends TubelessActivity {
                 if (complTextView.getText().length() < 5){
                     Toast.makeText(getContext(),"نوع واگذاری را انتخاب کنید" ,Toast.LENGTH_LONG).show();
                 }else {
+                    Global.CurrentTask.getOldSubscribeList().clear();
+                    for (TubelessObject item : subscribeItemList) {
+                        Global.CurrentTask.getOldSubscribeList().add((OldSubscribe) item);
+                    }
+
                     activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
                     finish();
                 }

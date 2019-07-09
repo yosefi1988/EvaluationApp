@@ -14,7 +14,7 @@ import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.SUBSCRIPTIONS;
 
-public class CustomDialogClass extends Dialog implements View.OnClickListener {
+public class SubStractDialogClass extends Dialog implements View.OnClickListener {
 
     public Activity c;
     public Dialog d;
@@ -22,7 +22,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     public Button buttonSave,buttonCancel;
     public static OldSubscribe subscribeItem = null;
 
-    public CustomDialogClass(Activity a) {
+    public SubStractDialogClass(Activity a) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
@@ -32,7 +32,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.custom_dialog);
+        setContentView(R.layout.add_substract_dialog);
         editTextCode = (EditText) findViewById(R.id.editTextCode);
         editTextValue = (EditText) findViewById(R.id.editTextValue);
         buttonSave = (Button) findViewById(R.id.buttonSave);

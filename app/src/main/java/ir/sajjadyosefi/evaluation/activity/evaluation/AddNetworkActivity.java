@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class AddNetworkActivity extends TubelessActivity {
     KMPAutoComplTextView KMPAutoComplTextViewSubUsage, KMPAutoComplTextView10 , KMPAutoComplTextView4 , KMPAutoComplTextView8 , KMPAutoComplTextView9 , KMPAutoComplTextView3, KMPAutoComplTextView1,KMPAutoComplTextViewSubscribe;
     KMPAutoComplTextView KMPAutoComplTextViewnetwork , KMPAutoComplTextViewBranch;
     Button buttonSave , buttonCancel ;
+    CheckBox checkBoxCleanOldLine;
 
     Button buttonNetworkReg , buttonNewNetwork;
     Button buttonBranchReg , buttonNewBranch;
@@ -65,6 +67,7 @@ public class AddNetworkActivity extends TubelessActivity {
         editTextCount = findViewById(R.id.editTextCount);
         editTextCount2 = findViewById(R.id.editTextCount2);
         buttonNetworkReg = findViewById(R.id.buttonNetworkReg);
+        checkBoxCleanOldLine = findViewById(R.id.checkBoxCleanOldLine);
         buttonBranchReg = findViewById(R.id.buttonBranchReg);
         buttonNewBranch = findViewById(R.id.buttonNewBranch);
         buttonNewNetwork = findViewById(R.id.buttonNewNetwork);
@@ -96,6 +99,8 @@ public class AddNetworkActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
                 boolean valid = true;
+                AbfaxSelectsObject item9 = null;
+                AbfaxSelectsObject item3 = null;
 
                 if (KMPAutoComplTextView9.getText().length() == 0){
                     valid = false;
@@ -104,6 +109,7 @@ public class AddNetworkActivity extends TubelessActivity {
                     for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                         if (item.getTextValue().equals(KMPAutoComplTextView9.getText().subSequence(2,KMPAutoComplTextView9.getText().length()).toString())){
                             xv = true;
+                            item9 = item;
                             break;
                         }
                     }
@@ -119,6 +125,7 @@ public class AddNetworkActivity extends TubelessActivity {
                     for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                         if (item.getTextValue().equals(KMPAutoComplTextView3.getText().subSequence(2,KMPAutoComplTextView3.getText().length()).toString())){
                             xv = true;
+                            item3 = item;
                             break;
                         }
                     }
@@ -161,6 +168,8 @@ public class AddNetworkActivity extends TubelessActivity {
                     waterBranch.setTitle("- انشعاب شماره " + (Global.listBranchs.size() + 1));
                     waterBranch.setId(Global.listBranchs.size() + 1);
                     waterBranch.setWaterNetwork(selectedWaterNetwork);
+                    waterBranch.setDiameterWaterPipeBranch(item3);
+                    waterBranch.setWaterPipeBranchStatus(item9);
                     selectedWaterBranch = waterBranch;
                     Global.listBranchs.add(waterBranch);
 
@@ -289,6 +298,8 @@ public class AddNetworkActivity extends TubelessActivity {
                                 linearLayoutSubscribe.setVisibility(View.GONE);
                             }
                     }
+
+
                     Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -458,6 +469,11 @@ public class AddNetworkActivity extends TubelessActivity {
             @Override
             public void onClick(View v) {
                 boolean valid = true;
+                AbfaxSelectsObject item1 = null;
+                AbfaxSelectsObject item10 = null;
+                OldSubscribe itemSubscribe = null;
+                AbfaxSelectsUsageTypeInfoDetail itemSubUsage = null;
+
 
                 try {
 
@@ -468,6 +484,9 @@ public class AddNetworkActivity extends TubelessActivity {
                         for (WaterBranch item : Global.listBranchs) {
                             if (item.getTitle().equals(KMPAutoComplTextViewBranch.getText().toString())) {
                                 xv = true;
+
+
+                                selectedWaterBranch = item;
                                 break;
                             }
                         }
@@ -483,6 +502,7 @@ public class AddNetworkActivity extends TubelessActivity {
                         for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                             if (item.getTextValue().equals(KMPAutoComplTextView1.getText().subSequence(2, KMPAutoComplTextView1.getText().length()).toString())) {
                                 xv = true;
+                                item1 = item;
                                 break;
                             }
                         }
@@ -497,6 +517,7 @@ public class AddNetworkActivity extends TubelessActivity {
                         for (AbfaxSelectsUsageTypeInfoDetail item : Global.allSelects.getUsageTypeInfoDetail()) {
                             if (item.getUsageInfoDetailDesc().equals(KMPAutoComplTextViewSubUsage.getText().subSequence(2, KMPAutoComplTextViewSubUsage.getText().length()).toString())) {
                                 xv = true;
+                                itemSubUsage = item;
                                 break;
                             }
                         }
@@ -511,6 +532,7 @@ public class AddNetworkActivity extends TubelessActivity {
                         for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                             if (item.getTextValue().equals(KMPAutoComplTextView10.getText().subSequence(2, KMPAutoComplTextView10.getText().length()).toString())) {
                                 xv = true;
+                                item10 = item;
                                 break;
                             }
                         }
@@ -533,6 +555,7 @@ public class AddNetworkActivity extends TubelessActivity {
                                         String sVal = item.getSubscriberCode() + " - " + item.getTblRequestSubscriberId();
                                         if (sVal.equals(KMPAutoComplTextViewSubscribe.getText().subSequence(2, KMPAutoComplTextViewSubscribe.getText().length()).toString())) {
                                             xv = true;
+                                            itemSubscribe = item;
                                             break;
                                         }
                                     }
@@ -554,17 +577,13 @@ public class AddNetworkActivity extends TubelessActivity {
                     }
 
                     if (valid) {
+
                         StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append(KMPAutoComplTextView4.getText());
-                        stringBuilder.append("/");
-                        stringBuilder.append(KMPAutoComplTextView3.getText());
-                        stringBuilder.append("/");
-                        stringBuilder.append(KMPAutoComplTextViewSubUsage.getText());
-
-
                         if (KMPAutoComplTextViewSubscribe.getText().length()>2) {
                             StringBuilder stringBuilder2 = new StringBuilder();
+                            stringBuilder.append(" ");
                             stringBuilder.append("اشتراک قبلی :");
+                            stringBuilder.append(" ");
                             stringBuilder.append(KMPAutoComplTextViewSubscribe.getText());
 
                             newWaterMeter = new WaterMeter(stringBuilder.toString(), stringBuilder2.toString(), 1);
@@ -573,6 +592,28 @@ public class AddNetworkActivity extends TubelessActivity {
                             newWaterMeter = new WaterMeter(stringBuilder.toString(),"", 1);
                             ((WaterMeter) newWaterMeter).setType(WATER_METER);
                         }
+
+
+
+                        newWaterMeter.setWaterNetwork(selectedWaterNetwork);
+                        newWaterMeter.setWaterBranch(selectedWaterBranch);
+
+                        newWaterMeter.setCleanOldLine(checkBoxCleanOldLine.isChecked());
+                        newWaterMeter.setDiameterWaterMeter(item1);
+                        newWaterMeter.setSubUsage(itemSubUsage);
+                        newWaterMeter.setCountWaterMeter(Integer.parseInt(editTextCount.getText().toString()));
+                        newWaterMeter.setCountUnit(Integer.parseInt(editTextCount2.getText().toString()));
+                        newWaterMeter.setInstallStatus(item10);
+                        newWaterMeter.setOldSubscribe(itemSubscribe);
+
+                        stringBuilder.append(newWaterMeter.getWaterNetwork().getDiameterWaterPipeNetwork().getTextValue());
+                        stringBuilder.append("/");
+                        stringBuilder.append(newWaterMeter.getWaterBranch().getDiameterWaterPipeBranch().getTextValue());
+                        stringBuilder.append("/");
+                        stringBuilder.append(newWaterMeter.getSubUsage().getUsageInfoDetailDesc());
+
+
+
 
                         Gson gson = new Gson();
                         Intent returnIntent = new Intent();
@@ -630,7 +671,7 @@ public class AddNetworkActivity extends TubelessActivity {
 
             List<ItemData> tmpListNetwork = new ArrayList<>();
             for (WaterNetwork waterNetwork : Global.listNetwork) {
-                ItemData newItem = new ItemData(waterNetwork.getTitle(),waterNetwork.getId() + "");
+                ItemData newItem = new ItemData(waterNetwork.getTitle(),waterNetwork.getId() + "" , "");
                 tmpListNetwork.add(newItem);
             }
             KMPAutoComplTextViewnetwork.setDatas(tmpListNetwork);
@@ -651,26 +692,6 @@ public class AddNetworkActivity extends TubelessActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                String result = data.getStringExtra("result");
-
-                if (result != null){
-
-                    Gson gson = new Gson();
-                    WasterWater wasterWaterItem = gson.fromJson(result,WasterWater.class);
-//                    WasterWaterList.add(wasterWaterItem);
-//                    adapter_Posts.notifyItemInserted(WasterWaterList.size());
-                }
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-    }//onActivityResult
 
 
     @Override
