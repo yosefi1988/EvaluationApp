@@ -3,7 +3,6 @@ package ir.sajjadyosefi.evaluation.activity.evaluation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,14 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.gson.Gson;
-import com.tuyenmonkey.mkloader.model.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
-import ir.sajjadyosefi.evaluation.activity.business.SubscriptionsActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
@@ -104,6 +101,7 @@ public class WasterWaterListActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
+                true,
                 WasterWaterList);
         adapter_Posts.listType = WASTER_WATER;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);

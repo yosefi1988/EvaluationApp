@@ -41,6 +41,7 @@ public class SearchResultActivity extends TubelessActivity {
                     getContext(),
                     mLinearLayoutManager,
                     getRootActivity(),
+                    true,
                     searchResponse);
 
             recyclerView.setLayoutManager(mLinearLayoutManager);

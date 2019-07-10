@@ -24,7 +24,6 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
 import ir.sajjadyosefi.evaluation.dialog.DrillingDialogClass;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
@@ -175,6 +174,7 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
                 getContext(),
                 mLayoutManager,
                 rootview,
+                true,
                 Global.CurrentTask.drillingItemList);
         adapter_Posts.listType = DRILLING;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);

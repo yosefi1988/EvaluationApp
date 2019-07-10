@@ -118,6 +118,7 @@ public class RequestCountActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
+                true,
                 requestCountItemList);
         adapter_Posts.listType = COUNT_REQUEST_EDITED;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);

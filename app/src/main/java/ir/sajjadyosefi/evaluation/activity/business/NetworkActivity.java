@@ -141,6 +141,7 @@ public class NetworkActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
+                true,
                 waterMeters);
         adapter_Posts.listType = WATER_METER;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);

@@ -147,6 +147,7 @@ public class SubscriptionsActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
+                true,
                 subscribeItemList);
         adapter_Posts.listType = SUBSCRIPTIONS;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);

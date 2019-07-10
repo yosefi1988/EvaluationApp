@@ -32,6 +32,7 @@ import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObjectSelectable;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.File;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
@@ -58,6 +59,7 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
 
     Activity activity ;
     String LastFileSelected = null;
+    private boolean enable = false ;
 
     RadioButton radioButton1,radioButton2,radioButton3,radioButton4;
 
@@ -98,12 +100,60 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
         if (Global.allSelects != null) {
             for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                 if (item.getType() == 5) {
-                    AbfaxSelectsObject sss = new AbfaxSelectsObject("- " + item.getTextValue(), item.getKeyValue());
+                    AbfaxSelectsObjectSelectable sss = new AbfaxSelectsObjectSelectable("- " + item.getTextValue(), item.getKeyValue(),false);
                     sss.setType(TODO);
                     requestCountItemList.add(sss);
                 }
             }
+
+
+
+            if (Global.CurrentTask.assignToBet != null) {
+//                Global.CurrentTask.assignToBet.add( (AbfaxSelectsObjectSelectable) requestCountItemList.get(0));
+//                Global.CurrentTask.assignToBet.get(0).setSelected(true);
+
+                for (AbfaxSelectsObjectSelectable item : Global.CurrentTask.assignToBet) {
+                    if (item.isSelected()) {
+                        for (TubelessObject item2 : requestCountItemList) {
+                            if (item.getKeyValue() == ((AbfaxSelectsObjectSelectable) item2).getKeyValue()) {
+
+                                ((AbfaxSelectsObjectSelectable) item2).setSelected(true);
+                            }
+                        }
+                    }
+                }
+            }
+
             prepareList(getRootActivity());
+
+            if (Global.CurrentTask.getPossibilityOfAssignment() == 3){
+                adapter_Posts.enable = enable = true;
+                radioButton1.setChecked(false);
+                radioButton2.setChecked(false);
+                radioButton3.setChecked(true);
+                radioButton4.setChecked(false);
+            }else {
+                if (Global.CurrentTask.getPossibilityOfAssignment() == 1){
+                    radioButton1.setChecked(true);
+                    radioButton2.setChecked(false);
+                    radioButton3.setChecked(false);
+                    radioButton4.setChecked(false);
+                }
+                if (Global.CurrentTask.getPossibilityOfAssignment() == 2){
+                    radioButton1.setChecked(false);
+                    radioButton2.setChecked(true);
+                    radioButton3.setChecked(false);
+                    radioButton4.setChecked(false);
+                }
+                if (Global.CurrentTask.getPossibilityOfAssignment() == 4){
+                    radioButton1.setChecked(false);
+                    radioButton2.setChecked(false);
+                    radioButton3.setChecked(false);
+                    radioButton4.setChecked(true);
+                }
+
+                adapter_Posts.enable = enable = false;
+            }
         }
 
 
@@ -148,6 +198,18 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
             @Override
             public void onClick(View view) {
                 //SubscriptionsActivity
+
+
+                if (radioButton3.isChecked()){
+                    Global.CurrentTask.assignToBet.clear();
+                    for (TubelessObject item2 : requestCountItemList) {
+                        if (((AbfaxSelectsObjectSelectable)item2).isSelected()){
+                            Global.CurrentTask.assignToBet.add((AbfaxSelectsObjectSelectable)item2);
+                        }
+                    }
+
+                }
+
 
                 if (radioButton4.isChecked() == true || radioButton2.isChecked() == true || radioButton3.isChecked() == true ){
                     //اخرین صفحه
@@ -224,25 +286,32 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
                 radioButton2.setChecked(!b);
                 radioButton3.setChecked(!b);
                 radioButton4.setChecked(!b);
-                adapter_Posts.enable = false;
+                adapter_Posts.enable = enable = false;
+                Global.CurrentTask.setPossibilityOfAssignment(1);
             } else if (compoundButton == radioButton2) {
                 radioButton1.setChecked(!b);
                 radioButton2.setChecked(b);
                 radioButton3.setChecked(!b);
                 radioButton4.setChecked(!b);
-                adapter_Posts.enable = false;
+                adapter_Posts.enable = enable = false;
+                Global.CurrentTask.setPossibilityOfAssignment(2);
+
             }else if (compoundButton == radioButton3) {
                 radioButton1.setChecked(!b);
                 radioButton2.setChecked(!b);
                 radioButton3.setChecked(b);
                 radioButton4.setChecked(!b);
-                adapter_Posts.enable = true;
+                adapter_Posts.enable = enable = true;
+                Global.CurrentTask.setPossibilityOfAssignment(3);
+
             }else if (compoundButton == radioButton4) {
                 radioButton1.setChecked(!b);
                 radioButton2.setChecked(!b);
                 radioButton3.setChecked(!b);
                 radioButton4.setChecked(b);
-                adapter_Posts.enable = false;
+                adapter_Posts.enable = enable = false;
+                Global.CurrentTask.setPossibilityOfAssignment(4);
+
             }
         }
         adapter_Posts.notifyDataSetChanged();
@@ -255,27 +324,27 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
             radioButton2.setChecked(false);
             radioButton3.setChecked(false);
             radioButton4.setChecked(false);
-            adapter_Posts.enable = false;
+            adapter_Posts.enable = enable = false;
 
         } else if (view == textView2) {
             radioButton1.setChecked(false);
             radioButton2.setChecked(true);
             radioButton3.setChecked(false);
             radioButton4.setChecked(false);
-            adapter_Posts.enable = false;
+            adapter_Posts.enable = enable = false;
 
         }else if (view == textView3) {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
             radioButton3.setChecked(true);
             radioButton4.setChecked(false);
-            adapter_Posts.enable = true;
+            adapter_Posts.enable = enable = true;
         }else if (view == textView4) {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
             radioButton3.setChecked(false);
             radioButton4.setChecked(true);
-            adapter_Posts.enable = false;
+            adapter_Posts.enable = enable = false;
         }
         adapter_Posts.notifyDataSetChanged();
     }
@@ -291,9 +360,9 @@ public class StepOneActivity extends TubelessActivity implements CompoundButton.
                 getContext(),
                 mLayoutManager,
                 rootview,
+                enable,
                 requestCountItemList);
         adapter_Posts.listType = TODO;
-        adapter_Posts.enable = false;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
 

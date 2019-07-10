@@ -1,6 +1,7 @@
 package ir.sajjadyosefi.evaluation.model.business;
 
 import android.app.Activity;
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,8 @@ import ir.sajjadyosefi.evaluation.activity.business.DetailsActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.MapActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObjectSelectable;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.Content;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.OldSubscribe;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
@@ -44,8 +47,8 @@ public class Task extends TubelessObject {
     private File fileKrocki;
     private List<OldSubscribe> oldSubscribeList;
     private List<Content> contentList;
-
-
+    private int PossibilityOfAssignment;
+    public List<AbfaxSelectsObjectSelectable> assignToBet = new ArrayList<>();
 
 
     public List<WaterNetwork> waterNetworks = new ArrayList<WaterNetwork>();
@@ -247,5 +250,13 @@ public class Task extends TubelessObject {
         this.fileKrocki = fileKrocki;
     }
 
+
+    public int getPossibilityOfAssignment() {
+        return PossibilityOfAssignment;
+    }
+
+    public void setPossibilityOfAssignment(int possibilityOfAssignment) {
+        PossibilityOfAssignment = possibilityOfAssignment;
+    }
 
 }

@@ -1,46 +1,34 @@
 package ir.sajjadyosefi.evaluation.classes.model.responses.Abfax;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.CompoundButton;
 
 import java.util.List;
 
-import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
-import ir.sajjadyosefi.evaluation.model.business.File;
-import ir.sajjadyosefi.evaluation.model.business.Task;
-import ir.sajjadyosefi.evaluation.model.exception.TubelessException;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 /**
  * Created by sajjad on 10/31/2016.
  */
-public class AbfaxSelectsObject  extends TubelessObject {
+public class AbfaxSelectsObjectSelectable extends AbfaxSelectsObject {
 
-    private int keyValue;
-    private String textValue;
+    private boolean isSelected;
 
-    public AbfaxSelectsObject(String text, int key) {
-        keyValue = key;
-        textValue = text;
+    public AbfaxSelectsObjectSelectable(String text, int key , boolean isSelected) {
+        super(text, key);
+        this.isSelected = isSelected;
     }
 
-    public int getKeyValue() {
-        return keyValue;
+
+    public boolean isSelected() {
+        return isSelected;
     }
 
-    public void setKeyValue(int keyValue) {
-        this.keyValue = keyValue;
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
-    public String getTextValue() {
-        return textValue;
-    }
-
-    public void setTextValue(String textValue) {
-        this.textValue = textValue;
-    }
 
     public void prepareYafteItem(Context mContext, boolean enable, EndlessList_Adapter.ToDotViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
 
@@ -51,7 +39,7 @@ public class AbfaxSelectsObject  extends TubelessObject {
         if (enable){
             holder.checkBox.setEnabled(enable);
             if (request.isSelected()){
-                holder.checkBox.setSelected(request.isSelected());
+                holder.checkBox.setChecked(request.isSelected());
             }
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

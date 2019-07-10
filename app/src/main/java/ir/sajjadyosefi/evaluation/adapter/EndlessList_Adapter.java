@@ -26,7 +26,7 @@ import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterAddActivity;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
-import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObjectSelectable;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.DrillingListItem;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.ListTasks;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterMeter;
@@ -108,12 +108,13 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
 
 
     //WasterWater - Subscriptions - usageListRequest - todoList
-    public EndlessList_Adapter(Context context, LinearLayoutManager mLayoutManager, View rootview, List<TubelessObject> wasterWaterList) {
+    public EndlessList_Adapter(Context context, LinearLayoutManager mLayoutManager, View rootview, boolean enable, List<TubelessObject> wasterWaterList) {
         this.mContext = context ;
         this.mLayoutManager = mLayoutManager;
         this.mRecyclerView = rootview.findViewById(R.id.recyclerView);
         this.mTimelineItemList = wasterWaterList;
         this.adapter = this ;
+        this.enable = enable ;
     }
 
     //FILES
@@ -469,7 +470,7 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
         }
         if (listType == TODO) {
             if (mTimelineItemList.size() > 0 && mTimelineItemList.size() != position && mTimelineItemList.get(position).getType() == TODO) {
-                ((AbfaxSelectsObject)mTimelineItemList.get(position)).prepareYafteItem(mContext, enable,(ToDotViewHolder) holder, mTimelineItemList, position,adapter);
+                ((AbfaxSelectsObjectSelectable)mTimelineItemList.get(position)).prepareYafteItem(mContext, enable,(ToDotViewHolder) holder, mTimelineItemList, position,adapter);
             }else {
 
             }
