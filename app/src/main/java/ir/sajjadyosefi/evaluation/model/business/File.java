@@ -1,5 +1,6 @@
 package ir.sajjadyosefi.evaluation.model.business;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -44,7 +45,7 @@ public class File extends TubelessObject {
 
     public static int MAP_K = 1000 ;
     public static int MAP_1 = 1001 ;
-    public static int MAP_2 = 1002 ;
+    public static int SIGNATURE = 1002 ;
     public static int MAP_3 = 1003 ;
 
     private String uri;
@@ -105,27 +106,34 @@ public class File extends TubelessObject {
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DownloadFileRequest loginRequest = new DownloadFileRequest();
-                loginRequest.setContentId(file.getRequestContentId() + "");
-                loginRequest.setFrame(file.getFrame() + "");
-                Global.apiManagerTubeless.getDocument(loginRequest,new TubelessRetrofitCallback<Object>(mContext, holder.rootView, true, null, new Callback<Object>() {
-                    @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
-                        Gson gson = new Gson();
-                        JsonElement jsonElement = gson.toJsonTree(response.body());
-                        DownloadDocument downloadObject = gson.fromJson(jsonElement , DownloadDocument.class);
+                if (file.getFileType() == SIGNATURE){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.parse(file.getUri()), "image/png");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ((Activity)mContext).startActivity(intent);
+                }else {
+                    DownloadFileRequest loginRequest = new DownloadFileRequest();
+                    loginRequest.setContentId(file.getRequestContentId() + "");
+                    loginRequest.setFrame(file.getFrame() + "");
+                    Global.apiManagerTubeless.getDocument(loginRequest, new TubelessRetrofitCallback<Object>(mContext, holder.rootView, true, null, new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            Gson gson = new Gson();
+                            JsonElement jsonElement = gson.toJsonTree(response.body());
+                            DownloadDocument downloadObject = gson.fromJson(jsonElement, DownloadDocument.class);
 
-                        Bitmap bmp = BitmapFactory.decodeByteArray(downloadObject.getObject().getContent().getBytes(), 0, downloadObject.getObject().getContent().length());
+                            Bitmap bmp = BitmapFactory.decodeByteArray(downloadObject.getObject().getContent().getBytes(), 0, downloadObject.getObject().getContent().length());
 //                        DetailsActivity.ImageView.setImageBitmap(bmp);
 
 
-                    }
+                        }
 
-                    @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
 
-                    }
-                }));
+                        }
+                    }));
+                }
             }
         });
 

@@ -37,13 +37,17 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.io.File;
 import java.io.OutputStream;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView;
+import ir.sajjadyosefi.evaluation.model.business.File;
+
+import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.FILES;
+import static ir.sajjadyosefi.evaluation.model.business.File.MAP_1;
+import static ir.sajjadyosefi.evaluation.model.business.File.SIGNATURE;
 
 public class SignatureActivity extends TubelessActivity implements View.OnClickListener {
 
@@ -235,6 +239,23 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                 Toast t = Toast .makeText(this, "Saved! "+ getRealPathFromURI(imageFileUri), Toast.LENGTH_SHORT);
                 t.show();
 
+
+
+                String LastFileSelected = null;
+                LastFileSelected = imageFileUri + "";
+                //imageViewAvatar.setImageURI(imageUri);
+
+                ir.sajjadyosefi.evaluation.model.business.File map1 = new File();
+                map1.setTitle(LastFileSelected.substring(LastFileSelected.lastIndexOf("/")+1));
+                map1.setTitle("signature");
+
+                map1.setRequestContentId(1);
+                map1.setFrame(1);
+                map1.setFileType(SIGNATURE);
+                map1.setUri(LastFileSelected);
+                map1.setType(FILES);
+                Global.CurrentTask.sendToServerfileList.add(map1);
+
             } catch (Exception e) {
                 Log.v("EXCEPTION", e.getMessage());
                 return false;
@@ -311,7 +332,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_STORAGE);
             }
             return false;
@@ -360,7 +381,11 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
 
                         //Request location updates:
                         //locationManager.requestLocationUpdates(provider, 400, 1, this);
-                        saveSignature();
+                        if (saveSignature()){
+                            Intent i = new Intent(getContext(), CommentActivity.class);
+                            (getActivity()).startActivity(i);
+                            finish();
+                        }
                     }
 
                 } else {

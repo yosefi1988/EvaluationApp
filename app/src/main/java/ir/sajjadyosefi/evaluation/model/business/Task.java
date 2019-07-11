@@ -61,6 +61,7 @@ public class Task extends TubelessObject {
     public List<WaterNetwork> waterNetworks = new ArrayList<WaterNetwork>();
     public List<TubelessObject> drillingItemList = new ArrayList<TubelessObject>();
     public List<TubelessObject> WasterWaterList = new ArrayList<TubelessObject>();
+    public List<TubelessObject> sendToServerfileList = new ArrayList<TubelessObject>();
 
     public boolean isMunicipalityLicense() {
         return municipalityLicense;

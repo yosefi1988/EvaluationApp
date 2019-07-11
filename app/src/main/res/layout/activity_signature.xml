@@ -14,10 +14,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="get last location"
+        android:visibility="gone"
         android:id="@+id/getLastlocation"/>
 
     <ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/signback"

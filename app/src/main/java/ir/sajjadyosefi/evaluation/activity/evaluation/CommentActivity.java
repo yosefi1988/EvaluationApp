@@ -60,7 +60,6 @@ public class CommentActivity extends TubelessActivity {
     private TextView txtText;
     private EditText editTextComment;
     TextToSpeech t1;
-    List<TubelessObject> taskItemList = new ArrayList<TubelessObject>();
     RecyclerView                    mRecyclerViewTimeline;
     LinearLayoutManager             mLayoutManager;
     EndlessList_Adapter             adapter_Posts;
@@ -331,7 +330,7 @@ public class CommentActivity extends TubelessActivity {
                 getContext(),
                 mLayoutManager,
                 rootview,
-                taskItemList,
+                Global.CurrentTask.sendToServerfileList ,
                 FILES,
                 true);
         adapter_Posts.listType = FILES;
@@ -364,7 +363,7 @@ public class CommentActivity extends TubelessActivity {
                         map1.setFileType(MAP_1);
                         map1.setUri(LastFileSelected);
                         map1.setType(FILES);
-                        taskItemList.add(map1);
+                        Global.CurrentTask.sendToServerfileList.add(map1);
                         adapter_Posts.notifyDataSetChanged();
                     }
                 })
@@ -387,7 +386,7 @@ public class CommentActivity extends TubelessActivity {
                         map1.setFileType(MAP_1);
                         map1.setUri(LastFileSelected);
                         map1.setType(FILES);
-                        taskItemList.add(map1);
+                        Global.CurrentTask.sendToServerfileList.add(map1);
                         adapter_Posts.notifyDataSetChanged();
 
                     }
