@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.business.NetworkActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
+import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
@@ -35,7 +37,6 @@ public class WasterWaterListActivity extends TubelessActivity {
     private View                    emptyView;
     Button buttonBack, buttonNext;
 
-    List<TubelessObject> WasterWaterList = new ArrayList<TubelessObject>();
     EndlessList_Adapter adapter_Posts;
 
     @Override
@@ -48,8 +49,8 @@ public class WasterWaterListActivity extends TubelessActivity {
                 if (result != null){
                     Gson gson = new Gson();
                     WasterWater wasterWaterItem = gson.fromJson(result,WasterWater.class);
-                    WasterWaterList.add(wasterWaterItem);
-                    adapter_Posts.notifyItemInserted(WasterWaterList.size());
+                    Global.CurrentTask.WasterWaterList.add(wasterWaterItem);
+                    adapter_Posts.notifyItemInserted(Global.CurrentTask.WasterWaterList.size());
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -77,8 +78,13 @@ public class WasterWaterListActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 //                getActivity().startActivity(new Intent(getContext(), DrillingListActivity.class));
-                getActivity().startActivity(new Intent(getContext(), DrillingActivity.class));
-                finish();
+
+                if (Global.CurrentTask.WasterWaterList.size() == 0){
+                    Toast.makeText(getContext(),"هنوز هیچ موردی وارد نکرده اید", Toast.LENGTH_LONG).show();
+                }else {
+                    getActivity().startActivity(new Intent(getContext(), DrillingActivity.class));
+                    finish();
+                }
             }
         });
 
@@ -102,7 +108,7 @@ public class WasterWaterListActivity extends TubelessActivity {
                 mLayoutManager,
                 rootview,
                 true,
-                WasterWaterList);
+                Global.CurrentTask.WasterWaterList);
         adapter_Posts.listType = WASTER_WATER;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);

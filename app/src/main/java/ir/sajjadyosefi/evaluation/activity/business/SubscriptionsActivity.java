@@ -54,6 +54,8 @@ public class SubscriptionsActivity extends TubelessActivity {
 
     Activity activity ;
     String LastFileSelected = null;
+    ArrayList<ItemData> list = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +66,13 @@ public class SubscriptionsActivity extends TubelessActivity {
 
         buttonNext = findViewById(R.id.buttonNext);
         buttonBack = findViewById(R.id.buttonBack);
+        complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
 
 
         //type موقت
         if (Global.CurrentTask == null ){
 
         }else {
-            complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
-            ArrayList<ItemData> list = new ArrayList<>();
 
             ItemData sss = new ItemData("- موقت",  "1","");
             list.add(sss);
@@ -113,13 +114,35 @@ public class SubscriptionsActivity extends TubelessActivity {
 
                 //RequestCountActivity
 
+
+
+
+
+                boolean valid = true;
+                boolean innerValid = false;
+
+                for (ItemData item : list) {
+                    if (item.getText().equals(complTextView.getText().toString())){
+                        innerValid = true;
+                        Global.CurrentTask.typeOfAssignment = item;
+                    }
+                }
+                if (innerValid == false){
+                    valid = false;
+                }
+
                 if (complTextView.getText().length() < 5){
                     Toast.makeText(getContext(),"نوع واگذاری را انتخاب کنید" ,Toast.LENGTH_LONG).show();
-                }else {
+                    valid = false;
+                }
+
+
+                if (valid){
                     Global.CurrentTask.getOldSubscribeList().clear();
                     for (TubelessObject item : subscribeItemList) {
                         Global.CurrentTask.getOldSubscribeList().add((OldSubscribe) item);
                     }
+
 
                     activity.startActivity(new Intent(getContext(), RequestCountActivity.class));
                     finish();
@@ -134,6 +157,7 @@ public class SubscriptionsActivity extends TubelessActivity {
                 finish();
             }
         });
+
     }
 
 
@@ -155,7 +179,17 @@ public class SubscriptionsActivity extends TubelessActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+
+        if (Global.CurrentTask.typeOfAssignment != null){
+            complTextView.edit = true;
+            complTextView.setText(Global.CurrentTask.typeOfAssignment.getText().toString());
+            complTextView.edit = false;
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

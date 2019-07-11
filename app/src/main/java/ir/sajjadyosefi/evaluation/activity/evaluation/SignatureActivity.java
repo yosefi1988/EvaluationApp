@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.OutputStream;
 
 import ir.sajjadyosefi.evaluation.R;
+import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.wiget.DrawableImageView;
 
@@ -123,11 +124,10 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
 
     }
 
-    public Location userLocation = null;
     @Override
     protected void onStart() {
         super.onStart();
-        if (userLocation  == null) {
+        if (Global.CurrentTask.userLocation  == null) {
             if (checkLocationPermission()){
                 statusCheck();
             }
@@ -172,7 +172,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                     // ...
                     dialog.hide();
                     Toast.makeText(getContext(),"location " + location.toString(),Toast.LENGTH_LONG).show();
-                    userLocation = location;
+                    Global.CurrentTask.userLocation = location;
                 }
             };
         };
@@ -210,7 +210,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                     finish();
                 }
             }else {
-                //Toast.makeText(getContext(),"Permission" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"دسترسی به حافظه هنوز اعطا نشده است." ,Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -340,6 +340,7 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
 
                 } else {
 
+                    buttonBack.performClick();
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
 
@@ -363,6 +364,8 @@ public class SignatureActivity extends TubelessActivity implements View.OnClickL
                     }
 
                 } else {
+
+                    buttonBack.performClick();
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.

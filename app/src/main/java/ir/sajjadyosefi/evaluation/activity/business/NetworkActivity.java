@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.refactor.kmpautotextview.ItemData;
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.activity.evaluation.AddNetworkActivity;
 import ir.sajjadyosefi.evaluation.activity.evaluation.DrillingActivity;
@@ -23,9 +25,11 @@ import ir.sajjadyosefi.evaluation.activity.evaluation.WasterWaterListActivity;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsUsageTypeInfoDetail;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterBranch;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterMeter;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WATER_METER;
@@ -47,6 +51,7 @@ public class NetworkActivity extends TubelessActivity {
 
     Activity activity ;
     String LastFileSelected = null;
+    int count = 0;
 
 
     @Override
@@ -80,24 +85,66 @@ public class NetworkActivity extends TubelessActivity {
 
 
 
+        ArrayList<ItemData> listSub = new ArrayList<>();
+        for (TubelessObject usageItem: Global.CurrentTask.getUsageList()) {
+            if (((UsageListItem)usageItem).isEdited() == true){
+                if (((UsageListItem)usageItem).getWaterMainUnitQtyReq2() >= 1){
 
+                    count = count + ((UsageListItem)usageItem).getWaterMainUnitQtyReq2();
+//                            for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
+//                                if (xItem.getUsageTypeId() == ((UsageListItem)usageItem).getUsageTypeIdReq()){
+//
+//                                    ItemData sss = new ItemData("- " + xItem.getUsageInfoDetailDesc(), xItem.getUsageTypeInfoDetailId() + "", xItem.getUsageTypeInfoDetailId() + "");
+//                                    listSub.add(sss);
+//
+//                                }
+//                            }
+                }
+                continue;
+            }else {
+                if (((UsageListItem)usageItem).getWaterMainUnitQtyReq() >= 1){
+                    //کاربری درخواستی
+                    //usageItem.getUsageTypeIdReq()
+
+                    count = count + ((UsageListItem)usageItem).getWaterMainUnitQtyReq();
+
+//                            for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
+//                                if (xItem.getUsageTypeId() == ((UsageListItem)usageItem).getUsageTypeIdReq()){
+//
+//                                    ItemData sss = new ItemData("- " + xItem.getUsageInfoDetailDesc(), xItem.getUsageTypeInfoDetailId() + "", xItem.getUsageTypeInfoDetailId() + "");
+//                                    listSub.add(sss);
+//
+//                                }
+//                            }
+                }
+            }
+        }
 
         battonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), WasterWaterListActivity.class);
-                (getActivity()).startActivity(i);
-                finish();
+
+                if (count == waterMeters.size()) {
+                    Intent i = new Intent(getContext(), WasterWaterListActivity.class);
+                    (getActivity()).startActivity(i);
+                    finish();
+                }else {
+                    Toast.makeText(getContext(), "تعداد در لیست بالا ؛ با تعداد تقاضا متناسب نیست , تعداد تقاضا = " + count , Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         battonNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (count == waterMeters.size()) {
+                    Intent i = new Intent(getContext(), DrillingActivity.class);
+                    (getActivity()).startActivity(i);
+                    finish();
+                }else {
+                    Toast.makeText(getContext(), "تعداد در لیست بالا ؛ با تعداد تقاضا متناسب نیست , تعداد تقاضا = " + count , Toast.LENGTH_LONG).show();
+                }
 
-                Intent i = new Intent(getContext(), DrillingActivity.class);
-                (getActivity()).startActivity(i);
-                finish();
             }
         });
 

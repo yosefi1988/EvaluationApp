@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,17 +44,39 @@ public class Task extends TubelessObject {
     private int taskType;
     private String taskDate;
     private List<UsageListItem> usageList;
+    private boolean unauthorizedUse ;
+    private boolean municipalityLicense ;
+    private boolean municipalSewageLicense ;
     private List<File> fileList;
     private File fileKrocki;
     private List<OldSubscribe> oldSubscribeList;
     private List<Content> contentList;
     private int PossibilityOfAssignment;
+    public ItemData typeOfAssignment;
     public List<AbfaxSelectsObjectSelectable> assignToBet = new ArrayList<>();
+    public List<AbfaxSelectsObjectSelectable> todoList = new ArrayList<>();
 
 
+    public Location userLocation = null;
     public List<WaterNetwork> waterNetworks = new ArrayList<WaterNetwork>();
     public List<TubelessObject> drillingItemList = new ArrayList<TubelessObject>();
+    public List<TubelessObject> WasterWaterList = new ArrayList<TubelessObject>();
 
+    public boolean isMunicipalityLicense() {
+        return municipalityLicense;
+    }
+
+    public void setMunicipalityLicense(boolean municipalityLicense) {
+        this.municipalityLicense = municipalityLicense;
+    }
+
+    public boolean isMunicipalSewageLicense() {
+        return municipalSewageLicense;
+    }
+
+    public void setMunicipalSewageLicense(boolean municipalSewageLicense) {
+        this.municipalSewageLicense = municipalSewageLicense;
+    }
 
     public List<Content> getContentList() {
         return contentList;
@@ -62,6 +85,15 @@ public class Task extends TubelessObject {
     public void setContentList(List<Content> contentList) {
         this.contentList = contentList;
     }
+
+    public boolean isUnauthorizedUse() {
+        return unauthorizedUse;
+    }
+
+    public void setUnauthorizedUse(boolean unauthorizedUse) {
+        this.unauthorizedUse = unauthorizedUse;
+    }
+
 
     public void prepareYafteItem(Context mContext, EndlessList_Adapter.TaskViewHolder holder, List<TubelessObject> mTimelineItemList, int position, EndlessList_Adapter adapter) {
         Task request = (Task) mTimelineItemList.get(position);

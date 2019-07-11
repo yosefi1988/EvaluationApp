@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -45,6 +46,7 @@ public class RequestCountActivity extends TubelessActivity {
 
 
     Button ButtonSms,ButtonCall,buttonk,buttonBack,buttonNext;
+    CheckBox checkBox ;
     TextView textViewNameFamily1,TextViewSerial,textViewDate,textViewNameFamily2,textViewMobile,TextViewCodePosti,TextViewAddress;
 
     Activity activity ;
@@ -59,16 +61,25 @@ public class RequestCountActivity extends TubelessActivity {
 
         buttonNext = findViewById(R.id.buttonNext);
         buttonBack = findViewById(R.id.buttonBack);
+        checkBox = findViewById(R.id.checkBox);
 
 
 
 
 
+        if (Global.CurrentTask.isUnauthorizedUse()){
+            checkBox.setChecked(true);
+        }else {
+            checkBox.setChecked(false);
+        }
 
 
         if (Global.CurrentTask != null) {
             for (UsageListItem usageListItem : Global.CurrentTask.getUsageList()) {
-                usageListItem.type = COUNT_REQUEST;
+
+                if (usageListItem.type == 0)
+                    usageListItem.type = COUNT_REQUEST;
+
                 requestCountItemList.add(usageListItem);
             }
         }
@@ -80,6 +91,9 @@ public class RequestCountActivity extends TubelessActivity {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                Global.CurrentTask.setUnauthorizedUse(checkBox.isChecked());
                 activity.startActivity(new Intent(getContext(), NetworkActivity.class));
                 finish();
             }

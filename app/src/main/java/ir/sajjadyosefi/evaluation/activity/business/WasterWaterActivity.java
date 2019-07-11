@@ -69,8 +69,8 @@ public class WasterWaterActivity extends TubelessActivity {
             complTextView = (KMPAutoComplTextView) findViewById(R.id.tvAutoCompl);
             ArrayList<ItemData> list = new ArrayList<>();
 
-            for (UsageListItem item: Global.CurrentTask.getUsageList()) {
-                ItemData sss = new ItemData(item.getUsageDesc().toString() , item.getUsageTypeIdReq()+"","");
+            for (TubelessObject item: Global.CurrentTask.getUsageList()) {
+                ItemData sss = new ItemData(((UsageListItem)item).getUsageDesc().toString() , ((UsageListItem)item).getUsageTypeIdReq()+"","");
                 list.add(sss);
             }
             complTextView.setDatas(list);

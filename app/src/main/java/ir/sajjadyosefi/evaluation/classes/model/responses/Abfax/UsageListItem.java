@@ -29,7 +29,7 @@ public class UsageListItem  extends TubelessObject {
     private String usageDesc;
     private boolean edited = false;
     private int waterMainUnitQtyReq2;
-    private int needSeparationReq2;
+    private boolean needSeparationReq2;
 
     public int getUsageTypeIdReq() {
         return usageTypeIdReq;
@@ -64,11 +64,11 @@ public class UsageListItem  extends TubelessObject {
         this.waterMainUnitQtyReq2 = waterMainUnitQtyReq2;
     }
 
-    public int getNeedSeparationReq2() {
+    public boolean getNeedSeparationReq2() {
         return needSeparationReq2;
     }
 
-    public void setNeedSeparationReq2(int needSeparationReq2) {
+    public void setNeedSeparationReq2(boolean needSeparationReq2) {
         this.needSeparationReq2 = needSeparationReq2;
     }
 
@@ -102,7 +102,7 @@ public class UsageListItem  extends TubelessObject {
 
         if (usageListItem.isEdited()){
             holder.textViewCount2.setText(usageListItem.getWaterMainUnitQtyReq2() + "");
-            holder.checkBoxNeedSeparationReq2.setChecked(usageListItem.needSeparationReq2 == 1 ? true : false);
+            holder.checkBoxNeedSeparationReq2.setChecked(usageListItem.needSeparationReq2 ? true : false);
         }
 
         holder.rootView.setOnClickListener(new View.OnClickListener() {

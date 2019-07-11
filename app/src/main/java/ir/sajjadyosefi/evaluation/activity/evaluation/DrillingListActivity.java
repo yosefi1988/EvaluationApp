@@ -142,10 +142,17 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
                 if (Global.CurrentTask.drillingItemList.size() == 0){
                     Toast.makeText(getContext(),"موردی برای حفاری وارد نکرده اید",Toast.LENGTH_LONG).show();
                 }else {
+                    Global.CurrentTask.setMunicipalityLicense(checkBox1.isChecked());
+                    Global.CurrentTask.setMunicipalSewageLicense(checkBox2.isChecked());
+
+
                     Intent i = new Intent(getContext(), ToDoListActivity.class);
                     (getActivity()).startActivity(i);
                     finish();
                 }
+
+                //municipalityLicense
+
             }
         });
 
@@ -162,6 +169,20 @@ public class DrillingListActivity extends TubelessActivity implements CompoundBu
 //            Intent i = new Intent(getContext(), AddNetworkActivity.class);
 //            (getActivity()).startActivityForResult(i, 1);
 //        }
+
+
+
+        if (Global.CurrentTask.isMunicipalityLicense()){
+            checkBox1.setChecked(true);
+        }else {
+            checkBox1.setChecked(false);
+        }
+
+        if (Global.CurrentTask.isMunicipalSewageLicense()){
+            checkBox2.setChecked(true);
+        }else {
+            checkBox2.setChecked(false);
+        }
     }
 
 

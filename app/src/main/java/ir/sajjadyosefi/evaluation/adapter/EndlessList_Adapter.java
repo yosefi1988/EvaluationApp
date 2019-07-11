@@ -127,9 +127,8 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             this.adapter = this;
             this.deletable = deletable ;
         }
-
-
     }
+
 
 
     ///////////////////////  ViewHolder   /////////////////////////

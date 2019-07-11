@@ -30,6 +30,7 @@ import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
 import ir.sajjadyosefi.evaluation.model.business.WasterWater;
+import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WATER_METER;
 
@@ -325,11 +326,11 @@ public class AddNetworkActivity extends TubelessActivity {
             //type subUsage
             KMPAutoComplTextViewSubUsage = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextViewSubUsage);
             ArrayList<ItemData> listSub = new ArrayList<>();
-            for (UsageListItem usageItem: Global.CurrentTask.getUsageList()) {
-                if (usageItem.isEdited() == true){
-                    if (usageItem.getWaterMainUnitQtyReq2() >= 1){
+            for (TubelessObject usageItem: Global.CurrentTask.getUsageList()) {
+                if (((UsageListItem)usageItem).isEdited() == true){
+                    if (((UsageListItem)usageItem).getWaterMainUnitQtyReq2() >= 1){
                         for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
-                            if (xItem.getUsageTypeId() == usageItem.getUsageTypeIdReq()){
+                            if (xItem.getUsageTypeId() == ((UsageListItem)usageItem).getUsageTypeIdReq()){
 
                                 ItemData sss = new ItemData("- " + xItem.getUsageInfoDetailDesc(), xItem.getUsageTypeInfoDetailId() + "", xItem.getUsageTypeInfoDetailId() + "");
                                 listSub.add(sss);
@@ -339,11 +340,11 @@ public class AddNetworkActivity extends TubelessActivity {
                     }
                     continue;
                 }else {
-                    if (usageItem.getWaterMainUnitQtyReq() >= 1){
+                    if (((UsageListItem)usageItem).getWaterMainUnitQtyReq() >= 1){
                         //کاربری درخواستی
                         //usageItem.getUsageTypeIdReq()
                         for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
-                            if (xItem.getUsageTypeId() == usageItem.getUsageTypeIdReq()){
+                            if (xItem.getUsageTypeId() == ((UsageListItem)usageItem).getUsageTypeIdReq()){
 
                                 ItemData sss = new ItemData("- " + xItem.getUsageInfoDetailDesc(), xItem.getUsageTypeInfoDetailId() + "", xItem.getUsageTypeInfoDetailId() + "");
                                 listSub.add(sss);

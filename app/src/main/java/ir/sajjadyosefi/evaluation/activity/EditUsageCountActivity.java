@@ -68,7 +68,7 @@ public class EditUsageCountActivity extends TubelessActivity {
             public void onClick(View view) {
                 if (editText.getText().length() >= 1){
 
-                    item.setNeedSeparationReq2(5);
+                    item.setNeedSeparationReq2(checkBox.isChecked());
                     item.setEdited(true);
                     item.setWaterMainUnitQtyReq2(Integer.parseInt(editText.getText().toString()));
 

@@ -19,6 +19,7 @@ import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObject;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelectsObjectSelectable;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.TODO;
@@ -61,11 +62,27 @@ public class ToDoListActivity extends TubelessActivity {
         if (Global.allSelects != null) {
             for (AbfaxSelectsObject item : Global.allSelects.getObject()) {
                 if (item.getType() == 6) {
-                    AbfaxSelectsObject sss = new AbfaxSelectsObject("- " + item.getTextValue(), item.getKeyValue());
+                    AbfaxSelectsObjectSelectable sss = new AbfaxSelectsObjectSelectable("- " + item.getTextValue(), item.getKeyValue(),false);
                     sss.setType(TODO);
                     requestCountItemList.add(sss);
                 }
             }
+
+
+            if (Global.CurrentTask.todoList != null) {
+                for (AbfaxSelectsObjectSelectable item : Global.CurrentTask.todoList) {
+                    if (item.isSelected()) {
+                        for (TubelessObject item2 : requestCountItemList) {
+                            if (item.getKeyValue() == ((AbfaxSelectsObjectSelectable) item2).getKeyValue()) {
+                                ((AbfaxSelectsObjectSelectable) item2).setSelected(true);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
             prepareList(getRootActivity());
         }
 
@@ -76,6 +93,14 @@ public class ToDoListActivity extends TubelessActivity {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Global.CurrentTask.todoList.clear();
+                for (TubelessObject item2 : requestCountItemList) {
+                    if (((AbfaxSelectsObjectSelectable)item2).isSelected()){
+                        Global.CurrentTask.todoList.add((AbfaxSelectsObjectSelectable)item2);
+                    }
+                }
+
 
                 Intent i = new Intent(getContext(),SignatureActivity.class);
                 (getActivity()).startActivity(i);

@@ -89,6 +89,7 @@ public class KMPAutoComplTextView extends android.support.v7.widget.AppCompatAut
 
     }
 
+    public boolean edit = false;
     private void onInputTextChanged(String input) {
         matchResult(input);
 
@@ -99,7 +100,8 @@ public class KMPAutoComplTextView extends android.support.v7.widget.AppCompatAut
         mAdapter.notifyDataSetChanged();
 
         if (!KMPAutoComplTextView.this.isPopupShowing() || mAdapter.mList.size() > 0) {
-            showDropDown();
+            if (edit == false)
+                showDropDown();
         }
 
     }
