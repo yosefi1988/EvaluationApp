@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_margin="5dp"
+    android:background="@drawable/bg_search"
     android:gravity="right"  >
 
     <LinearLayout
@@ -13,6 +15,7 @@
         android:layoutDirection="rtl"
         android:textDirection="ltr"
         android:gravity="center"
+        android:layout_margin="5dp"
         android:orientation="horizontal" >
 
         <ir.sajjadyosefi.evaluation.classes.wiget.PersianTextView

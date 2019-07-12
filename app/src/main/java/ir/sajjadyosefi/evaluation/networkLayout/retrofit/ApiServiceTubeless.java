@@ -2,9 +2,11 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 
 import android.graphics.Movie;
 import ir.sajjadyosefi.evaluation.classes.model.request.SearchRequest;
+import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DownloadFileRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
+import ir.sajjadyosefi.evaluation.model.business.Task;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -58,4 +60,7 @@ public interface ApiServiceTubeless {
     @POST("api/DownloadFile")
     Call<Object> documents(@Body DownloadFileRequest request);
 
+
+    @POST("api/send")
+    Call<Object> sendData(@Body SendTaskToServerObject request);
 }

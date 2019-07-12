@@ -3,9 +3,11 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 
 import android.content.Context;
 
+import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DownloadFileRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.utility.DeviceUtil;
+import ir.sajjadyosefi.evaluation.model.business.Task;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -71,6 +73,13 @@ public class RetrofitHelperService {
         Call<Object> userCall = service.GetAllEvaluationRequest(request);
         userCall.enqueue(callback);
     }
+
+
+    public void sendData(SendTaskToServerObject request, TubelessRetrofitCallback<Object> callback) {
+        Call<Object> userCall = service.sendData(request);
+        userCall.enqueue(callback);
+    }
+
     ///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
 

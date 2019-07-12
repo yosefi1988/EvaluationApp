@@ -596,6 +596,9 @@ public class AddNetworkActivity extends TubelessActivity {
 
 
 
+                        if (selectedWaterNetwork.getId() == 0){
+                            selectedWaterNetwork = selectedWaterBranch.getWaterNetwork();
+                        }
                         newWaterMeter.setWaterNetwork(selectedWaterNetwork);
                         newWaterMeter.setWaterBranch(selectedWaterBranch);
 
@@ -605,7 +608,10 @@ public class AddNetworkActivity extends TubelessActivity {
                         newWaterMeter.setCountWaterMeter(Integer.parseInt(editTextCount.getText().toString()));
                         newWaterMeter.setCountUnit(Integer.parseInt(editTextCount2.getText().toString()));
                         newWaterMeter.setInstallStatus(item10);
-                        newWaterMeter.setOldSubscribe(itemSubscribe);
+
+                        if (itemSubscribe != null)
+                            newWaterMeter.setOldSubscribe(itemSubscribe);
+
 
                         stringBuilder.append(newWaterMeter.getWaterNetwork().getDiameterWaterPipeNetwork().getTextValue());
                         stringBuilder.append("/");

@@ -41,11 +41,13 @@ public class WasterWaterAddActivity extends TubelessActivity {
     EditText editTextCount,editTextTool;
     LinearLayout linearLayoutCount,linearLayoutGhotr,linearLayoutSubscribe;
 
+    ArrayList<ItemData> list = new ArrayList<>();
+    ArrayList<ItemData> list2 = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wastewater);
-        ArrayList<ItemData> list = new ArrayList<>();
 
         linearLayoutSubscribe = findViewById(R.id.linearLayoutSubscribe);
         linearLayoutGhotr = findViewById(R.id.linearLayoutGhotr);
@@ -62,42 +64,71 @@ public class WasterWaterAddActivity extends TubelessActivity {
             public void onClick(View view) {
                 if (complTextView.getText().toString().equals(list.get(0).getText().toString())) {
                     //دارد
-                    WasterWater aaaaaa2 = new WasterWater();
-                    ((WasterWater) aaaaaa2).setLength(Integer.parseInt(editTextTool.getText().toString()));
-                    ((WasterWater) aaaaaa2).setSiphon(true);
-                    ((WasterWater) aaaaaa2).setSubscribeCode(KMPAutoComplTextViewSubscribe.getText().toString());
-                    ((WasterWater) aaaaaa2).setType(WASTER_WATER);
+
+                    boolean valid = true;
+                    if (editTextTool.getText().toString().length() == 0){
+                        valid = false;
+                    }else if (Integer.parseInt(editTextTool.getText().toString()) == 0){
+                        valid = false;
+                    }
+
+                    if (valid) {
+                        WasterWater aaaaaa2 = new WasterWater();
+                        ((WasterWater) aaaaaa2).setLength(Integer.parseInt(editTextTool.getText().toString()));
+                        ((WasterWater) aaaaaa2).setSiphon(true);
+                        ((WasterWater) aaaaaa2).setSubscribeCode(KMPAutoComplTextViewSubscribe.getText().toString());
+                        ((WasterWater) aaaaaa2).setType(WASTER_WATER);
 
 
-                    Gson gson = new Gson();
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result",gson.toJson(aaaaaa2));
-                    setResult(Activity.RESULT_OK,returnIntent);
-                    finish();
-
+                        Gson gson = new Gson();
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result", gson.toJson(aaaaaa2));
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+                    }else {
+                        Toast.makeText(getContext(), "مقادیر را کامل وارد کنید" , Toast.LENGTH_SHORT).show();
+                    }
 
                 }else {
                     //ندارد
-
-
-                    WasterWater aaaaaa = new WasterWater();
-                    ((WasterWater) aaaaaa).setCount(Integer.parseInt(editTextCount.getText().toString()));
-                    ((WasterWater) aaaaaa).setLength(Integer.parseInt(editTextTool.getText().toString()));
-                    ((WasterWater) aaaaaa).setSiphon(false);
-
-                    for (ItemData item : list) {
-                        if (item.getText().equals(KMPAutoComplTextView2.getText().toString().substring(2,KMPAutoComplTextView2.getText().length()))){
-                            //((WasterWater) newWaterMeter).setDiameter(Integer.parseInt(item.getMeta()));
-                            ((WasterWater) aaaaaa).setDiameter(1);
-                        }
+                    boolean valid = true;
+                    if (editTextTool.getText().toString().length() == 0){
+                        valid = false;
+                    }else if (Integer.parseInt(editTextTool.getText().toString()) == 0){
+                        valid = false;
                     }
-                    ((WasterWater) aaaaaa).setType(WASTER_WATER);
+                    if (editTextCount.getText().toString().length() == 0){
+                        valid = false;
+                    }else if (Integer.parseInt(editTextCount.getText().toString()) == 0){
+                        valid = false;
+                    }
 
-                    Gson gson = new Gson();
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result",gson.toJson(aaaaaa));
-                    setResult(Activity.RESULT_OK,returnIntent);
-                    finish();
+
+
+                    if (valid) {
+                        WasterWater aaaaaa = new WasterWater();
+                        ((WasterWater) aaaaaa).setCount(Integer.parseInt(editTextCount.getText().toString()));
+                        ((WasterWater) aaaaaa).setLength(Integer.parseInt(editTextTool.getText().toString()));
+                        ((WasterWater) aaaaaa).setSiphon(false);
+
+                        for (ItemData item : list2) {
+                            if (item.getText().equals(KMPAutoComplTextView2.getText().toString())) {
+                                //((WasterWater) newWaterMeter).setDiameter(Integer.parseInt(item.getMeta()));
+                                ((WasterWater) aaaaaa).setDiameter(Integer.parseInt(item.getMeta()));
+                                break;
+                            }
+                        }
+                        ((WasterWater) aaaaaa).setType(WASTER_WATER);
+
+                        Gson gson = new Gson();
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result", gson.toJson(aaaaaa));
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+
+                    }else {
+                        Toast.makeText(getContext(), "مقادیر را کامل وارد کنید" , Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
@@ -127,14 +158,14 @@ public class WasterWaterAddActivity extends TubelessActivity {
                 public void onPopupItemClick(ItemData itemData) {
                     Toast.makeText(getBaseContext(), itemData.getText(), Toast.LENGTH_SHORT).show();
 
-                    if (itemData.equals(list.get(0).getText())){
+                    if (itemData.getText().toString().equals(list.get(0).getText())){
                         //دارد
 
                         linearLayoutSubscribe.setVisibility(View.VISIBLE);
                         linearLayoutGhotr.setVisibility(View.GONE);
                         linearLayoutCount.setVisibility(View.GONE);
 
-                    }else if (itemData.equals(list.get(1).getText())){
+                    }else if (itemData.getText().toString().equals(list.get(1).getText())){
                         //ندارد
 
                         linearLayoutSubscribe.setVisibility(View.GONE);
@@ -170,7 +201,6 @@ public class WasterWaterAddActivity extends TubelessActivity {
 
         //type 2
         KMPAutoComplTextView2 = (KMPAutoComplTextView) findViewById(R.id.KMPAutoComplTextView2);
-        ArrayList<ItemData> list2 = new ArrayList<>();
 
         for (AbfaxSelectsObject item: Global.allSelects.getObject()) {
             if (item.getType() == 2) {

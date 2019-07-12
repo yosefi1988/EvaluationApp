@@ -29,9 +29,13 @@ import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.PickerBuilder;
+import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
+import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
+import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.AbfaxSelects;
 import ir.sajjadyosefi.evaluation.classes.model.responses.basic.ServerResponseBase;
 import ir.sajjadyosefi.evaluation.model.business.File;
+import ir.sajjadyosefi.evaluation.model.db.Config;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallback;
 import retrofit2.Call;
@@ -52,7 +56,7 @@ public class CommentActivity extends TubelessActivity {
     //take an integer variable for SPEECH and intiate as 1
     protected static final int RESULT_SPEECH = 1;
     //take two Image Buttons
-    private Button btnSpeak22;
+    private Button btnSpeak22 , buttonSend;
     Button buttonCamera , buttonGallery;
 
 
@@ -97,6 +101,7 @@ public class CommentActivity extends TubelessActivity {
 //        txtText = (TextView) findViewById(R.id.textView);
 //        btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
         btnSpeak22 = (Button) findViewById(R.id.ButtonGetVoice);
+        buttonSend = (Button) findViewById(R.id.buttonSend);
         buttonCamera = (Button) findViewById(R.id.buttonCamera);
         buttonGallery = (Button) findViewById(R.id.buttonGallery);
         editTextComment = (EditText) findViewById(R.id.editTextComment);
@@ -122,6 +127,38 @@ public class CommentActivity extends TubelessActivity {
                 selectFromGallery();
             }
         });
+
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SendTaskToServerObject ss = new SendTaskToServerObject();
+                ss.setTask(Global.CurrentTask);
+
+                Gson gson = new Gson();
+                String json = gson.toJson(ss);
+
+                //get from server
+                Global.apiManagerTubeless.sendData(ss, new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        Gson gson = new Gson();
+                        JsonElement jsonElement = gson.toJsonTree(response.body());
+
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+
+                        int a = 5 ;
+                        a++;
+                    }
+                }));
+            }
+        });
+
 
 //        btnSpeak.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -30,6 +30,7 @@ import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterMeter;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.NetworkAndBranch.WaterNetwork;
 import ir.sajjadyosefi.evaluation.classes.model.responses.Abfax.UsageListItem;
+import ir.sajjadyosefi.evaluation.model.business.WasterWater;
 import ir.sajjadyosefi.evaluation.model.main.TubelessObject;
 
 import static ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter.WATER_METER;
@@ -90,7 +91,7 @@ public class NetworkActivity extends TubelessActivity {
             if (((UsageListItem)usageItem).isEdited() == true){
                 if (((UsageListItem)usageItem).getWaterMainUnitQtyReq2() >= 1){
 
-                    count = count + ((UsageListItem)usageItem).getWaterMainUnitQtyReq2();
+                    count = count + ((UsageListItem)usageItem).getWaterMainUnitQtyReq2()  ;
 //                            for (AbfaxSelectsUsageTypeInfoDetail xItem:Global.allSelects.getUsageTypeInfoDetail()) {
 //                                if (xItem.getUsageTypeId() == ((UsageListItem)usageItem).getUsageTypeIdReq()){
 //
@@ -124,7 +125,13 @@ public class NetworkActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 
-                if (count == waterMeters.size()) {
+                int interedCount = 0 ;
+                for (TubelessObject item : waterMeters) {
+                    int a = ((WaterMeter)item).getCountWaterMeter();
+                    int b = ((WaterMeter)item).getCountUnit();
+                    interedCount = interedCount + (a * b);
+                }
+                if (count == interedCount) {
                     Intent i = new Intent(getContext(), WasterWaterListActivity.class);
                     (getActivity()).startActivity(i);
                     finish();
@@ -137,7 +144,14 @@ public class NetworkActivity extends TubelessActivity {
         battonNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (count == waterMeters.size()) {
+                int interedCount = 0 ;
+                for (TubelessObject item : waterMeters) {
+                    int a = ((WaterMeter)item).getCountWaterMeter();
+                    int b = ((WaterMeter)item).getCountUnit();
+                    interedCount = interedCount + (a * b);
+                }
+
+                if (count == interedCount) {
                     Intent i = new Intent(getContext(), DrillingActivity.class);
                     (getActivity()).startActivity(i);
                     finish();
