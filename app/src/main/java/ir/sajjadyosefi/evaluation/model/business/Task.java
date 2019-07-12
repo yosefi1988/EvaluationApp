@@ -59,6 +59,7 @@ public class Task extends TubelessObject {
 
     public Location userLocation = null;
     public List<WaterNetwork> waterNetworks = new ArrayList<WaterNetwork>();
+    public List<TubelessObject> waterMeters = new ArrayList<>();
     public List<TubelessObject> drillingItemList = new ArrayList<TubelessObject>();
     public List<TubelessObject> WasterWaterList = new ArrayList<TubelessObject>();
     public List<TubelessObject> sendToServerfileList = new ArrayList<TubelessObject>();

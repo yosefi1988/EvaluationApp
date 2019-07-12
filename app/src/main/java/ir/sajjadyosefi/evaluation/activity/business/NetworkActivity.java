@@ -72,7 +72,7 @@ public class NetworkActivity extends TubelessActivity {
                 for (WaterMeter waterMeterItem : waterBranchItem.getWaterMeters()) {
                     waterMeterItem.setWaterNetwork(waterNetworkItem);
                     waterMeterItem.setWaterBranch(waterBranchItem);
-                    waterMeters.add(waterMeterItem);
+                    Global.CurrentTask.waterMeters.add(waterMeterItem);
                 }
             }
         }
@@ -126,7 +126,7 @@ public class NetworkActivity extends TubelessActivity {
             public void onClick(View view) {
 
                 int interedCount = 0 ;
-                for (TubelessObject item : waterMeters) {
+                for (TubelessObject item : Global.CurrentTask.waterMeters) {
                     int a = ((WaterMeter)item).getCountWaterMeter();
                     int b = ((WaterMeter)item).getCountUnit();
                     interedCount = interedCount + (a * b);
@@ -145,7 +145,7 @@ public class NetworkActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
                 int interedCount = 0 ;
-                for (TubelessObject item : waterMeters) {
+                for (TubelessObject item : Global.CurrentTask.waterMeters) {
                     int a = ((WaterMeter)item).getCountWaterMeter();
                     int b = ((WaterMeter)item).getCountUnit();
                     interedCount = interedCount + (a * b);
@@ -181,7 +181,6 @@ public class NetworkActivity extends TubelessActivity {
     }
 
 
-    List<TubelessObject> waterMeters = new ArrayList<>();
 
     private void prepareList(View rootview) {
 //        if (Global.CurrentTask.waterNetworks == null){
@@ -203,7 +202,7 @@ public class NetworkActivity extends TubelessActivity {
                 mLayoutManager,
                 rootview,
                 true,
-                waterMeters);
+                Global.CurrentTask.waterMeters);
         adapter_Posts.listType = WATER_METER;
         mRecyclerViewTimeline.setLayoutManager(mLayoutManager);
         mRecyclerViewTimeline.setAdapter(adapter_Posts);
@@ -226,7 +225,7 @@ public class NetworkActivity extends TubelessActivity {
 //                    WaterMeter waterMeterItem;
 //                    waterMeterItem.setWaterNetwork(waterNetworkItem);
 //                    waterMeterItem.setWaterBranch(waterBranchItem);
-                    waterMeters.add(kontor);
+                    Global.CurrentTask.waterMeters.add(kontor);
 //                    Global.CurrentTask.NetworkAndBranch.add(kontor);
                     adapter_Posts.notifyDataSetChanged();
 
