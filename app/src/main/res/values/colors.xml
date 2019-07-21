@@ -2,12 +2,14 @@
 <resources>
     <color name="colorPrimary">#FFC107</color>
     <color name="colorTextGry">#5A5A5A</color>
-    <color name="buttonsColor">#0075A5</color>
+    <color name="buttonsColor">#426BD7</color>
+    <color name="buttonsColorLight">#779CFF</color>
     <color name="buttonsColorDisable">#a1a1a1</color>
     <color name="buttonsTextColor">#C0ECF3</color>
 
     <color name="colorPrimaryDark">#4267b2</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="transparent">#A6E9EBEE</color>
 
     <color name="colorProgress">@color/colorWhite</color>
     <color name="fb_background_color">#e9ebee</color>

@@ -7,81 +7,110 @@
     android:background="@color/fb_background_color"
     android:orientation="vertical"
     android:textDirection="rtl"
-    android:padding="20dp"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
     <TextView
         android:id="@+id/login_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="22dp"
-        android:gravity="center_horizontal"
-        android:text="@string/account"
-        android:textColor="#4267b2"
-        android:textSize="26sp"
-        android:textStyle="bold" />
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/login_backgrand" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/login_logo_backgrand"
+        android:foregroundGravity="center"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="130dp">
+        android:padding="10dp"
+        android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/editTextPhone"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circle_border"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_search"
-            android:drawableLeft="@android:drawable/ic_menu_edit"
-            android:drawablePadding="15dp"
-            android:hint="@string/mobile_number"
-            android:textDirection="locale"
-            android:inputType="text"
-            android:gravity="start"
-            android:text="09123333333"
-            android:textSize="20dp"
-            android:textAlignment="viewStart"
-            android:padding="10dp" />
-        <EditText
-            android:id="@+id/editTextPass"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textDirection="locale"
-            android:gravity="start"
-            android:textAlignment="viewStart"
-            android:background="@drawable/bg_search"
-            android:drawableLeft="@android:drawable/ic_menu_edit"
-            android:drawablePadding="15dp"
-            android:inputType="textPassword"
-            android:text="Ar_123456"
-            android:textSize="20dp"
-            android:hint="@string/password"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:orientation="vertical" >
 
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:textSize="30dp"
+                android:text="ورود به سیستم"/>
 
+            <EditText
+                android:id="@+id/editTextPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_search"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:drawablePadding="15dp"
+                android:hint="@string/mobile_number"
+                android:textDirection="locale"
+                android:inputType="text"
+                android:gravity="start"
+                android:text="09999816652"
+                android:textSize="20dp"
+                android:textAlignment="viewStart"
+                android:padding="10dp" />
+            <EditText
+                android:id="@+id/editTextPass"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:gravity="start"
+                android:textAlignment="viewStart"
+                android:background="@drawable/bg_search"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:drawablePadding="15dp"
+                android:inputType="textPassword"
+                android:text="Ar_123456"
+                android:textSize="20dp"
+                android:hint="@string/password"
+                android:padding="10dp" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+            <EditText
+                android:visibility="invisible"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:gravity="start"
+                android:textAlignment="viewStart"
+                android:background="@drawable/bg_search"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:drawablePadding="15dp"
+                android:inputType="textPassword"
+                android:text="Ar_123456"
+                android:textSize="20dp"
+                android:hint="@string/password"
+                android:padding="10dp" />
 
+        </LinearLayout>
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_search"
             android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="#fff"
+            android:layout_marginTop="-30dp"
             android:textSize="18sp" />
-
     </LinearLayout>
 
 </RelativeLayout>

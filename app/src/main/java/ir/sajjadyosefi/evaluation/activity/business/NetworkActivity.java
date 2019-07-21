@@ -170,7 +170,7 @@ public class NetworkActivity extends TubelessActivity {
             }
         });
 
-        if (Global.CurrentTask.waterNetworks.size() == 0) {
+        if (Global.CurrentTask.waterMeters.size() == 0) {
             Intent i = new Intent(getContext(), AddNetworkActivity.class);
             (getActivity()).startActivityForResult(i, 1);
         }else {

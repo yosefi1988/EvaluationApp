@@ -52,6 +52,7 @@ public class Task extends TubelessObject {
     private List<OldSubscribe> oldSubscribeList;
     private List<Content> contentList;
     private int PossibilityOfAssignment;
+    public String comment;
     public ItemData typeOfAssignment;
     public List<AbfaxSelectsObjectSelectable> assignToBet = new ArrayList<>();
     public List<AbfaxSelectsObjectSelectable> todoList = new ArrayList<>();

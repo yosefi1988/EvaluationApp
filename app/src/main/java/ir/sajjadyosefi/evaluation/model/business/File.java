@@ -112,27 +112,29 @@ public class File extends TubelessObject {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ((Activity)mContext).startActivity(intent);
                 }else {
-                    DownloadFileRequest loginRequest = new DownloadFileRequest();
-                    loginRequest.setContentId(file.getRequestContentId() + "");
-                    loginRequest.setFrame(file.getFrame() + "");
-                    Global.apiManagerTubeless.getDocument(loginRequest, new TubelessRetrofitCallback<Object>(mContext, holder.rootView, true, null, new Callback<Object>() {
-                        @Override
-                        public void onResponse(Call<Object> call, Response<Object> response) {
-                            Gson gson = new Gson();
-                            JsonElement jsonElement = gson.toJsonTree(response.body());
-                            DownloadDocument downloadObject = gson.fromJson(jsonElement, DownloadDocument.class);
+//                    DownloadFileRequest loginRequest = new DownloadFileRequest();
+//                    loginRequest.setContentId(file.getRequestContentId() + "");
+//                    loginRequest.setFrame(file.getFrame() + "");
+//                    Global.apiManagerTubeless.getDocument(loginRequest, new TubelessRetrofitCallback<Object>(mContext, holder.rootView, true, null, new Callback<Object>() {
+//                        @Override
+//                        public void onResponse(Call<Object> call, Response<Object> response) {
+//                            Gson gson = new Gson();
+//                            JsonElement jsonElement = gson.toJsonTree(response.body());
+//                            DownloadDocument downloadObject = gson.fromJson(jsonElement, DownloadDocument.class);
+//
+//                            Bitmap bmp = BitmapFactory.decodeByteArray(downloadObject.getObject().getContent().getBytes(), 0, downloadObject.getObject().getContent().length());
+////                        DetailsActivity.ImageView.setImageBitmap(bmp);
+//
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Object> call, Throwable t) {
+//
+//                        }
+//                    }));
 
-                            Bitmap bmp = BitmapFactory.decodeByteArray(downloadObject.getObject().getContent().getBytes(), 0, downloadObject.getObject().getContent().length());
-//                        DetailsActivity.ImageView.setImageBitmap(bmp);
 
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<Object> call, Throwable t) {
-
-                        }
-                    }));
                 }
             }
         });

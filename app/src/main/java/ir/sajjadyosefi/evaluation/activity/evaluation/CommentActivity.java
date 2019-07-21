@@ -132,6 +132,8 @@ public class CommentActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 
+                Global.CurrentTask.comment = editTextComment.getText().toString();
+
                 SendTaskToServerObject ss = new SendTaskToServerObject();
                 ss.setTask(Global.CurrentTask);
 

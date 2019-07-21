@@ -41,9 +41,8 @@ public class RetrofitHelperService {
         if (apiManager == null) {
             apiManager = new RetrofitHelperService();
         }
-        // TODO: 6/15/2019 uncomment
-        //androidId = DeviceUtil.GetAndroidId(applicationContext);
-        androidId = "123";
+        androidId = DeviceUtil.GetAndroidId(applicationContext);
+//        androidId = "123";
         return apiManager;
     }
 
