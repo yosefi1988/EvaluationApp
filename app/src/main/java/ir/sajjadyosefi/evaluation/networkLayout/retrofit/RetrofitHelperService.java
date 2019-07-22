@@ -3,11 +3,14 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 
 import android.content.Context;
 
+import com.squareup.okhttp.RequestBody;
+
 import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DownloadFileRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
 import ir.sajjadyosefi.evaluation.classes.utility.DeviceUtil;
 import ir.sajjadyosefi.evaluation.model.business.Task;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -76,6 +79,12 @@ public class RetrofitHelperService {
 
     public void sendData(SendTaskToServerObject request, TubelessRetrofitCallback<Object> callback) {
         Call<Object> userCall = service.sendData(request);
+        userCall.enqueue(callback);
+    }
+
+
+    public void requestUpload(RequestBody request, MultipartBody.Part xxxxxxx, RequestBody  s , RequestBody  u , RequestBody  p , RequestBody  ip, TubelessRetrofitCallback<Object> callback) {
+        Call<java.lang.Object> userCall = service.upload(request,xxxxxxx , s, ip , u , p);
         userCall.enqueue(callback);
     }
 

@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +24,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.RequestBody;
+import com.yalantis.ucrop.util.FileUtils;
 
 import ir.sajjadyosefi.evaluation.R;
 import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
@@ -158,6 +162,8 @@ public class CommentActivity extends TubelessActivity {
                         a++;
                     }
                 }));
+
+
             }
         });
 
@@ -242,6 +248,70 @@ public class CommentActivity extends TubelessActivity {
 
 //    }
 
+//    public boolean sendFiles(){
+//        private void sendAvatar(CustomerNew customer, String fileUri){
+//
+//
+//            File file = new File(FileUtils.getPath(getContext(), Uri.parse(fileUri)));
+//
+//            // create RequestBody instance from file
+//            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
+////        RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), file);
+//
+//
+//
+//            RequestBody UserID = RequestBody.create(
+//                    MediaType.parse("text/plain"),
+//                    customer.getSessionID());
+//
+//            RequestBody pa369647_2eb2_469d_b894_09ad85a0e347 = RequestBody.create(
+//                    MediaType.parse("text/plain"),
+//                    Url.pass);
+//            RequestBody ub1e6d0e_00d5_4934_bbc1_0de5de92725d = RequestBody.create(
+//                    MediaType.parse("text/plain"),
+//                    Url.user);
+//
+//
+//
+//            // MultipartBody.Part is used to send also the actual file name
+//            MultipartBody.Part body = MultipartBody.Part.createFormData("Pic", file.getName(), requestFile) ;
+//
+//
+//            // add another part within the multipart request
+//            String descriptionString = "hello, this is description speaking";
+//            RequestBody description =
+//                    RequestBody.create(okhttp3.MultipartBody.FORM, descriptionString);
+//            // add another part within the multipart request
+//            String ip = "0214554";
+//            RequestBody ipDescription =
+//                    RequestBody.create(okhttp3.MultipartBody.FORM, descriptionString);
+//
+//            // finally, execute the request
+//            Global.retrofit.requestUpload(description,body ,UserID,ub1e6d0e_00d5_4934_bbc1_0de5de92725d ,pa369647_2eb2_469d_b894_09ad85a0e347,ipDescription, new SamaniumRetrofitCallback<Object>(getContext(), rootView, true, buttonSubmit, new Callback<Object>() {
+//                @Override
+//                public void onResponse(Call<Object> call, Response<Object> response) {
+//                    Log.v("Upload", "success");
+//                    MainActivity.avatarMustRefresh = true ;
+//
+//                    JsonElement jsonElement = gson.toJsonTree(response.body());
+//                    LoginResponse responseX = gson.fromJson(jsonElement, LoginResponse.class);
+//
+//                    if (Global.customerNew != null)
+//                        Global.customerNew.setAvatarURL(responseX.getResponse().getAvatarURL());
+//
+//
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Object> call, Throwable t) {
+//                    Log.e("Upload error:", t.getMessage());
+//
+//                }
+//            }));
+//
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
