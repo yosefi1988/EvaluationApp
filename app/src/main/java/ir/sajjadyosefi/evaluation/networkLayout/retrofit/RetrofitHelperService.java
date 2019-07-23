@@ -45,7 +45,7 @@ public class RetrofitHelperService {
             apiManager = new RetrofitHelperService();
         }
         androidId = DeviceUtil.GetAndroidId(applicationContext);
-//        androidId = "123";
+        androidId = "123";
         return apiManager;
     }
 
