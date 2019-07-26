@@ -555,6 +555,11 @@ public class EndlessList_Adapter extends RecyclerView.Adapter<EndlessList_Adapte
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
 
+                Gson gson = new Gson();
+                loadTasksFromDatabaseAndShowInRecyclerView(gson);
+
+                int a = 5 ;
+                a++;
 
             }
         }));

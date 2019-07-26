@@ -114,6 +114,7 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
     public void onFailure(final Call<java.lang.Object> call, Throwable t) {
         int a =0 ;
         a++;
+        ((TubelessActivity)mContext).dialog.hide();
 
         try {
             showConnectionLostDialog(mContext, null , new Runnable() {
@@ -127,6 +128,9 @@ public class TubelessRetrofitCallback<Object> implements Callback<java.lang.Obje
             aX  ++;
 
         }
+
+        mCallback.onFailure(call,t);
+
     }
 
 

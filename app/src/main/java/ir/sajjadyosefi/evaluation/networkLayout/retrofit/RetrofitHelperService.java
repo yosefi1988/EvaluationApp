@@ -3,7 +3,7 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 
 import android.content.Context;
 
-import com.squareup.okhttp.RequestBody;
+import okhttp3.RequestBody;
 
 import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DownloadFileRequest;
@@ -45,7 +45,7 @@ public class RetrofitHelperService {
             apiManager = new RetrofitHelperService();
         }
         androidId = DeviceUtil.GetAndroidId(applicationContext);
-        androidId = "123";
+//        androidId = "123";
         return apiManager;
     }
 
@@ -83,8 +83,8 @@ public class RetrofitHelperService {
     }
 
 
-    public void requestUpload(RequestBody request, MultipartBody.Part xxxxxxx, RequestBody  s , RequestBody  u , RequestBody  p , RequestBody  ip, TubelessRetrofitCallback<Object> callback) {
-        Call<java.lang.Object> userCall = service.upload(request,xxxxxxx , s, ip , u , p);
+    public void requestUpload(MultipartBody.Part file, RequestBody userName, RequestBody password, RequestBody  androidId , RequestBody  serialRequestCode , RequestBody  fileType , RequestBody  senderType, TubelessRetrofitCallback<Object> callback) {
+        Call<java.lang.Object> userCall = service.upload(file , userName,password,androidId, serialRequestCode , fileType , senderType);
         userCall.enqueue(callback);
     }
 

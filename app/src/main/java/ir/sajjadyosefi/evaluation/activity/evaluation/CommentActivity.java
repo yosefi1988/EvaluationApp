@@ -24,8 +24,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.MultipartBody;
 import com.yalantis.ucrop.util.FileUtils;
 
 import ir.sajjadyosefi.evaluation.R;
@@ -33,6 +34,7 @@ import ir.sajjadyosefi.evaluation.adapter.EndlessList_Adapter;
 import ir.sajjadyosefi.evaluation.classes.Global;
 import ir.sajjadyosefi.evaluation.classes.activity.TubelessActivity;
 import ir.sajjadyosefi.evaluation.classes.libraries.tofiraImagePicker.PickerBuilder;
+import ir.sajjadyosefi.evaluation.classes.model.request.SendFileRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.DeviceRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.account.LoginRequest;
@@ -45,6 +47,7 @@ import ir.sajjadyosefi.evaluation.networkLayout.retrofit.TubelessRetrofitCallbac
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Url;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,32 +139,33 @@ public class CommentActivity extends TubelessActivity {
             @Override
             public void onClick(View view) {
 
-                Global.CurrentTask.comment = editTextComment.getText().toString();
-
-                SendTaskToServerObject ss = new SendTaskToServerObject();
-                ss.setTask(Global.CurrentTask);
-
-                Gson gson = new Gson();
-                String json = gson.toJson(ss);
-
-                //get from server
-                Global.apiManagerTubeless.sendData(ss, new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
-                    @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
-                        Gson gson = new Gson();
-                        JsonElement jsonElement = gson.toJsonTree(response.body());
-
-
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
-
-                        int a = 5 ;
-                        a++;
-                    }
-                }));
+                sendFiles();
+//                Global.CurrentTask.comment = editTextComment.getText().toString();
+//
+//                SendTaskToServerObject ss = new SendTaskToServerObject();
+//                ss.setTask(Global.CurrentTask);
+//
+//                Gson gson = new Gson();
+//                String json = gson.toJson(ss);
+//
+//                //get from server
+//                Global.apiManagerTubeless.sendData(ss, new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
+//                    @Override
+//                    public void onResponse(Call<Object> call, Response<Object> response) {
+//                        Gson gson = new Gson();
+//                        JsonElement jsonElement = gson.toJsonTree(response.body());
+//
+//
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Object> call, Throwable t) {
+//
+//                        int a = 5 ;
+//                        a++;
+//                    }
+//                }));
 
 
             }
@@ -248,70 +252,91 @@ public class CommentActivity extends TubelessActivity {
 
 //    }
 
-//    public boolean sendFiles(){
-//        private void sendAvatar(CustomerNew customer, String fileUri){
+    public boolean sendFiles(){
+
+
+        SendFileRequest ss = new SendFileRequest();
+        ss.setFileType("1");
+        ss.setSenderType("2");
+        ss.setSerialRequestCode(Global.CurrentTask.getSerialRequestCode());
+
+//        ss.setUserName("");
+//        ss.setPassword("");
+//        ss.setAndroidId("");
+        sendAvatar(ss,Global.CurrentTask.getFileList().get(0).getUri());
+        return  true;
+    }
+
+    private void sendAvatar(SendFileRequest request, String fileUri){
+        java.io.File file = new java.io.File(FileUtils.getPath(getContext(), Uri.parse(fileUri)));
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
+
+        RequestBody userName = RequestBody.create(
+                MediaType.parse("text/plain"),
+                request.getUserName());
+
+        RequestBody password = RequestBody.create(
+                MediaType.parse("text/plain"),
+                request.getPassword());
+
+        RequestBody androidId = RequestBody.create(
+                MediaType.parse("text/plain"),
+                Global.apiManagerTubeless.androidId);
+
+        RequestBody fileType = RequestBody.create(
+                MediaType.parse("text/plain"),
+                request.getFileType());
+
+        RequestBody senderType = RequestBody.create(
+                MediaType.parse("text/plain"),
+                request.getSenderType());
+
+        RequestBody serialRequestCode = RequestBody.create(
+                MediaType.parse("text/plain"),
+                request.getSerialRequestCode());
+
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile) ;
+
+
+
+        // finally, execute the request
+
+
+        Global.apiManagerTubeless.requestUpload(body ,userName,password,androidId ,serialRequestCode,fileType,senderType, new TubelessRetrofitCallback<Object>(getContext(), getRootActivity(), true, null, new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+                Gson gson = new Gson();
+                JsonElement jsonElement = gson.toJsonTree(response.body());
+//                    AbfaxSelects responseX = gson.fromJson(jsonElement, AbfaxSelects.class);
+
+
+//                Config configNew = new Config();
+//                configNew.ServerConfig = jsonElement.toString();
+//                configNew.Day = todayDate.getDay();
 //
 //
-//            File file = new File(FileUtils.getPath(getContext(), Uri.parse(fileUri)));
+//                //save to db
+//                configNew.save();
 //
-//            // create RequestBody instance from file
-//            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
-////        RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), file);
-//
-//
-//
-//            RequestBody UserID = RequestBody.create(
-//                    MediaType.parse("text/plain"),
-//                    customer.getSessionID());
-//
-//            RequestBody pa369647_2eb2_469d_b894_09ad85a0e347 = RequestBody.create(
-//                    MediaType.parse("text/plain"),
-//                    Url.pass);
-//            RequestBody ub1e6d0e_00d5_4934_bbc1_0de5de92725d = RequestBody.create(
-//                    MediaType.parse("text/plain"),
-//                    Url.user);
-//
-//
-//
-//            // MultipartBody.Part is used to send also the actual file name
-//            MultipartBody.Part body = MultipartBody.Part.createFormData("Pic", file.getName(), requestFile) ;
-//
-//
-//            // add another part within the multipart request
-//            String descriptionString = "hello, this is description speaking";
-//            RequestBody description =
-//                    RequestBody.create(okhttp3.MultipartBody.FORM, descriptionString);
-//            // add another part within the multipart request
-//            String ip = "0214554";
-//            RequestBody ipDescription =
-//                    RequestBody.create(okhttp3.MultipartBody.FORM, descriptionString);
-//
-//            // finally, execute the request
-//            Global.retrofit.requestUpload(description,body ,UserID,ub1e6d0e_00d5_4934_bbc1_0de5de92725d ,pa369647_2eb2_469d_b894_09ad85a0e347,ipDescription, new SamaniumRetrofitCallback<Object>(getContext(), rootView, true, buttonSubmit, new Callback<Object>() {
-//                @Override
-//                public void onResponse(Call<Object> call, Response<Object> response) {
-//                    Log.v("Upload", "success");
-//                    MainActivity.avatarMustRefresh = true ;
-//
-//                    JsonElement jsonElement = gson.toJsonTree(response.body());
-//                    LoginResponse responseX = gson.fromJson(jsonElement, LoginResponse.class);
-//
-//                    if (Global.customerNew != null)
-//                        Global.customerNew.setAvatarURL(responseX.getResponse().getAvatarURL());
-//
-//
-//
-//                }
-//
-//                @Override
-//                public void onFailure(Call<Object> call, Throwable t) {
-//                    Log.e("Upload error:", t.getMessage());
-//
-//                }
-//            }));
-//
-//        }
-//    }
+//                //init allSelects in GLobal
+//                Global.allSelects = gson.fromJson(jsonElement ,AbfaxSelects.class);
+//                startMainActivity();
+//                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+                int a = 5 ;
+                a++;
+            }
+        }));
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

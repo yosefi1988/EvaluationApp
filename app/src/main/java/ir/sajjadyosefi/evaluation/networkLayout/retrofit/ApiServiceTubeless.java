@@ -2,7 +2,7 @@ package ir.sajjadyosefi.evaluation.networkLayout.retrofit;
 
 import android.graphics.Movie;
 
-import com.squareup.okhttp.RequestBody;
+import okhttp3.RequestBody;
 
 import ir.sajjadyosefi.evaluation.classes.model.request.SearchRequest;
 import ir.sajjadyosefi.evaluation.classes.model.request.SendTaskToServerObject;
@@ -71,12 +71,13 @@ public interface ApiServiceTubeless {
     Call<Object> sendData(@Body SendTaskToServerObject request);
 
     @Multipart
-    @POST("api/send")
+    @POST("api/UploadFileFormAndroid")
     Call<java.lang.Object> upload(
-            @Part("description") RequestBody description,
             @Part MultipartBody.Part file,
-            @Part("UserID") RequestBody s,
-            @Part("ip") RequestBody ip,
-            @Part("ub1e6d0e_00d5_4934_bbc1_0de5de92725d") RequestBody u,
-            @Part("pa369647_2eb2_469d_b894_09ad85a0e347") RequestBody p);
+            @Part("userName") RequestBody userName,
+            @Part("password") RequestBody password,
+            @Part("androidId") RequestBody androidId,
+            @Part("serialRequestCode") RequestBody serialRequestCode,
+            @Part("fileType") RequestBody fileType,
+            @Part("senderType") RequestBody senderType);
 }
